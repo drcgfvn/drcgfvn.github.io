@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T07:28:42.739Z",
+  "generatedAt": "2026-08-19T08:04:36.252Z",
   "resources": {
     "hinh-anh-san-pham-don": {
       "images": [
@@ -128,10 +128,7 @@
     "logo-drcgf": {
       "images": [
         "../tai-lieu/logo-drcgf/img/LOGO%20DR%20CGF-01.jpg",
-        "../tai-lieu/logo-drcgf/img/LOGO%20DR%20CGF-03.png",
-        "../tai-lieu/logo-drcgf/img/LOGO%20DR%20CGF-05.png",
-        "../tai-lieu/logo-drcgf/img/LOGO%20DR%20CGF-06.png",
-        "../tai-lieu/logo-drcgf/img/LOGO%20DR%20CGF-07.png"
+        "../tai-lieu/logo-drcgf/img/LOGO%20DR%20CGF-05.png"
       ],
       "files": [
         "../tai-lieu/logo-drcgf/files/LOGO%20DR%20CGF_ngang%20doc.pdf",
