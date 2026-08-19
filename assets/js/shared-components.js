@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-  var loaderScript = document.currentScript;
-  var siteRoot = new URL("../../", loaderScript.src);
+  // Cloudflare-safe: không suy ra site root từ document.currentScript vì Rocket Loader có thể thay đổi script đang thực thi.
+  var siteRoot = new URL("/", window.location.origin);
   var mobileMedia = window.matchMedia("(max-width: 884px)");
 
   ensureStylesheet("drcgf-site-enhancements", "assets/css/site-enhancements.css?v=20260729-menu885");
@@ -54,7 +54,7 @@
     }
     if (!slots.length) return Promise.resolve();
 
-    var componentUrl = new URL("components/" + componentName + ".html", siteRoot);
+    var componentUrl = new URL("/components/" + componentName + ".html", window.location.origin);
     return fetch(componentUrl.href, { cache: "no-store" })
       .then(function (response) {
         if (!response.ok) throw new Error("HTTP " + response.status);
