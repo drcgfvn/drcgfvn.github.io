@@ -1,0 +1,14 @@
+CẤU HÌNH CLOUDFLARE PAGES ĐỂ TỰ QUÉT ẢNH/TÀI LIỆU
+
+Build command:
+  npm run build
+
+Build output directory:
+  .
+
+Sau khi cấu hình một lần, mỗi lần push/upload file vào GitHub trong:
+  /tai-lieu/<ten-muc>/img/
+hoặc:
+  /tai-lieu/<ten-muc>/files/
+
+Cloudflare sẽ chạy script build, tự sinh assets/js/tai-lieu-data.js và gallery/tài liệu sẽ cập nhật theo file mới.

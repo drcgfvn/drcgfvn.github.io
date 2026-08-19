@@ -1,0 +1,38 @@
+# DR.CGF static website
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+# Chặn truy cập trực tiếp dữ liệu form
+RewriteEngine On
+# 301 redirects: old news URLs -> new /tin-tuc/ structure
+RewriteRule ^b5-ceramide-peptide-trong-cham-soc-hang-rao-da/?$ /tin-tuc/b5-ceramide-peptide-trong-cham-soc-hang-rao-da/ [R=301,L]
+RewriteRule ^cach-chon-san-pham-dr-cgf-theo-nhu-cau-da/?$ /tin-tuc/cach-chon-san-pham-dr-cgf-theo-nhu-cau-da/ [R=301,L]
+RewriteRule ^he-san-pham-big-size-1000ml-cho-quy-trinh-spa/?$ /tin-tuc/he-san-pham-big-size-1000ml-cho-quy-trinh-spa/ [R=301,L]
+RewriteRule ^retinal-bakuchiol-va-chu-trinh-cham-soc-da-co-dau-hieu-tuoi-tac/?$ /tin-tuc/retinal-bakuchiol-va-chu-trinh-cham-soc-da-co-dau-hieu-tuoi-tac/ [R=301,L]
+RewriteRule ^spicule-trong-chu-trinh-cham-soc-da/?$ /tin-tuc/spicule-trong-chu-trinh-cham-soc-da/ [R=301,L]
+RewriteRule ^tranexamic-niacinamide-arbutin-trong-cham-soc-da-khong-deu-mau/?$ /tin-tuc/tranexamic-niacinamide-arbutin-trong-cham-soc-da-khong-deu-mau/ [R=301,L]
+
+RewriteRule ^data/ - [F,L]
+# BEGIN DRCGF PERFORMANCE
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+# END DRCGF PERFORMANCE

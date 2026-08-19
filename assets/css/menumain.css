@@ -1,0 +1,1471 @@
+/* ==========================================================
+   MENUMAIN - HEADER / MENU DÙNG CHUNG
+   - Đồng bộ font trên mọi cấp đường dẫn, gồm trang sản phẩm.
+   - Header luôn có nền trắng đặc, kể cả khi sticky sau cuộn.
+   ========================================================== */
+
+/* Font chữ của menu: khai báo tại file dùng chung để không phụ thuộc
+   vào đường dẫn tương đối trong từng trang sản phẩm. */
+@font-face {
+  font-family: "MenuMain Segoe";
+  src: url("../../wp-content/themes/drcgf/assets/fonts/segoeui.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MenuMain Segoe";
+  src: url("../../wp-content/themes/drcgf/assets/fonts/segoeuib.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MenuMain Segoe";
+  src: url("../../wp-content/themes/drcgf/assets/fonts/segoeuib.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MenuMain Segoe";
+  src: url("../../wp-content/themes/drcgf/assets/fonts/segoeuib.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Icon menu Flatsome. Bản khai báo inline trong các trang sản phẩm dùng
+   đường dẫn tương đối sai cấp, vì vậy khai báo lại từ menumain.css. */
+@font-face {
+  font-family: "fl-icons";
+  src: url("../../wp-content/themes/flatsome/assets/css/icons/fl-icons0eed.woff2?v=3.17.4") format("woff2"),
+       url("../../wp-content/themes/flatsome/assets/css/icons/fl-icons0eed.woff?v=3.17.4") format("woff"),
+       url("../../wp-content/themes/flatsome/assets/css/icons/fl-icons0eed.ttf?v=3.17.4") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+
+#header,
+#main-menu,
+#header input,
+#header button,
+#header select,
+#header textarea {
+  font-family: "MenuMain Segoe", "Segoe UI", Arial, sans-serif;
+}
+
+/* Giữ đúng font icon, không để font chữ menu ghi đè. */
+#header i[class*=" icon-"],
+#header i[class^="icon-"],
+#main-menu i[class*=" icon-"],
+#main-menu i[class^="icon-"] {
+  font-family: "fl-icons" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+/* Header luôn có nền đặc. Bao phủ cả lớp nền thật của Flatsome. */
+#header,
+#header .header-wrapper,
+#header #masthead,
+#header #wide-nav,
+#header .header-bg-container,
+#header .header-bg-color,
+#header .header-bg-image {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  opacity: 1 !important;
+}
+
+/* Vô hiệu hóa nền trong suốt do class của theme. */
+#header.transparent,
+#header.has-transparent,
+#header.show-on-scroll,
+#header.transparent .header-wrapper,
+#header.has-transparent .header-wrapper,
+#header.show-on-scroll .header-wrapper,
+#header.transparent .header-bg-color,
+#header.has-transparent .header-bg-color,
+#header.show-on-scroll .header-bg-color,
+#header.transparent #masthead,
+#header.has-transparent #masthead,
+#header.transparent #wide-nav,
+#header.has-transparent #wide-nav {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Trạng thái sau khi cuộn: Flatsome gắn class .stuck vào .header-wrapper. */
+#header .header-wrapper.stuck,
+#header.stuck,
+#header.is-sticky,
+#header.is-sticky .header-wrapper,
+#header .stuck #masthead,
+#header .stuck #wide-nav,
+#header .stuck .header-bg-container,
+#header .stuck .header-bg-color,
+#header .stuck .header-bg-image {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#header .header-wrapper.stuck {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Đường phân cách nhẹ phía dưới menu chính. */
+#header #wide-nav {
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+
+/* Màu chữ rõ trên nền trắng ở cả trạng thái thường và sticky. */
+#header #wide-nav .nav > li > a,
+#header #masthead .nav > li > a,
+#header #masthead .html,
+#header #masthead .custom-text-head,
+#header .header-wrapper.stuck .nav > li > a,
+#header .header-wrapper.stuck .html,
+#header .header-wrapper.stuck .custom-text-head {
+  color: #333333 !important;
+}
+
+/* Menu con desktop. */
+#header .nav-dropdown,
+#header .sub-menu {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Menu điện thoại. */
+#main-menu,
+#main-menu .sidebar-menu,
+#main-menu .mfp-content,
+.mobile-sidebar,
+.off-canvas-left .mfp-content,
+.off-canvas-right .mfp-content {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+#header .search-field {
+  background-color: #ffffff !important;
+}
+
+/* Logo dùng kích thước thật thay vì thuộc tính HTML width/height = 1. */
+#header .header-logo,
+#header .header-logo-dark {
+  width: auto !important;
+  height: auto !important;
+  max-height: 110px;
+  opacity: 1 !important;
+}
+
+#header .header-wrapper.stuck .header-logo,
+#header .header-wrapper.stuck .header-logo-dark {
+  max-height: 70px !important;
+}
+
+@media (max-width: 884px) {
+  #header #masthead {
+    min-height: 70px;
+  }
+
+  #header #wide-nav {
+    display: none !important;
+  }
+}
+
+/* ==========================================================
+   Bộ điều khiển mobile độc lập, không phụ thuộc popup của theme.
+   ========================================================== */
+@media (max-width: 884px) {
+  html:has(body.drcgf-mobile-menu-active),
+  html:has(body.drcgf-mobile-search-active),
+  body.drcgf-mobile-menu-active,
+  body.drcgf-mobile-search-active {
+    overflow: hidden !important;
+  }
+
+  #header .header-inner {
+    overflow: visible !important;
+  }
+
+  #header .mobile-nav,
+  #header .mobile-nav > li,
+  #header .mobile-nav > li > a {
+    position: relative;
+    z-index: 5;
+  }
+
+  #header .mobile-nav > li > a {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #main-menu.mobile-sidebar {
+    display: block !important;
+    position: fixed !important;
+    z-index: 100002 !important;
+    top: 0 !important;
+    bottom: auto !important;
+    left: 0 !important;
+    width: min(88vw, 380px) !important;
+    max-width: 380px !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    transform: translate3d(-104%, 0, 0) !important;
+    transition: transform .26s ease, opacity .2s ease, visibility 0s linear .26s !important;
+    box-shadow: 12px 0 32px rgba(0, 0, 0, .18) !important;
+    pointer-events: none !important;
+  }
+
+  #main-menu.mobile-sidebar.drcgf-mobile-panel-open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+    transition-delay: 0s !important;
+    pointer-events: auto !important;
+  }
+
+  #main-menu .sidebar-menu {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100dvh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: calc(58px + env(safe-area-inset-top, 0px)) 0 calc(34px + env(safe-area-inset-bottom, 0px)) !important;
+    transform: none !important;
+  }
+
+  #main-menu .nav-sidebar {
+    min-height: min-content;
+    padding-bottom: 18px !important;
+  }
+
+  #main-menu .drcgf-mobile-close,
+  #search-lightbox .drcgf-mobile-close {
+    position: absolute;
+    z-index: 3;
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    min-height: 42px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #eef3f9;
+    color: #163b6c;
+    font: 300 34px/38px Arial, sans-serif;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  #main-menu .drcgf-mobile-close:hover,
+  #main-menu .drcgf-mobile-close:focus,
+  #search-lightbox .drcgf-mobile-close:hover,
+  #search-lightbox .drcgf-mobile-close:focus {
+    background: #dfe9f5;
+    color: #0b4ca3;
+    outline: 2px solid rgba(11, 76, 163, .25);
+  }
+
+  #main-menu .nav-sidebar > li {
+    position: relative;
+  }
+
+  #main-menu .nav-sidebar > li > a {
+    padding-right: 54px !important;
+  }
+
+  #main-menu .drcgf-submenu-toggle {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 5px;
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #33506f;
+    cursor: pointer;
+  }
+
+  #main-menu .drcgf-submenu-toggle span::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    background: transparent;
+    transform: translate(-50%, -68%) rotate(45deg);
+    transform-origin: center;
+    transition: transform .2s ease;
+  }
+
+  #main-menu .drcgf-submenu-toggle span::after {
+    content: none !important;
+  }
+
+  #main-menu li.drcgf-submenu-open > .drcgf-submenu-toggle span::before {
+    transform: translate(-50%, -30%) rotate(225deg);
+  }
+
+  #main-menu li.menu-item-has-children > .sub-menu,
+  #main-menu li.menu-item-has-children > ul.children {
+    display: none !important;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  #main-menu li.menu-item-has-children.drcgf-submenu-open > .sub-menu,
+  #main-menu li.menu-item-has-children.drcgf-submenu-open > ul.children {
+    display: block !important;
+  }
+
+  .drcgf-mobile-backdrop {
+    display: block !important;
+    position: fixed;
+    z-index: 100001;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgba(4, 18, 37, .58);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .22s ease, visibility 0s linear .22s;
+  }
+
+  body.drcgf-mobile-menu-active .drcgf-mobile-backdrop,
+  body.drcgf-mobile-search-active .drcgf-mobile-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  #search-lightbox.mfp-hide {
+    display: flex !important;
+  }
+
+  #search-lightbox {
+    position: fixed !important;
+    z-index: 100002 !important;
+    top: max(18px, env(safe-area-inset-top, 0px)) !important;
+    left: 50% !important;
+    width: min(calc(100% - 28px), 560px) !important;
+    min-height: 132px;
+    margin: 0 !important;
+    padding: 64px 18px 22px !important;
+    border-radius: 14px;
+    background: #ffffff !important;
+    color: #1d2c40 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translate3d(-50%, -18px, 0) scale(.98) !important;
+    transition: transform .22s ease, opacity .2s ease, visibility 0s linear .22s !important;
+    pointer-events: none !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .24);
+  }
+
+  #search-lightbox.drcgf-mobile-panel-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate3d(-50%, 0, 0) scale(1) !important;
+    transition-delay: 0s !important;
+    pointer-events: auto !important;
+  }
+
+  #search-lightbox .searchform-wrapper,
+  #search-lightbox form,
+  #search-lightbox .flex-row {
+    width: 100%;
+  }
+
+  #search-lightbox .search-field {
+    height: 48px !important;
+    min-height: 48px !important;
+    border: 1px solid #c7d3e1 !important;
+    border-radius: 7px 0 0 7px !important;
+    background: #fff !important;
+    color: #16263a !important;
+    font-size: 16px !important;
+  }
+
+  #search-lightbox .ux-search-submit {
+    width: 50px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    margin: 0 !important;
+    border-radius: 0 7px 7px 0 !important;
+  }
+}
+
+/* Không để hiệu ứng sticky của theme giữ header ở trạng thái translate âm,
+   khiến nút menu/tìm kiếm mobile chỉ còn lộ một phần sau khi cuộn. */
+@media (max-width: 884px) {
+  #header .header-wrapper.stuck,
+  #header.stuck .header-wrapper,
+  #header.is-sticky .header-wrapper {
+    top: 0 !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+  }
+}
+
+/* DRCGF MOBILE MENU LAYOUT FIX 2026-07-23 */
+@media (max-width: 884px) {
+  /* Chỉ hiển thị một logo. Trước đây logo thường và logo dark cùng hiện,
+     khiến hình bị chồng/lộn thứ tự trên điện thoại. */
+  #header #logo img.header_logo.header-logo {
+    display: block !important;
+  }
+
+  #header #logo img.header-logo-dark {
+    display: none !important;
+  }
+
+  #header #logo > a {
+    flex-wrap: nowrap !important;
+  }
+
+  /* Panel menu thích ứng theo bề rộng màn hình, không bị quá hẹp ở
+     điện thoại màn hình lớn nhưng vẫn chừa vùng bấm để đóng. */
+  #main-menu.mobile-sidebar {
+    width: min(90vw, 430px) !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  #main-menu,
+  #main-menu * {
+    box-sizing: border-box;
+  }
+
+  #main-menu .sidebar-menu {
+    padding-top: calc(58px + env(safe-area-inset-top, 0px)) !important;
+  }
+
+  #main-menu .nav-sidebar {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 18px calc(30px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  #main-menu .nav-sidebar > li {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  /* Gỡ giới hạn max-width:265px của theme trong menu mobile. */
+  #main-menu .nav-sidebar > li.header-search-form,
+  #main-menu .header-search-form,
+  #main-menu .header-search-form-wrapper,
+  #main-menu .searchform-wrapper,
+  #main-menu form.searchform {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #main-menu .nav-sidebar > li.header-search-form {
+    padding: 14px 0 18px !important;
+  }
+
+  #main-menu .nav-sidebar > li > a {
+    width: 100% !important;
+    min-height: 46px !important;
+    padding: 13px 52px 13px 0 !important;
+    line-height: 20px !important;
+  }
+
+  #main-menu .nav-sidebar > li:not(.menu-item-has-children) > a {
+    padding-right: 6px !important;
+  }
+
+  #main-menu .drcgf-submenu-toggle {
+    right: 0 !important;
+    top: 0 !important;
+    width: 46px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+  }
+
+  #main-menu .drcgf-submenu-toggle::before,
+  #main-menu .drcgf-submenu-toggle::after {
+    content: none !important;
+  }
+
+  #main-menu .sub-menu,
+  #main-menu ul.children {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 3px 0 10px 14px !important;
+  }
+
+  #main-menu .sub-menu > li > a,
+  #main-menu ul.children > li > a {
+    display: block !important;
+    padding: 9px 8px !important;
+    line-height: 20px !important;
+    white-space: normal !important;
+  }
+}
+
+
+
+/* MENUMAIN STABILITY + CONSISTENCY 2026-07-23 */
+/* Thông số header dùng chung, trùng với các trang gốc của website. */
+#header .header-main { height: 90px; }
+#header #logo { width: 166px; }
+#header #logo img { max-height: 110px; padding: 10px 0; }
+#header .header-bottom { min-height: 50px; }
+#header .header-top { min-height: 30px; }
+#header .header-bottom-nav > li > a { line-height: 16px; }
+#header .search-form { width: 100%; }
+
+/* Fallback hover độc lập với JavaScript của theme. */
+@media (min-width: 885px) {
+  #header li.has-dropdown:hover > .nav-dropdown {
+    left: -15px !important;
+    max-height: 1000px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+  #header .nav-right li.has-dropdown:hover:last-child > .nav-dropdown {
+    left: auto !important;
+    right: -15px !important;
+  }
+}
+
+@media (max-width: 884px) {
+  /* Mobile dùng sticky riêng, không dùng cơ chế .stuck của theme. Cách này
+     ngăn header bị co hoặc trượt mất một nửa khi đổi hướng cuộn. */
+  #header.drcgf-mobile-sticky,
+  #header {
+    position: sticky !important;
+    top: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 1001 !important;
+    width: 100% !important;
+    height: 70px !important;
+    min-height: 70px !important;
+    overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
+    transform: none !important;
+    animation: none !important;
+    background: #fff !important;
+  }
+
+  #header .header-wrapper,
+  #header .header-wrapper.stuck,
+  #header.stuck .header-wrapper,
+  #header.is-sticky .header-wrapper {
+    position: relative !important;
+    inset: auto !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    width: 100% !important;
+    height: 70px !important;
+    min-height: 70px !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    animation: none !important;
+    transition: box-shadow .2s ease !important;
+    background: #fff !important;
+  }
+
+  /* Không hiển thị thanh mạng xã hội màu đen trên điện thoại. */
+  #header .header-top,
+  #header .header-top.hide-for-sticky,
+  #header .header-wrapper.stuck .header-top.hide-for-sticky,
+  #header.stuck .header-top.hide-for-sticky,
+  #header.is-sticky .header-top.hide-for-sticky {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #header .header-main,
+  #header .header-wrapper.stuck .header-main,
+  #header.stuck .header-main,
+  #header.is-sticky .header-main,
+  #header #masthead {
+    position: relative !important;
+    top: 0 !important;
+    height: 70px !important;
+    min-height: 70px !important;
+    transform: none !important;
+  }
+
+  #header .header-inner {
+    height: 70px !important;
+    min-height: 70px !important;
+  }
+
+  /* Theme tự chèn button.toggle với icon mũi tên; menu này dùng nút dấu cộng riêng. */
+  #main-menu button.toggle {
+    display: none !important;
+  }
+
+  #main-menu li.menu-item-has-children > a::after,
+  #main-menu li.menu-item-has-children > a::before {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+
+/* MOBILE UX UPDATE 2026-07-23
+   - Biểu tượng menu gồm 3 gạch ngang bằng nhau.
+   - Hiển thị nút về đầu trang trên điện thoại. */
+@media (max-width: 884px) {
+  #header .nav-click {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  #header .nav-click span,
+  #header .nav-click::before,
+  #header .nav-click::after {
+    left: 2px !important;
+    right: auto !important;
+    width: 28px !important;
+    height: 2px !important;
+    transform: none !important;
+    opacity: 1 !important;
+    border-radius: 0 !important;
+  }
+
+  #header .nav-click::before {
+    top: 7px !important;
+  }
+
+  #header .nav-click span {
+    top: 15px !important;
+  }
+
+  #header .nav-click::after {
+    top: 23px !important;
+  }
+
+  /* Không biến biểu tượng 3 gạch thành dấu X khi panel mở. */
+  .has-off-canvas .current-lightbox-clicked .nav-click span,
+  .has-off-canvas .current-lightbox-clicked .nav-click::before,
+  .has-off-canvas .current-lightbox-clicked .nav-click::after {
+    left: 2px !important;
+    width: 28px !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  #top-link.back-to-top {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    right: 14px !important;
+    bottom: 14px !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    z-index: 9999 !important;
+    color: #777 !important;
+    background: transparent !important;
+    border-color: #777 !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: none !important;
+    transition: opacity .2s ease, visibility .2s ease !important;
+  }
+
+  #top-link.back-to-top.active,
+  #top-link.back-to-top.drcgf-top-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  #top-link.back-to-top:hover,
+  #top-link.back-to-top:focus,
+  #top-link.back-to-top:focus-visible,
+  #top-link.back-to-top:active {
+    color: #fff !important;
+    background: #446084 !important;
+    border-color: #446084 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+}
+
+
+/* ==========================================================
+   DROPDOWN DESKTOP + LAYER ORDER + CONTACT STICKY 2026-07-23
+   Chỉ tinh chỉnh menu con và các lớp phủ, không đổi menumain.
+   ========================================================== */
+@media (min-width: 885px) {
+  #header .nav-dropdown,
+  #header .sub-menu.nav-dropdown {
+    min-width: 270px !important;
+    padding: 10px !important;
+    border: 1px solid rgba(12, 76, 145, .13) !important;
+    border-radius: 10px !important;
+    background: #fff !important;
+    box-shadow: 0 14px 34px rgba(17, 48, 86, .16) !important;
+    overflow: hidden !important;
+    transform: translateY(8px) !important;
+    transition: opacity .16s ease, visibility .16s ease, transform .16s ease !important;
+  }
+
+  #header li.has-dropdown:hover > .nav-dropdown,
+  #header li.has-dropdown.current-dropdown > .nav-dropdown {
+    transform: translateY(0) !important;
+  }
+
+  #header .nav-dropdown > li,
+  #header .sub-menu.nav-dropdown > li {
+    margin: 0 !important;
+    border: 0 !important;
+  }
+
+  #header .nav-dropdown > li + li,
+  #header .sub-menu.nav-dropdown > li + li {
+    border-top: 1px solid #edf2f7 !important;
+  }
+
+  #header .nav-dropdown > li > a,
+  #header .sub-menu.nav-dropdown > li > a {
+    position: relative !important;
+    display: block !important;
+    padding: 11px 13px 11px 16px !important;
+    border: 0 !important;
+    border-radius: 7px !important;
+    color: #26384c !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.38 !important;
+    white-space: normal !important;
+    transition: color .15s ease, background-color .15s ease, padding-left .15s ease !important;
+  }
+
+  #header .nav-dropdown > li > a::before,
+  #header .sub-menu.nav-dropdown > li > a::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    width: 3px;
+    height: 0;
+    border-radius: 3px;
+    background: #0a58a8;
+    transform: translateY(-50%);
+    transition: height .15s ease !important;
+  }
+
+  #header .nav-dropdown > li > a:hover,
+  #header .nav-dropdown > li.current-menu-item > a,
+  #header .sub-menu.nav-dropdown > li > a:hover,
+  #header .sub-menu.nav-dropdown > li.current-menu-item > a {
+    padding-left: 20px !important;
+    color: #084f98 !important;
+    background: #eef6ff !important;
+  }
+
+  #header .nav-dropdown > li > a:hover::before,
+  #header .nav-dropdown > li.current-menu-item > a::before,
+  #header .sub-menu.nav-dropdown > li > a:hover::before,
+  #header .sub-menu.nav-dropdown > li.current-menu-item > a::before {
+    height: 22px;
+  }
+}
+
+/* Panel menu/tìm kiếm luôn phủ lên header và nội dung trang. */
+#main-menu,
+#search-lightbox {
+  z-index: 2147483000 !important;
+}
+
+#main-menu .mfp-content,
+#search-lightbox .mfp-content,
+#main-menu .sidebar-menu {
+  position: relative;
+  z-index: 2147483001 !important;
+}
+
+.drcgf-mobile-backdrop,
+#drcgf-mobile-backdrop {
+  z-index: 2147482990 !important;
+}
+
+
+/* ==========================================================
+   MOBILE PANEL LAYER + DESKTOP DROPDOWN HOVER FIX 2026-07-23B
+   ========================================================== */
+@media (max-width: 884px) {
+  /* Backdrop luôn nằm dưới panel menu và panel tìm kiếm. */
+  .drcgf-mobile-backdrop,
+  #drcgf-mobile-backdrop {
+    z-index: 99990 !important;
+  }
+
+  #main-menu.mobile-sidebar,
+  #main-menu.mobile-sidebar.mfp-hide,
+  #main-menu.mobile-sidebar.drcgf-mobile-panel-open,
+  #search-lightbox,
+  #search-lightbox.drcgf-mobile-panel-open {
+    z-index: 100000 !important;
+    isolation: isolate;
+  }
+
+  #main-menu.mobile-sidebar.drcgf-mobile-panel-open,
+  #search-lightbox.drcgf-mobile-panel-open {
+    pointer-events: auto !important;
+  }
+
+  #main-menu .sidebar-menu,
+  #main-menu .mfp-content,
+  #search-lightbox .mfp-content {
+    position: relative !important;
+    z-index: 100001 !important;
+  }
+}
+
+@media (min-width: 885px) {
+  /* Hover chỉ đổi màu nền/chữ, không đổi padding hay thêm vạch nên chữ không nhảy dòng. */
+  #header .nav-dropdown > li > a,
+  #header .sub-menu.nav-dropdown > li > a {
+    padding: 11px 14px !important;
+    background: transparent !important;
+    white-space: normal !important;
+    transition: color .16s ease, background-color .16s ease, box-shadow .16s ease !important;
+  }
+
+  #header .nav-dropdown > li > a::before,
+  #header .sub-menu.nav-dropdown > li > a::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  #header .nav-dropdown > li > a:hover,
+  #header .nav-dropdown > li.current-menu-item > a,
+  #header .sub-menu.nav-dropdown > li > a:hover,
+  #header .sub-menu.nav-dropdown > li.current-menu-item > a {
+    padding: 11px 14px !important;
+    color: #084f98 !important;
+    background: #f1f6fc !important;
+    box-shadow: inset 0 0 0 1px rgba(10, 88, 168, .10) !important;
+  }
+}
+
+/* ==========================================================
+   Đồng bộ dropdown desktop: luôn một dòng, không dịch chữ.
+   Trang Thành phần là chuẩn tải CSS/JS dùng chung.
+   ========================================================== */
+@media (min-width: 885px) {
+  #header .nav-dropdown,
+  #header .sub-menu {
+    width: max-content !important;
+    min-width: 240px !important;
+    max-width: min(420px, calc(100vw - 32px)) !important;
+  }
+
+  #header .nav-dropdown > li,
+  #header .sub-menu > li {
+    width: 100% !important;
+  }
+
+  #header .nav-dropdown > li > a,
+  #header .sub-menu > li > a {
+    display: block !important;
+    width: 100% !important;
+    min-width: max-content !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    hyphens: none !important;
+    padding-left: 14px !important;
+    padding-right: 18px !important;
+    transform: none !important;
+  }
+
+  #header .nav-dropdown > li > a:hover,
+  #header .sub-menu > li > a:hover,
+  #header .nav-dropdown > li.active > a,
+  #header .sub-menu > li.active > a {
+    padding-left: 14px !important;
+    padding-right: 18px !important;
+    transform: none !important;
+  }
+}
+
+
+/* ==========================================================
+   GLOBAL FIXED HEADER + MOBILE OVERLAY 2026-07-23 FINAL
+   Một cơ chế duy nhất cho toàn bộ website: không sticky theo scroll.
+   ========================================================== */
+#header.drcgf-fixed-header,
+#header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  z-index: 100000 !important;
+}
+
+#header .header-wrapper,
+#header .header-wrapper.stuck,
+#header.stuck .header-wrapper,
+#header.is-sticky .header-wrapper {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  animation: none !important;
+}
+
+#drcgf-fixed-header-space {
+  display: block !important;
+  width: 100% !important;
+  flex: 0 0 auto !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 884px) {
+  #header,
+  #header.drcgf-fixed-header,
+  #header .header-wrapper,
+  #header .header-main,
+  #header #masthead,
+  #header .header-inner {
+    height: 70px !important;
+    min-height: 70px !important;
+    max-height: 70px !important;
+  }
+
+  #drcgf-fixed-header-space {
+    height: 70px !important;
+    min-height: 70px !important;
+  }
+
+  /* Lớp tối che cả header phía sau. */
+  .drcgf-mobile-backdrop,
+  #drcgf-mobile-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    z-index: 200000 !important;
+  }
+
+  /* Menu và tìm kiếm phủ từ đỉnh viewport, cao hơn backdrop/header. */
+  #main-menu.mobile-sidebar,
+  #main-menu.mobile-sidebar.mfp-hide,
+  #main-menu.mobile-sidebar.drcgf-mobile-panel-open,
+  #search-lightbox,
+  #search-lightbox.mfp-hide,
+  #search-lightbox.drcgf-mobile-panel-open {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    z-index: 200010 !important;
+    transform: none !important;
+  }
+
+  #main-menu .sidebar-menu,
+  #main-menu .mfp-content,
+  #search-lightbox .mfp-content,
+  #search-lightbox .searchform-wrapper {
+    position: relative !important;
+    z-index: 200011 !important;
+  }
+
+  body.drcgf-mobile-menu-active #header,
+  body.drcgf-mobile-search-active #header {
+    z-index: 100000 !important;
+  }
+}
+
+
+/* MOBILE MENU/SEARCH LEGACY EFFECT RESTORE 2026-07-23 */
+@media (max-width: 884px) {
+  /* Backdrop phủ website và header, nhưng luôn nằm dưới panel. */
+  .drcgf-mobile-backdrop,
+  #drcgf-mobile-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    z-index: 200000 !important;
+  }
+
+  /* Khôi phục hiệu ứng menu cũ: panel trượt từ trái vào. */
+  #main-menu.mobile-sidebar,
+  #main-menu.mobile-sidebar.mfp-hide {
+    display: block !important;
+    position: fixed !important;
+    z-index: 200010 !important;
+    top: 0 !important;
+    bottom: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    width: min(88vw, 380px) !important;
+    max-width: 380px !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    transform: translate3d(-104%, 0, 0) !important;
+    transition: transform .26s ease, opacity .2s ease, visibility 0s linear .26s !important;
+    box-shadow: 12px 0 32px rgba(0, 0, 0, .18) !important;
+    pointer-events: none !important;
+  }
+
+  #main-menu.mobile-sidebar.drcgf-mobile-panel-open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+    transition-delay: 0s !important;
+    pointer-events: auto !important;
+  }
+
+  #main-menu .sidebar-menu,
+  #main-menu .mfp-content {
+    position: relative !important;
+    z-index: 200011 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100dvh !important;
+  }
+
+  /* Khôi phục hiệu ứng tìm kiếm cũ: hộp nổi giữa phía trên, không bung thành sidebar. */
+  #search-lightbox,
+  #search-lightbox.mfp-hide {
+    display: flex !important;
+    position: fixed !important;
+    z-index: 200010 !important;
+    top: max(18px, env(safe-area-inset-top, 0px)) !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    width: min(calc(100% - 28px), 560px) !important;
+    height: auto !important;
+    min-height: 132px !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 64px 18px 22px !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    color: #1d2c40 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    overflow: visible !important;
+    transform: translate3d(-50%, -18px, 0) scale(.98) !important;
+    transition: transform .22s ease, opacity .2s ease, visibility 0s linear .22s !important;
+    pointer-events: none !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .24) !important;
+  }
+
+  #search-lightbox.drcgf-mobile-panel-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate3d(-50%, 0, 0) scale(1) !important;
+    transition-delay: 0s !important;
+    pointer-events: auto !important;
+  }
+
+  #search-lightbox .mfp-content,
+  #search-lightbox .searchform-wrapper {
+    position: relative !important;
+    z-index: 200011 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+}
+
+
+/* ==========================================================
+   DESKTOP MAIN MENU + CONNECTED DROPDOWN 2026-07-24
+   - Menu cha gọn, hiện đại.
+   - Dropdown bám đúng cạnh dưới của mục cha.
+   - Không dùng mũi tên tam giác.
+   ========================================================== */
+@media (min-width: 885px) {
+  #header #wide-nav {
+    background: #fff !important;
+    border-top: 1px solid #edf1f6 !important;
+    border-bottom: 1px solid #e6ebf2 !important;
+    box-shadow: 0 5px 16px rgba(20, 45, 78, .06) !important;
+    overflow: visible !important;
+  }
+
+  #header #wide-nav .flex-row,
+  #header #wide-nav .flex-col,
+  #header #wide-nav .nav {
+    overflow: visible !important;
+  }
+
+  #header #wide-nav .nav > li {
+    position: relative !important;
+    margin: 0 4px !important;
+  }
+
+  #header #wide-nav .nav > li > a.nav-top-link {
+    position: relative !important;
+    z-index: 1002 !important;
+    min-height: 48px !important;
+    padding: 0 17px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    color: #1d2d42 !important;
+    font-weight: 700 !important;
+    letter-spacing: .015em !important;
+    border: 1px solid transparent !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease !important;
+  }
+
+  #header #wide-nav .nav > li:hover > a.nav-top-link,
+  #header #wide-nav .nav > li.current-menu-item > a.nav-top-link,
+  #header #wide-nav .nav > li.current-menu-ancestor > a.nav-top-link,
+  #header #wide-nav .nav > li.current-dropdown > a.nav-top-link {
+    color: #0757a6 !important;
+    background: #f4f8fd !important;
+    border-color: #dce7f3 !important;
+    box-shadow: 0 4px 12px rgba(11, 76, 148, .08) !important;
+  }
+
+  /* Khi có menu con, tab cha và dropdown trở thành một khối liền nhau. */
+  #header #wide-nav .nav > li.has-dropdown:hover > a.nav-top-link,
+  #header #wide-nav .nav > li.has-dropdown.current-dropdown > a.nav-top-link {
+    background: #fff !important;
+    border-color: #d9e3ee !important;
+    border-bottom-color: #fff !important;
+    border-radius: 10px 10px 0 0 !important;
+    box-shadow: 0 -4px 14px rgba(20, 48, 83, .07) !important;
+  }
+
+  #header #wide-nav li.has-dropdown > .nav-dropdown,
+  #header #wide-nav li.has-dropdown > .sub-menu.nav-dropdown {
+    top: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    margin: -1px 0 0 !important;
+    padding: 8px !important;
+    min-width: max(100%, 285px) !important;
+    width: max-content !important;
+    max-width: min(430px, calc(100vw - 32px)) !important;
+    border: 1px solid #d9e3ee !important;
+    border-radius: 0 12px 12px 12px !important;
+    background: #fff !important;
+    box-shadow: 0 18px 40px rgba(20, 48, 83, .16) !important;
+    transform: none !important;
+    transform-origin: top left !important;
+    overflow: hidden !important;
+    z-index: 1001 !important;
+  }
+
+  #header #wide-nav .nav-dropdown > li,
+  #header #wide-nav .sub-menu.nav-dropdown > li {
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  #header #wide-nav .nav-dropdown > li > a,
+  #header #wide-nav .sub-menu.nav-dropdown > li > a {
+    display: block !important;
+    padding: 11px 14px !important;
+    color: #24364b !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+    border: 0 !important;
+    border-radius: 7px !important;
+    background: transparent !important;
+    transition: color .15s ease, background-color .15s ease !important;
+  }
+
+  #header #wide-nav .nav-dropdown > li > a:hover,
+  #header #wide-nav .sub-menu.nav-dropdown > li > a:hover {
+    color: #0757a6 !important;
+    background: #f1f6fc !important;
+  }
+
+  /* Loại bỏ toàn bộ tam giác/pointer mặc định của Flatsome. */
+  body.nav-dropdown-has-arrow #header #wide-nav li.has-dropdown::before,
+  body.nav-dropdown-has-arrow #header #wide-nav li.has-dropdown::after,
+  #header #wide-nav .nav-dropdown::before,
+  #header #wide-nav .nav-dropdown::after,
+  #header #wide-nav .sub-menu.nav-dropdown::before,
+  #header #wide-nav .sub-menu.nav-dropdown::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+
+
+/* ==========================================================
+   DROPDOWN DESKTOP ALIGN + SYNCHRONOUS CLOSE 2026-07-24
+   - Bỏ mọi phần tử/pseudo tạo khoảng thụt ở bên trái.
+   - Toàn bộ dropdown ẩn/hiện cùng lúc, không còn khung biến mất chậm.
+   ========================================================== */
+@media (min-width: 885px) {
+  #header #wide-nav li.has-dropdown > .nav-dropdown,
+  #header #wide-nav li.has-dropdown > .sub-menu.nav-dropdown {
+    padding: 7px 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: none !important;
+  }
+
+  #header #wide-nav li.has-dropdown:hover > .nav-dropdown,
+  #header #wide-nav li.has-dropdown:hover > .sub-menu.nav-dropdown,
+  #header #wide-nav li.has-dropdown:focus-within > .nav-dropdown,
+  #header #wide-nav li.has-dropdown:focus-within > .sub-menu.nav-dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: none !important;
+  }
+
+  /* Không để class current-dropdown của theme giữ lại nền/khung sau khi rời chuột. */
+  #header #wide-nav li.has-dropdown.current-dropdown:not(:hover):not(:focus-within) > .nav-dropdown,
+  #header #wide-nav li.has-dropdown.current-dropdown:not(:hover):not(:focus-within) > .sub-menu.nav-dropdown {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  #header #wide-nav .nav > li.has-dropdown.current-dropdown:not(:hover):not(:focus-within) > a.nav-top-link {
+    color: #1d2d42 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    border-radius: 9px !important;
+    box-shadow: none !important;
+  }
+
+  #header #wide-nav .nav-dropdown > li,
+  #header #wide-nav .sub-menu.nav-dropdown > li {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  #header #wide-nav .nav-dropdown > li::before,
+  #header #wide-nav .nav-dropdown > li::after,
+  #header #wide-nav .sub-menu.nav-dropdown > li::before,
+  #header #wide-nav .sub-menu.nav-dropdown > li::after,
+  #header #wide-nav .nav-dropdown > li > a::before,
+  #header #wide-nav .nav-dropdown > li > a::after,
+  #header #wide-nav .sub-menu.nav-dropdown > li > a::before,
+  #header #wide-nav .sub-menu.nav-dropdown > li > a::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  #header #wide-nav .nav-dropdown > li > a,
+  #header #wide-nav .sub-menu.nav-dropdown > li > a,
+  #header #wide-nav .nav-dropdown > li > a:hover,
+  #header #wide-nav .sub-menu.nav-dropdown > li > a:hover,
+  #header #wide-nav .nav-dropdown > li.current-menu-item > a,
+  #header #wide-nav .sub-menu.nav-dropdown > li.current-menu-item > a {
+    margin: 0 !important;
+    padding: 11px 15px !important;
+    text-indent: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================
+   CONTACT HEADER SYNC + MOBILE TAP STATES 2026-07-24
+   - Trang Liên hệ dùng đúng kích thước header chung.
+   - Menu con mobile không giữ nền xám sau khi chạm.
+   ========================================================== */
+@media (max-width: 884px) {
+  #main-menu li.menu-item-has-children,
+  #main-menu li.menu-item-has-children.drcgf-submenu-open,
+  #main-menu li.menu-item-has-children > a,
+  #main-menu li.menu-item-has-children > a:hover,
+  #main-menu li.menu-item-has-children > a:focus,
+  #main-menu li.menu-item-has-children > a:focus-visible,
+  #main-menu li.menu-item-has-children > a:active,
+  #main-menu li.menu-item-has-children.drcgf-submenu-open > a,
+  #main-menu .drcgf-submenu-toggle,
+  #main-menu .drcgf-submenu-toggle:hover,
+  #main-menu .drcgf-submenu-toggle:focus,
+  #main-menu .drcgf-submenu-toggle:focus-visible,
+  #main-menu .drcgf-submenu-toggle:active,
+  #main-menu li.drcgf-submenu-open > .drcgf-submenu-toggle {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  #main-menu .drcgf-submenu-toggle {
+    transition: none !important;
+  }
+}
+
+/* Mobile logo height requested: keep the shared menumain logo at 50px. */
+@media (max-width: 884px) {
+  #header #logo img.header_logo.header-logo,
+  #header #logo img.header-logo-dark,
+  #header #logo img {
+    width: auto !important;
+    height: auto !important;
+    max-height: 50px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Disable only the logo size transition when switching responsive breakpoints. */
+#header .header-wrapper:not(.stuck) #logo img,
+#header .header-wrapper.stuck #logo img {
+  transition: none !important;
+}
+
+
+/* Mobile slider nav smaller */
+@media (max-width:884px){
+.slider-nav-circle .flickity-prev-next-button,.slider-nav-circle .slider-nav,.flickity-prev-next-button{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;}
+.flickity-prev-next-button svg{width:14px!important;height:14px!important;}
+}
+
+/* ==========================================================
+   BREAKPOINT MENUMAIN 885PX
+   Flatsome mặc định dùng 850px cho .show-for-medium/.hide-for-medium.
+   Ghi đè riêng header để khoảng 850-884px dùng đầy đủ menu mobile,
+   gồm nút hamburger, logo giữa và nút tìm kiếm.
+   ========================================================== */
+@media (min-width: 850px) and (max-width: 884px) {
+  #header .show-for-medium {
+    display: block !important;
+  }
+
+  #header .flex-col.show-for-medium {
+    display: flex !important;
+  }
+
+  #header .show-for-medium .mobile-nav {
+    display: flex !important;
+  }
+
+  #header .hide-for-medium,
+  #header #wide-nav.hide-for-medium,
+  #header #wide-nav {
+    display: none !important;
+  }
+
+  #header .header-inner {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+  }
+
+  #header .header-inner > .flex-left,
+  #header .header-inner > .flex-right {
+    flex: 1 1 0 !important;
+  }
+
+  #header .header-inner > #logo {
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+    text-align: center !important;
+  }
+
+  #header .header-inner > .show-for-medium.flex-left {
+    order: 1 !important;
+    justify-content: flex-start !important;
+  }
+
+  #header .header-inner > .show-for-medium.flex-right {
+    order: 3 !important;
+    justify-content: flex-end !important;
+  }
+}
+
+@media (min-width: 885px) {
+  #header .show-for-medium {
+    display: none !important;
+  }
+
+  #header .hide-for-medium {
+    display: flex !important;
+  }
+
+  #header #wide-nav.hide-for-medium,
+  #header #wide-nav {
+    display: flex !important;
+  }
+}

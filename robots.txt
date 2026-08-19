@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tim-kiem/
+
+Sitemap: https://www.drcgf.vn/sitemap.xml

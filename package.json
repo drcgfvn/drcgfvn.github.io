@@ -1,0 +1,7 @@
+{
+  "name": "drcgf-static-site",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/generate-tai-lieu-data.js"
+  }
+}

@@ -1,0 +1,400 @@
+/* DR.CGF - Các hiệu chỉnh dùng chung 2026-07-22, cập nhật mobile 2026-07-22 */
+
+/* Giữ logo nằm gọn trong header điện thoại ở cả trạng thái đầu trang và sticky. */
+@media (max-width: 884px) {
+  #header #masthead,
+  #header .header-main,
+  #header .header-inner {
+    min-height: 70px !important;
+    height: 70px !important;
+    overflow: visible !important;
+  }
+
+  #header #logo {
+    width: 148px !important;
+    max-width: calc(100vw - 126px) !important;
+    height: 70px !important;
+    margin: 0 auto !important;
+    overflow: hidden;
+  }
+
+  #header #logo > a {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 7px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  #header #logo img.header_logo.header-logo,
+  #header .header-logo,
+  #header .header-wrapper.stuck .header-logo {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 56px !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+  }
+
+  #header #logo img.header-logo-dark {
+    display: none !important;
+  }
+}
+
+/* Trang chủ desktop: zoom thành phần nhanh hơn và chỉ phóng nhẹ. */
+@media (min-width: 885px) {
+  body.home #row-1964802524 .has-hover .image-zoom-long img {
+    transition: transform 0.32s ease-out !important;
+    transform: scale(1) !important;
+    will-change: transform;
+  }
+
+  body.home #row-1964802524 .has-hover:hover .image-zoom-long img {
+    transform: scale(1.06) !important;
+  }
+}
+
+/* Khối giao diện cho trang tìm kiếm, liên hệ và 404. */
+.drcgf-page-shell {
+  background: #f5f8fc;
+  min-height: 52vh;
+  padding: 46px 0 72px;
+}
+.drcgf-page-container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+.drcgf-page-heading {
+  text-align: center;
+  margin: 0 auto 30px;
+  max-width: 760px;
+}
+.drcgf-page-heading h1 {
+  color: #0b4ca3;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.18;
+  margin-bottom: 10px;
+}
+.drcgf-page-heading p { color: #536275; font-size: 17px; }
+.drcgf-panel {
+  background: #fff;
+  border: 1px solid #e0e8f2;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 14px 34px rgba(16, 57, 112, .08);
+}
+.drcgf-breadcrumbs { margin-bottom: 22px; color: #66758a; font-size: 14px; }
+.drcgf-breadcrumbs a { color: #0b4ca3; }
+
+.drcgf-search-form-page {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto 32px;
+}
+.drcgf-search-form-page input,
+.drcgf-contact-form input,
+.drcgf-contact-form select,
+.drcgf-contact-form textarea {
+  width: 100%;
+  border: 1px solid #cfd9e6;
+  border-radius: 7px;
+  background: #fff;
+  min-height: 48px;
+  padding: 11px 13px;
+  font-size: 16px;
+  box-shadow: none;
+}
+.drcgf-search-form-page input:focus,
+.drcgf-contact-form input:focus,
+.drcgf-contact-form select:focus,
+.drcgf-contact-form textarea:focus {
+  border-color: #0b4ca3;
+  box-shadow: 0 0 0 3px rgba(11, 76, 163, .12);
+  outline: none;
+}
+.drcgf-action-button {
+  border: 0;
+  border-radius: 7px;
+  min-height: 48px;
+  padding: 0 24px;
+  background: #121212;
+  color: #fff !important;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.drcgf-action-button:hover { background: #073c82; }
+.drcgf-action-button--outline { background: transparent; border: 1px solid #0b4ca3; color: #0b4ca3 !important; }
+.drcgf-action-button--outline:hover { color: #fff !important; background: #0b4ca3; }
+
+.drcgf-results-meta { margin: 0 0 20px; color: #4d5c70; }
+.drcgf-results-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; }
+.drcgf-result-card { background:#fff; border:1px solid #e1e8f1; border-radius:9px; overflow:hidden; display:flex; flex-direction:column; transition:.2s ease; }
+.drcgf-result-card:hover { transform:translateY(-3px); box-shadow:0 12px 26px rgba(18,73,154,.11); }
+.drcgf-result-card__image { aspect-ratio:1/1; background:#fff; display:flex; align-items:center; justify-content:center; padding:16px; }
+.drcgf-result-card__image img { width:100%; height:100%; object-fit:contain; }
+.drcgf-result-card__body { padding:16px; display:flex; flex:1; flex-direction:column; }
+.drcgf-result-card__group { color:#0b4ca3; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+.drcgf-result-card h2 { font-size:16px; line-height:1.4; margin:8px 0; }
+.drcgf-result-card h2 a { color:#1b2940; }
+.drcgf-result-card__vn { color:#647287; font-size:14px; min-height:38px; }
+.drcgf-result-card__price { margin-top:auto; color:#0b4ca3; font-weight:700; }
+.drcgf-empty-state { text-align:center; padding:46px 22px; border:1px dashed #c9d5e4; background:#fff; border-radius:10px; }
+
+.drcgf-contact-layout { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(280px,.7fr); gap:28px; align-items:start; }
+.drcgf-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.drcgf-form-field--full { grid-column:1/-1; }
+.drcgf-contact-form label { display:block; font-weight:650; color:#24354d; margin-bottom:7px; }
+.drcgf-contact-form label span { color:#b42318; }
+.drcgf-contact-form textarea { min-height:128px; resize:vertical; }
+.drcgf-contact-form .privacy-check { display:flex; gap:10px; align-items:flex-start; font-weight:400; color:#526174; }
+.drcgf-contact-form .privacy-check input { width:18px; min-height:18px; height:18px; margin-top:3px; }
+.drcgf-form-actions { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.drcgf-form-note { font-size:13px; color:#66758a; margin:10px 0 0; }
+.drcgf-form-alert { border-radius:7px; padding:12px 14px; margin-bottom:18px; display:none; }
+.drcgf-form-alert.is-visible { display:block; }
+.drcgf-form-alert.is-error { background:#fff0f0; color:#9c1c1c; border:1px solid #f2caca; }
+.drcgf-contact-card h2 { color:#0b4ca3; font-size:22px; }
+.drcgf-contact-card ul { list-style:none; margin:0; padding:0; }
+.drcgf-contact-card li { padding:12px 0; border-bottom:1px solid #e8edf4; }
+.drcgf-contact-card li:last-child { border-bottom:0; }
+.drcgf-contact-card strong { display:block; color:#25364e; }
+
+.drcgf-404 { text-align:center; max-width:720px; margin:0 auto; }
+.drcgf-404__code { font-size:clamp(86px,17vw,180px); line-height:.9; font-weight:800; color:#d7e5f6; letter-spacing:-.06em; }
+.drcgf-404 h1 { color:#0b4ca3; }
+.drcgf-404__actions { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:24px; }
+
+@media (max-width: 900px) {
+  .drcgf-results-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .drcgf-contact-layout { grid-template-columns:1fr; }
+}
+@media (max-width: 560px) {
+  .drcgf-page-shell { padding:30px 0 48px; }
+  .drcgf-panel { padding:20px 16px; }
+  .drcgf-search-form-page { grid-template-columns:1fr; }
+  .drcgf-results-grid { grid-template-columns:1fr; }
+  .drcgf-form-grid { grid-template-columns:1fr; }
+  .drcgf-form-field--full { grid-column:auto; }
+}
+
+
+
+
+/* CONTACT FORM ALIGNMENT 2026-07-23 */
+.drcgf-form-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px !important;
+  align-items: stretch !important;
+}
+.drcgf-form-actions .drcgf-action-button {
+  width: 100% !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  margin: 0 !important;
+  padding: 0 16px !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 380px) {
+  .drcgf-form-actions { grid-template-columns: 1fr; }
+}
+
+
+/* DRCGF iOS Safari product image sizing fix */
+.catalogue-grid,
+.catalogue-card,
+.catalogue-card__image,
+.product-verified__grid,
+.product-verified__image { min-width:0; }
+.catalogue-card__image {
+  position:relative !important;
+  display:block !important;
+  width:100% !important;
+  height:0 !important;
+  padding:100% 0 0 !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+  background:#fff;
+}
+.catalogue-card__image img {
+  position:absolute !important;
+  top:18px !important;
+  right:18px !important;
+  bottom:18px !important;
+  left:18px !important;
+  display:block !important;
+  width:calc(100% - 36px) !important;
+  height:calc(100% - 36px) !important;
+  max-width:calc(100% - 36px) !important;
+  max-height:calc(100% - 36px) !important;
+  object-fit:contain !important;
+  object-position:center !important;
+}
+.product-verified__image { min-width:0; overflow:hidden; }
+.product-verified__image img {
+  display:block !important;
+  width:auto !important;
+  height:auto !important;
+  max-width:100% !important;
+  max-height:620px !important;
+  margin:0 auto !important;
+  object-fit:contain !important;
+  object-position:center !important;
+}
+@media(max-width:520px){
+  .catalogue-card__image img {
+    top:14px !important;
+    right:14px !important;
+    bottom:14px !important;
+    left:14px !important;
+    width:calc(100% - 28px) !important;
+    height:calc(100% - 28px) !important;
+    max-width:calc(100% - 28px) !important;
+    max-height:calc(100% - 28px) !important;
+  }
+  .product-verified__image img { max-height:70vh !important; }
+}
+
+
+/* CONTACT PAGE — đồng bộ tone giao diện với trang Tin tức */
+body.drcgf-contact-page .drcgf-page-shell {
+  background: #fff;
+  padding-top: 42px;
+}
+body.drcgf-contact-page .drcgf-page-container {
+  width: min(1150px, calc(100% - 32px));
+}
+body.drcgf-contact-page .drcgf-contact-heading {
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+body.drcgf-contact-page .drcgf-contact-heading .section-title-container {
+  margin-bottom: 12px;
+  padding: 0;
+}
+body.drcgf-contact-page .drcgf-contact-heading .section-title {
+  margin: 0;
+  color: #121212;
+}
+body.drcgf-contact-page .drcgf-contact-heading .section-title-main {
+  border: 0;
+  color: #121212;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: .01em;
+  padding: 0 18px;
+  text-transform: uppercase;
+}
+body.drcgf-contact-page .drcgf-contact-heading .section-title b {
+  background-color: #d8d8d8;
+  height: 1px;
+  opacity: 1;
+}
+body.drcgf-contact-page .drcgf-contact-heading p {
+  color: #555;
+  font-size: 16px;
+  margin: 0 auto;
+  max-width: 760px;
+}
+body.drcgf-contact-page .drcgf-panel {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .06);
+}
+body.drcgf-contact-page .drcgf-contact-form label,
+body.drcgf-contact-page .drcgf-contact-card strong {
+  color: #222;
+}
+body.drcgf-contact-page .drcgf-contact-form input,
+body.drcgf-contact-page .drcgf-contact-form select,
+body.drcgf-contact-page .drcgf-contact-form textarea {
+  border-color: #d7d7d7;
+  border-radius: 3px;
+}
+body.drcgf-contact-page .drcgf-contact-form input:focus,
+body.drcgf-contact-page .drcgf-contact-form select:focus,
+body.drcgf-contact-page .drcgf-contact-form textarea:focus {
+  border-color: #121212;
+  box-shadow: 0 0 0 2px rgba(18, 18, 18, .08);
+}
+body.drcgf-contact-page .drcgf-action-button {
+  background: #121212;
+  border: 1px solid #121212;
+  border-radius: 3px;
+  color: #fff !important;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+body.drcgf-contact-page .drcgf-action-button:hover {
+  background: #0b4ca3;
+  border-color: #0b4ca3;
+}
+body.drcgf-contact-page .drcgf-action-button--outline {
+  background: #fff;
+  border-color: #121212;
+  color: #121212 !important;
+}
+body.drcgf-contact-page .drcgf-action-button--outline:hover {
+  background: #121212;
+  border-color: #121212;
+  color: #fff !important;
+}
+body.drcgf-contact-page .drcgf-contact-card h2 {
+  color: #121212;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+body.drcgf-contact-page .drcgf-form-note {
+  color: #000000 !important;
+  font-weight: 400;
+}
+@media (max-width: 560px) {
+  body.drcgf-contact-page .drcgf-page-shell { padding-top: 28px; }
+  body.drcgf-contact-page .drcgf-contact-heading .section-title-main {
+    font-size: 22px;
+    padding: 0 10px;
+  }
+}
+
+
+/* Mobile slider override */
+@media (max-width:549px){
+body.home .hero-slide{background-image:var(--mobile-bg)!important;}
+}
+
+/* Fix 2026-07-29: slider dọc mobile hiển thị đủ ảnh, không crop phần trên. */
+@media (max-width: 549px) {
+  body.home #main {
+    padding-top: 0 !important;
+  }
+
+  body.home #slider-247421510 {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}
+
+
+/* V18: Back-to-top hover unified with homepage */
+#top-link.back-to-top:hover,
+#top-link.back-to-top:focus,
+#top-link.back-to-top:focus-visible,
+#top-link.back-to-top:active {
+  color: #fff !important;
+}
+#top-link.back-to-top:hover i,
+#top-link.back-to-top:focus i,
+#top-link.back-to-top:focus-visible i,
+#top-link.back-to-top:active i {
+  color: #fff !important;
+}
