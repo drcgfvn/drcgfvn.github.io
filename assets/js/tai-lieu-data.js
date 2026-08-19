@@ -81,7 +81,7 @@ window.DRCGF_RESOURCE_DATA = [
     "id": 10,
     "title": "Video hội thảo",
     "type": "video",
-    "slug": "video-cam-nhan-khach-hang",
+    "slug": "video-hoi-thao",
     "images": [],
     "files": [],
     "playlistId": "PLWK3kngiuTdA",
@@ -154,7 +154,7 @@ window.DRCGF_RESOURCE_DATA = [
     "slug": "video-feedback-tu-khach-hang",
     "images": [],
     "files": [],
-    "playlistId": "PLOobQvMz7hPA",
+    "playlistId": "PLe4mmwbl3he8",
     "videos": []
   },
   {
