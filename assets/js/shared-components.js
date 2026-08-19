@@ -22,10 +22,73 @@
     window.setTimeout(setupMobileControls, 500);
   }
 
-  window.loadSharedComponent = function (componentName) {
-    console.warn("Component đã được nhúng trực tiếp vào HTML:", componentName);
-    if (componentName === "menumain") scheduleMobileSetup();
+  function setupSharedBackToTop() {
+    var link = document.getElementById("top-link");
+    if (!link || link.__drcgfSharedBound) return;
+    link.__drcgfSharedBound = true;
+
+    function update() {
+      link.classList.toggle("active", window.scrollY > 300);
+    }
+
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      } catch (error) {
+        window.scrollTo(0, 0);
+      }
+    });
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
+  window.loadSharedComponent = function (componentName, target) {
+    var slots = [];
+    if (target) {
+      slots = [target];
+    } else {
+      slots = Array.prototype.slice.call(
+        document.querySelectorAll('[data-shared-component="' + componentName + '"]')
+      );
+    }
+    if (!slots.length) return Promise.resolve();
+
+    var componentUrl = new URL("components/" + componentName + ".html", siteRoot);
+    return fetch(componentUrl.href, { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        return response.text();
+      })
+      .then(function (html) {
+        var resolvedHtml = html.replace(/\{\{ROOT\}\}/g, siteRoot.href);
+        slots.forEach(function (slot) {
+          slot.insertAdjacentHTML("beforebegin", resolvedHtml);
+          slot.remove();
+        });
+
+        if (componentName === "menumain") scheduleMobileSetup();
+        if (componentName === "footermain") {
+          setupSharedBackToTop();
+          syncMobileBackToTop();
+        }
+      })
+      .catch(function (error) {
+        console.error("Không tải được component " + componentName + ":", error);
+        slots.forEach(function (slot) {
+          slot.setAttribute("data-shared-error", "true");
+        });
+      });
   };
+
+  function loadDeclaredSharedComponents() {
+    var slots = document.querySelectorAll("[data-shared-component]");
+    Array.prototype.forEach.call(slots, function (slot) {
+      if (slot.getAttribute("data-shared-loaded") === "true") return;
+      var name = slot.getAttribute("data-shared-component");
+      if (name) window.loadSharedComponent(name, slot);
+    });
+  }
 
   function getMenuTrigger() {
     return document.querySelector('a[data-open="#main-menu"]');
@@ -400,10 +463,12 @@
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
+      loadDeclaredSharedComponents();
       setupMobileControls();
       setupGlobalFixedHeader();
     });
   } else {
+    loadDeclaredSharedComponents();
     setupMobileControls();
     setupGlobalFixedHeader();
   }
