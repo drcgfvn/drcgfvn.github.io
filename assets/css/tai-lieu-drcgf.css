@@ -287,5 +287,3 @@ body.drcgf-viewer-scroll-locked{overscroll-behavior:none!important;touch-action:
   .drcgf-links-table td:nth-child(4){padding-top:9px!important}
   .drcgf-link-open{width:100%;min-height:40px}
 }
-.button, button, input[type="button"], input[type="reset"], input[type="submit"] {
-       line-height: 1em!important;

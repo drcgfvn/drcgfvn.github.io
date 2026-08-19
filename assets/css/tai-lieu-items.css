@@ -1,0 +1,9 @@
+/* CSS rieng cho cac nut/muc ben trong trang tai-lieu-drcgf.
+   Scope nay ngan rule line-height anh huong menu, footer va nut back-to-top. */
+.drcgf-tai-lieu-scope .button,
+.drcgf-tai-lieu-scope button,
+.drcgf-tai-lieu-scope input[type="button"],
+.drcgf-tai-lieu-scope input[type="reset"],
+.drcgf-tai-lieu-scope input[type="submit"] {
+  line-height: 1em !important;
+}
