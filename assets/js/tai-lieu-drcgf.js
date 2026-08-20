@@ -306,7 +306,8 @@
       ['Link eclafinvietnam.info','https://www.eclafinvietnam.info'],
       ['Website Hàn Quốc','https://www.cgfcosmetic.com'],
       ['Website drcgfvietnam.info','https://www.drcgfvietnam.info'],
-      ['Slide Thuần Hoa Group','https://canva.link/8tnhtufh09fvama']
+      ['Slide Thuần Hoa Group','https://canva.link/8tnhtufh09fvama'],
+	  ['Drive Tài liệu DR.CGF','https://drive.google.com/drive/folders/1d77CBAx-GQMNbT-kwehb06nGUYZn5FwJ?usp=drive_link']
     ];
     return '<div class="drcgf-links-box"><div class="drcgf-links-heading">DANH SÁCH LIÊN KẾT</div><div class="drcgf-links-table-wrap"><table class="drcgf-links-table"><thead><tr><th>STT</th><th>Tên liên kết</th><th>Đường dẫn</th><th>Truy cập</th></tr></thead><tbody>'+links.map(function(x,i){return '<tr><td>'+(i+1)+'</td><td><strong>'+esc(x[0])+'</strong></td><td><a href="'+esc(x[1])+'" target="_blank" rel="noopener">'+esc(x[1])+'</a></td><td><a class="drcgf-link-open" href="'+esc(x[1])+'" target="_blank" rel="noopener">MỞ WEBSITE</a></td></tr>';}).join('')+'</tbody></table></div></div>';
   }
