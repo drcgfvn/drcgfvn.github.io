@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T10:32:04.384Z",
+  "generatedAt": "2026-08-20T07:15:47.148Z",
   "resources": {
     "hinh-anh-san-pham-don": {
       "images": [
@@ -136,7 +136,11 @@
       ]
     },
     "feedback-trai-nghiem-khach-hang": {
-      "images": [],
+      "images": [
+        "../tai-lieu/feedback-trai-nghiem-khach-hang/img/2.jpg",
+        "../tai-lieu/feedback-trai-nghiem-khach-hang/img/3.jpg",
+        "../tai-lieu/feedback-trai-nghiem-khach-hang/img/FEEDBACK%20SAU%201%20THANG.jpg"
+      ],
       "files": []
     },
     "phac-do-lieu-trinh-combo": {
