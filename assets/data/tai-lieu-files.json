@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T07:15:47.148Z",
+  "generatedAt": "2026-08-20T07:17:50.183Z",
   "resources": {
     "hinh-anh-san-pham-don": {
       "images": [
@@ -139,12 +139,15 @@
       "images": [
         "../tai-lieu/feedback-trai-nghiem-khach-hang/img/2.jpg",
         "../tai-lieu/feedback-trai-nghiem-khach-hang/img/3.jpg",
-        "../tai-lieu/feedback-trai-nghiem-khach-hang/img/FEEDBACK%20SAU%201%20THANG.jpg"
+        "../tai-lieu/feedback-trai-nghiem-khach-hang/img/FEEDBACK%20SAU%201%20THANG.jpg",
+        "../tai-lieu/feedback-trai-nghiem-khach-hang/img/nam.jpg"
       ],
       "files": []
     },
     "phac-do-lieu-trinh-combo": {
       "images": [
+        "../tai-lieu/phac-do-lieu-trinh-combo/img/1.jpg",
+        "../tai-lieu/phac-do-lieu-trinh-combo/img/2.jpg",
         "../tai-lieu/phac-do-lieu-trinh-combo/img/img%20(1).jpg",
         "../tai-lieu/phac-do-lieu-trinh-combo/img/img%20(2).jpg",
         "../tai-lieu/phac-do-lieu-trinh-combo/img/img%20(3).jpg",
