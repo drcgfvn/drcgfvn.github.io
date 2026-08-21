@@ -222,22 +222,14 @@
     var pv=ensurePdfViewer();
     var absolute=new URL(url,window.location.href).href;
     var frame=pv.querySelector('iframe'), note=pv.querySelector('.drcgf-office-local-note');
-    var local=/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname)||window.location.protocol==='file:';
     pv.classList.remove('is-office-viewer');
     if(note)note.hidden=true;
     if(frame){frame.style.display='block';frame.title='Trình xem PDF';}
     pv.querySelector('.drcgf-pdf-title').textContent=pdfViewerState.name;
     pv.querySelector('.drcgf-pdf-open-new').href=absolute;
     var cleanPdfUrl=absolute.split('#')[0];
-    if(frame){
-      // Khi website đã public, Google Docs Viewer đọc PDF từ HTTPS và không phụ
-      // thuộc vào Content-Disposition/MIME mà máy chủ hoặc Cloudflare trả về.
-      // Ở localhost, dùng trình xem PDF có sẵn của trình duyệt vì dịch vụ online
-      // không thể truy cập địa chỉ nội bộ.
-      frame.src=local
-        ? cleanPdfUrl+'#page=1&view=Fit'
-        : 'https://docs.google.com/gview?embedded=1&url='+encodeURIComponent(cleanPdfUrl);
-    }
+    var localViewer=new URL('../assets/pdfjs/viewer.html',window.location.href).href;
+    if(frame)frame.src=localViewer+'?file='+encodeURIComponent(cleanPdfUrl);
     lockPageScroll();pv.classList.add('is-open');pv.setAttribute('aria-hidden','false');document.body.classList.add('drcgf-pdf-open');
   }
 

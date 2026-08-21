@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trình xem PDF</title>
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <header class="toolbar">
+    <button id="prev" type="button" aria-label="Trang trước">‹</button>
+    <label>Trang <input id="page-number" type="number" min="1" value="1"> / <span id="page-count">–</span></label>
+    <button id="next" type="button" aria-label="Trang sau">›</button>
+    <span class="spacer"></span>
+    <button id="zoom-out" type="button" aria-label="Thu nhỏ">−</button>
+    <span id="zoom-value">100%</span>
+    <button id="zoom-in" type="button" aria-label="Phóng to">+</button>
+  </header>
+  <main id="stage">
+    <div id="loading">Đang tải tài liệu…</div>
+    <canvas id="canvas" hidden></canvas>
+    <div id="error" hidden>
+      <strong>Không thể hiển thị PDF.</strong>
+      <span>Vui lòng dùng nút “Mở tab mới” phía trên để xem hoặc tải file.</span>
+    </div>
+  </main>
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>
