@@ -1,0 +1,38 @@
+/* Trang tạo thư mời - DR.CGF */
+body.drcgf-contact-page.drcgf-invite-page .drcgf-page-shell{padding-top:32px}
+body.drcgf-invite-page .drcgf-page-container{max-width:1180px;margin:0 auto;padding:0 15px}
+body.drcgf-invite-page .drcgf-invite-layout{display:grid;grid-template-columns:minmax(320px,.78fr) minmax(0,1.22fr);gap:28px;align-items:start}
+body.drcgf-invite-page .drcgf-panel{box-sizing:border-box}
+.invite-control-panel{position:sticky;top:88px}
+.invite-control-panel h2,.invite-preview-panel h2{font-size:22px;color:#0b4ca3;margin:0 0 8px}
+.invite-lead{color:#66758a;margin:0 0 22px;font-size:14px;line-height:1.65}
+.invite-field{margin-bottom:18px}
+.invite-field label{display:block;font-weight:650;color:#24354d;margin-bottom:7px}
+.invite-field label span{color:#b42318}
+.invite-field input[type="text"],.invite-field input[type="file"]{width:100%;box-sizing:border-box;border:1px solid #d7dee8;border-radius:7px;background:#fff;color:#24354d;min-height:44px;padding:10px 12px;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
+.invite-field input[type="text"]:focus,.invite-field input[type="file"]:focus{border-color:#0b4ca3;box-shadow:0 0 0 3px rgba(11,76,163,.10)}
+.invite-field input[type="file"]{padding:7px 9px}
+.invite-range{display:grid;grid-template-columns:72px 1fr 58px;gap:10px;align-items:center;margin:12px 0}
+.invite-range label{font-size:14px;font-weight:600;color:#44546a;margin:0}
+.invite-range output{font-size:13px;color:#66758a;text-align:right;font-variant-numeric:tabular-nums}
+.invite-range input[type="range"]{width:100%;accent-color:#0b4ca3}
+.invite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.invite-actions .drcgf-action-button{width:100%;display:flex;align-items:center;justify-content:center;min-height:46px;box-sizing:border-box;cursor:pointer;margin:0}
+.invite-actions .primary-download{grid-column:1/-1;background:#0b4ca3!important;color:#fff!important;border:1px solid #0b4ca3!important}
+.invite-actions .primary-download:hover{background:#073c82!important;border-color:#073c82!important}
+.invite-help{margin:16px 0 0;padding:13px 14px;border:1px solid #e4eaf2;border-radius:8px;background:#f8fafc;color:#5a697d;font-size:13px;line-height:1.6}
+.invite-help strong{color:#24354d}
+.invite-preview-panel{overflow:hidden}
+.invite-canvas-wrap{position:relative;width:min(100%,620px);margin:14px auto 0;border-radius:10px;overflow:hidden;background:#f0f2f5;box-shadow:0 12px 28px rgba(25,39,61,.10);touch-action:none;user-select:none;-webkit-user-select:none}
+#invite-canvas{display:block;width:100%;height:auto;cursor:grab;touch-action:none}
+#invite-canvas.is-dragging{cursor:grabbing}
+.invite-empty{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);z-index:2;width:70%;max-width:320px;padding:14px 16px;border-radius:10px;background:rgba(255,255,255,.92);box-shadow:0 8px 24px rgba(0,0,0,.08);text-align:center;color:#506077;font-size:14px;pointer-events:none}
+.invite-empty strong{display:block;color:#24354d;font-size:15px;margin-bottom:3px}
+.invite-empty.is-hidden{display:none}
+.invite-status{min-height:20px;margin:12px 0 0;text-align:center;font-size:13px;color:#66758a}
+.invite-status.is-error{color:#b42318}
+.invite-status.is-success{color:#157347}
+.invite-privacy{margin:16px 0 0;font-size:13px;color:#66758a;text-align:center}
+.invite-privacy strong{color:#24354d}
+@media(max-width:849px){body.drcgf-invite-page .drcgf-invite-layout{grid-template-columns:1fr}.invite-control-panel{position:static}.invite-preview-panel{order:-1}}
+@media(max-width:549px){body.drcgf-contact-page.drcgf-invite-page .drcgf-page-shell{padding-top:24px}.invite-actions{grid-template-columns:1fr}.invite-actions .primary-download{grid-column:auto}.invite-range{grid-template-columns:62px 1fr 52px}.invite-canvas-wrap{border-radius:7px}}
