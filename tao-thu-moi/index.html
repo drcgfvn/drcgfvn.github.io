@@ -410,9 +410,25 @@
         <input id="guest-photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif" />
       </div>
 
+      <div class="invite-bg-tools">
+        <button class="drcgf-action-button bg-remove-button" id="remove-background" type="button" disabled>Tách nền ảnh</button>
+        <button class="drcgf-action-button drcgf-action-button--outline" id="use-original" type="button" disabled>Dùng ảnh gốc</button>
+        <div class="invite-bg-progress is-hidden" id="bg-progress-wrap" aria-live="polite">
+          <div class="invite-bg-progress-bar"><span id="bg-progress-bar"></span></div>
+          <small id="bg-progress-label">Đang chuẩn bị AI tách nền…</small>
+        </div>
+        <p class="invite-bg-note">Chỉ tách nền khi bạn bấm nút. Ảnh vẫn được xử lý ngay trên thiết bị và không tải lên máy chủ.</p>
+      </div>
+
       <div class="invite-field">
         <label for="guest-name">Họ và tên <span>*</span></label>
         <input id="guest-name" type="text" maxlength="80" autocomplete="name" placeholder="Ví dụ: Nguyễn Thị Thu Hương" />
+      </div>
+
+      <div class="invite-range">
+        <label for="name-size">Cỡ chữ</label>
+        <input id="name-size" type="range" min="25" max="60" value="42" step="1" />
+        <output id="name-size-value" for="name-size">42 px</output>
       </div>
 
       <div class="invite-range">
@@ -432,7 +448,7 @@
         <button class="drcgf-action-button primary-download" id="download-invite" type="button">Tải thư mời JPG</button>
       </div>
 
-      <div class="invite-help"><strong>Mẹo căn ảnh:</strong> kéo trực tiếp trên thư mời để di chuyển. Trên máy tính có thể lăn chuột để zoom. Trên điện thoại dùng thanh Thu phóng và Xoay ảnh.</div>
+      <div class="invite-help"><strong>Mẹo căn ảnh:</strong> kéo trực tiếp trên thư mời để di chuyển. Có thể điều chỉnh Cỡ chữ để tên cân đối; nếu tên quá dài hệ thống vẫn tự co lại để không tràn. Trên máy tính có thể lăn chuột để zoom.</div>
       <p class="invite-privacy"><strong>Riêng tư:</strong> ảnh bạn chọn không được gửi hoặc lưu trên website.</p>
     </section>
 

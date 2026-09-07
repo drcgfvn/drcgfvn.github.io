@@ -8,6 +8,10 @@
   var template = new Image();
   var guest = null;
   var guestUrl = null;
+  var originalFile = null;
+  var originalGuestUrl = null;
+  var processedGuestUrl = null;
+  var removingBackground = false;
   var templateReady = false;
 
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
@@ -28,6 +32,8 @@
 
   var fileInput = document.getElementById('guest-photo');
   var nameInput = document.getElementById('guest-name');
+  var nameSizeInput = document.getElementById('name-size');
+  var nameSizeValue = document.getElementById('name-size-value');
   var zoomInput = document.getElementById('photo-zoom');
   var rotateInput = document.getElementById('photo-rotate');
   var zoomValue = document.getElementById('zoom-value');
@@ -36,6 +42,11 @@
   var downloadBtn = document.getElementById('download-invite');
   var emptyHint = document.getElementById('invite-empty');
   var status = document.getElementById('invite-status');
+  var removeBgBtn = document.getElementById('remove-background');
+  var useOriginalBtn = document.getElementById('use-original');
+  var bgProgressWrap = document.getElementById('bg-progress-wrap');
+  var bgProgressBar = document.getElementById('bg-progress-bar');
+  var bgProgressLabel = document.getElementById('bg-progress-label');
 
   function setStatus(text, type){
     status.textContent = text || '';
@@ -89,7 +100,8 @@
   function drawName(){
     var text = normalizedName();
     if (!text) return;
-    var fontSize = NAME.fontSize;
+    var requestedSize = nameSizeInput ? Number(nameSizeInput.value) : NAME.fontSize;
+    var fontSize = Math.max(NAME.minFontSize, requestedSize);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#432817';
@@ -120,6 +132,27 @@
     rotateValue.textContent = Math.round(state.rotation) + '°';
   }
 
+  function setBgProgress(percent, label){
+    if (!bgProgressWrap) return;
+    bgProgressWrap.classList.remove('is-hidden');
+    bgProgressBar.style.width = Math.max(0, Math.min(100, percent || 0)) + '%';
+    bgProgressLabel.textContent = label || 'Đang xử lý…';
+  }
+
+  function hideBgProgress(){ if (bgProgressWrap) bgProgressWrap.classList.add('is-hidden'); }
+
+  function setGuestFromUrl(url, message){
+    var img = new Image();
+    img.onload = function(){
+      guest = img;
+      resetTransform();
+      emptyHint.classList.add('is-hidden');
+      if (message) setStatus(message, 'success');
+    };
+    img.onerror = function(){ setStatus('Không đọc được ảnh đã xử lý.', 'error'); };
+    img.src = url;
+  }
+
   function loadGuest(file){
     if (!file) return;
     if (!/^image\/(jpeg|png|webp|heic|heif)$/i.test(file.type) && !/\.(jpe?g|png|webp|heic|heif)$/i.test(file.name)) {
@@ -130,14 +163,21 @@
       setStatus('Ảnh quá lớn. Vui lòng chọn ảnh dưới 30 MB.', 'error');
       return;
     }
+    originalFile = file;
     if (guestUrl) URL.revokeObjectURL(guestUrl);
+    if (originalGuestUrl) URL.revokeObjectURL(originalGuestUrl);
+    if (processedGuestUrl) { URL.revokeObjectURL(processedGuestUrl); processedGuestUrl = null; }
     guestUrl = URL.createObjectURL(file);
+    originalGuestUrl = guestUrl;
+    removeBgBtn.disabled = false;
+    useOriginalBtn.disabled = true;
+    hideBgProgress();
     var img = new Image();
     img.onload = function(){
       guest = img;
       resetTransform();
       emptyHint.classList.add('is-hidden');
-      setStatus('Đã chọn ảnh. Kéo trực tiếp trên thư mời để căn vị trí.', 'success');
+      setStatus('Đã chọn ảnh gốc. Bạn có thể căn chỉnh ngay hoặc bấm “Tách nền ảnh”.', 'success');
     };
     img.onerror = function(){
       guest = null;
@@ -192,7 +232,59 @@
   }, {passive:false});
 
   fileInput.addEventListener('change', function(){ loadGuest(this.files && this.files[0]); });
+
+  removeBgBtn.addEventListener('click', async function(){
+    if (!originalFile || removingBackground) return;
+    removingBackground = true;
+    removeBgBtn.disabled = true;
+    useOriginalBtn.disabled = true;
+    setBgProgress(3, 'Đang tải AI tách nền (lần đầu có thể lâu hơn)…');
+    setStatus('Đang tách nền trên thiết bị của bạn…');
+    try {
+      var mod = await import('https://esm.sh/@imgly/background-removal@1.7.0');
+      var lastPct = 8;
+      var blob = await mod.removeBackground(originalFile, {
+        model: 'isnet_quint8',
+        device: 'gpu',
+        output: { format: 'image/png', quality: 1 },
+        progress: function(key, current, total){
+          var pct = total ? Math.round((current / total) * 88) + 8 : lastPct;
+          lastPct = Math.max(lastPct, Math.min(96, pct));
+          var label = key && key.indexOf('download') >= 0 ? 'Đang tải dữ liệu AI…' : 'AI đang tách chủ thể khỏi nền…';
+          setBgProgress(lastPct, label);
+        }
+      });
+      if (processedGuestUrl) URL.revokeObjectURL(processedGuestUrl);
+      processedGuestUrl = URL.createObjectURL(blob);
+      guestUrl = processedGuestUrl;
+      setGuestFromUrl(processedGuestUrl, 'Đã tách nền. Bạn vẫn có thể kéo, zoom và xoay ảnh như bình thường.');
+      setBgProgress(100, 'Tách nền hoàn tất.');
+      setTimeout(hideBgProgress, 1400);
+      useOriginalBtn.disabled = false;
+    } catch (err) {
+      console.error(err);
+      hideBgProgress();
+      setStatus('Thiết bị hoặc trình duyệt này chưa tách nền được. Ảnh gốc vẫn được giữ nguyên để bạn tiếp tục sử dụng.', 'error');
+      useOriginalBtn.disabled = true;
+    } finally {
+      removingBackground = false;
+      removeBgBtn.disabled = !originalFile;
+    }
+  });
+
+  useOriginalBtn.addEventListener('click', function(){
+    if (!originalGuestUrl) return;
+    guestUrl = originalGuestUrl;
+    setGuestFromUrl(originalGuestUrl, 'Đã chuyển về ảnh gốc.');
+    useOriginalBtn.disabled = true;
+  });
   nameInput.addEventListener('input', draw);
+  if (nameSizeInput) {
+    nameSizeInput.addEventListener('input', function(){
+      if (nameSizeValue) nameSizeValue.textContent = Math.round(Number(this.value)) + ' px';
+      draw();
+    });
+  }
   zoomInput.addEventListener('input', function(){ state.zoom = Number(this.value)/100; updateOutputs(); draw(); });
   rotateInput.addEventListener('input', function(){ state.rotation = Number(this.value); updateOutputs(); draw(); });
   resetBtn.addEventListener('click', function(){ resetTransform(); setStatus('Đã đưa ảnh về vị trí ban đầu.'); });

@@ -36,3 +36,17 @@ body.drcgf-invite-page .drcgf-panel{box-sizing:border-box}
 .invite-privacy strong{color:#24354d}
 @media(max-width:849px){body.drcgf-invite-page .drcgf-invite-layout{grid-template-columns:1fr}.invite-control-panel{position:static}.invite-preview-panel{order:-1}}
 @media(max-width:549px){body.drcgf-contact-page.drcgf-invite-page .drcgf-page-shell{padding-top:24px}.invite-actions{grid-template-columns:1fr}.invite-actions .primary-download{grid-column:auto}.invite-range{grid-template-columns:62px 1fr 52px}.invite-canvas-wrap{border-radius:7px}}
+
+/* AI tách nền - chỉ chạy khi người dùng bấm */
+.invite-bg-tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-4px 0 18px}
+.invite-bg-tools .drcgf-action-button{width:100%;min-height:43px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0}
+.invite-bg-tools button:disabled{opacity:.48;cursor:not-allowed}
+.bg-remove-button{background:#0b4ca3!important;color:#fff!important;border:1px solid #0b4ca3!important}
+.bg-remove-button:hover:not(:disabled){background:#073c82!important;border-color:#073c82!important}
+.invite-bg-note{grid-column:1/-1;margin:0;color:#66758a;font-size:12.5px;line-height:1.55}
+.invite-bg-progress{grid-column:1/-1}
+.invite-bg-progress.is-hidden{display:none}
+.invite-bg-progress-bar{height:7px;overflow:hidden;border-radius:99px;background:#e8edf4;margin-bottom:6px}
+.invite-bg-progress-bar span{display:block;width:0;height:100%;background:#0b4ca3;transition:width .18s ease}
+.invite-bg-progress small{display:block;color:#66758a;font-size:12px}
+@media(max-width:549px){.invite-bg-tools{grid-template-columns:1fr}}
