@@ -17,7 +17,7 @@
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
   // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
   var HOLE = { x:527, y:674, w:473, h:422 };
-  var NAME = { x:768, y:1222, maxWidth:760, fontSize:42, minFontSize:25 };
+  var NAME = { x:768, y:1222, maxWidth:760, fontSize:52, minFontSize:18 };
 
   var state = {
     x: HOLE.x + HOLE.w / 2,
@@ -34,6 +34,8 @@
   var nameInput = document.getElementById('guest-name');
   var nameSizeInput = document.getElementById('name-size');
   var nameSizeValue = document.getElementById('name-size-value');
+  var nameSizeMinus = document.getElementById('name-size-minus');
+  var nameSizePlus = document.getElementById('name-size-plus');
   var zoomInput = document.getElementById('photo-zoom');
   var rotateInput = document.getElementById('photo-rotate');
   var zoomValue = document.getElementById('zoom-value');
@@ -62,7 +64,7 @@
       var sx = template.naturalWidth / 1536;
       var sy = template.naturalHeight / 2048;
       HOLE = { x:527*sx, y:674*sy, w:473*sx, h:422*sy };
-      NAME = { x:768*sx, y:1222*sy, maxWidth:760*sx, fontSize:42*sy, minFontSize:25*sy };
+      NAME = { x:768*sx, y:1222*sy, maxWidth:760*sx, fontSize:52*sy, minFontSize:18*sy };
       state.x = HOLE.x + HOLE.w/2;
       state.y = HOLE.y + HOLE.h/2;
     }
@@ -100,17 +102,19 @@
   function drawName(){
     var text = normalizedName();
     if (!text) return;
+
+    // Cỡ chữ do khách chọn phải có tác dụng trực tiếp.
+    // Không tự co chữ ở đây vì việc auto-fit trước đây khiến kéo thanh lên
+    // nhưng chữ dài vẫn bị ép về cùng một cỡ, trông như thanh không hoạt động.
     var requestedSize = nameSizeInput ? Number(nameSizeInput.value) : NAME.fontSize;
     var fontSize = Math.max(NAME.minFontSize, requestedSize);
+
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#432817';
     ctx.font = '700 ' + fontSize + 'px Arial, Helvetica, sans-serif';
-    while (fontSize > NAME.minFontSize && ctx.measureText(text).width > NAME.maxWidth) {
-      fontSize -= 1;
-      ctx.font = '700 ' + fontSize + 'px Arial, Helvetica, sans-serif';
-    }
-    ctx.fillText(text, NAME.x, NAME.y, NAME.maxWidth);
+    ctx.fillText(text, NAME.x, NAME.y);
+    return fontSize;
   }
 
   function resetTransform(){
@@ -279,11 +283,21 @@
     useOriginalBtn.disabled = true;
   });
   nameInput.addEventListener('input', draw);
+  function changeNameSize(delta){
+    if (!nameSizeInput) return;
+    var min = Number(nameSizeInput.min) || 18;
+    var max = Number(nameSizeInput.max) || 100;
+    nameSizeInput.value = String(Math.max(min, Math.min(max, Number(nameSizeInput.value) + delta)));
+    if (nameSizeValue) nameSizeValue.textContent = Math.round(Number(nameSizeInput.value)) + ' px';
+    draw();
+  }
   if (nameSizeInput) {
     nameSizeInput.addEventListener('input', function(){
       if (nameSizeValue) nameSizeValue.textContent = Math.round(Number(this.value)) + ' px';
       draw();
     });
+    if (nameSizeMinus) nameSizeMinus.addEventListener('click', function(){ changeNameSize(-2); });
+    if (nameSizePlus) nameSizePlus.addEventListener('click', function(){ changeNameSize(2); });
   }
   zoomInput.addEventListener('input', function(){ state.zoom = Number(this.value)/100; updateOutputs(); draw(); });
   rotateInput.addEventListener('input', function(){ state.rotation = Number(this.value); updateOutputs(); draw(); });

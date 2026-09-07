@@ -383,7 +383,7 @@
         .woocommerce-product-gallery {
           opacity: 1 !important;
         }
-      </style><link href="/assets/css/menumain.css?v=20260818-v18" id="menumain-shared-css" rel="stylesheet"/><meta content="Tạo thư mời sự kiện DR.CGF trực tuyến: chọn ảnh, căn chỉnh, nhập tên và tải thư mời JPG về máy." name="description"/><meta content="Tạo thư mời sự kiện DR.CGF trực tuyến: chọn ảnh, căn chỉnh, nhập tên và tải thư mời JPG về máy." property="og:description"/><meta content="Tạo thư mời sự kiện DR.CGF trực tuyến: chọn ảnh, căn chỉnh, nhập tên và tải thư mời JPG về máy." name="twitter:description"/><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.drcgf.vn/#organization","name":"DR.CGF Cosmetics","url":"https://www.drcgf.vn/","logo":{"@type":"ImageObject","url":"https://www.drcgf.vn/favicon.png"},"sameAs":["https://www.facebook.com/Dr.CGFVietnam"]},{"@type":"BreadcrumbList","@id":"https://www.drcgf.vn/taothumoi/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://www.drcgf.vn/"},{"@type":"ListItem","position":2,"name":"Liên hệ","item":"https://www.drcgf.vn/taothumoi/"}]}]}</script><link href="tao-thu-moi.css?v=1" rel="stylesheet"/>
+      </style><link href="/assets/css/menumain.css?v=20260818-v18" id="menumain-shared-css" rel="stylesheet"/><meta content="Tạo thư mời sự kiện DR.CGF trực tuyến: chọn ảnh, căn chỉnh, nhập tên và tải thư mời JPG về máy." name="description"/><meta content="Tạo thư mời sự kiện DR.CGF trực tuyến: chọn ảnh, căn chỉnh, nhập tên và tải thư mời JPG về máy." property="og:description"/><meta content="Tạo thư mời sự kiện DR.CGF trực tuyến: chọn ảnh, căn chỉnh, nhập tên và tải thư mời JPG về máy." name="twitter:description"/><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.drcgf.vn/#organization","name":"DR.CGF Cosmetics","url":"https://www.drcgf.vn/","logo":{"@type":"ImageObject","url":"https://www.drcgf.vn/favicon.png"},"sameAs":["https://www.facebook.com/Dr.CGFVietnam"]},{"@type":"BreadcrumbList","@id":"https://www.drcgf.vn/taothumoi/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://www.drcgf.vn/"},{"@type":"ListItem","position":2,"name":"Liên hệ","item":"https://www.drcgf.vn/taothumoi/"}]}]}</script><link href="tao-thu-moi.css?v=3" rel="stylesheet"/>
 </head>
 <body class="page drcgf-contact-page drcgf-invite-page theme-flatsome woocommerce-no-js lightbox nav-dropdown-has-arrow nav-dropdown-has-shadow nav-dropdown-has-border catalog-mode">
 <a class="skip-link screen-reader-text" href="#main">Chuyển đến nội dung</a>
@@ -427,8 +427,12 @@
 
       <div class="invite-range">
         <label for="name-size">Cỡ chữ</label>
-        <input id="name-size" type="range" min="25" max="60" value="42" step="1" />
-        <output id="name-size-value" for="name-size">42 px</output>
+        <div class="name-size-control">
+          <button id="name-size-minus" type="button" class="size-step" aria-label="Giảm cỡ chữ">A−</button>
+          <input id="name-size" type="range" min="18" max="100" value="52" step="1" />
+          <button id="name-size-plus" type="button" class="size-step" aria-label="Tăng cỡ chữ">A+</button>
+        </div>
+        <output id="name-size-value" for="name-size">52 px</output>
       </div>
 
       <div class="invite-range">
@@ -448,7 +452,7 @@
         <button class="drcgf-action-button primary-download" id="download-invite" type="button">Tải thư mời JPG</button>
       </div>
 
-      <div class="invite-help"><strong>Mẹo căn ảnh:</strong> kéo trực tiếp trên thư mời để di chuyển. Có thể điều chỉnh Cỡ chữ để tên cân đối; nếu tên quá dài hệ thống vẫn tự co lại để không tràn. Trên máy tính có thể lăn chuột để zoom.</div>
+      <div class="invite-help"><strong>Mẹo căn ảnh:</strong> kéo trực tiếp trên thư mời để di chuyển. Có thể điều chỉnh Cỡ chữ để tên cân đối và thu nhỏ khi tên dài. Trên máy tính có thể lăn chuột để zoom.</div>
       <p class="invite-privacy"><strong>Riêng tư:</strong> ảnh bạn chọn không được gửi hoặc lưu trên website.</p>
     </section>
 
@@ -1349,7 +1353,7 @@
     </script>
 
 <script src="../assets/js/back-to-top.js?v=20260729-fix1" defer></script>
-<script src="tao-thu-moi.js?v=1"></script>
+<script src="tao-thu-moi.js?v=3"></script>
 </body>
 </html>
 <!-- Page cached by LiteSpeed Cache 5.6 on 2026-07-16 19:34:17 -->
