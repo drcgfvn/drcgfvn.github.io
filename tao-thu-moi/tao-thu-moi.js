@@ -198,32 +198,134 @@
     };
   }
 
+  // Cử chỉ trên mobile/PC:
+  // - 1 ngón / chuột: kéo ảnh
+  // - 2 ngón: vừa di chuyển, pinch để zoom và xoay trực tiếp
+  // Pointer Events giúp cùng một code chạy trên iPhone/iPad/Android và desktop hiện đại.
+  var activePointers = new Map();
+  var gesture = null;
+
+  function pointDistance(a, b){
+    var dx = b.x - a.x, dy = b.y - a.y;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+  function pointAngle(a, b){
+    return Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+  }
+  function pointMid(a, b){
+    return { x:(a.x+b.x)/2, y:(a.y+b.y)/2 };
+  }
+  function normalizeAngle(deg){
+    while (deg > 180) deg -= 360;
+    while (deg < -180) deg += 360;
+    return deg;
+  }
+  function getTwoPointers(){
+    var vals = Array.from(activePointers.values());
+    return vals.length >= 2 ? [vals[0], vals[1]] : null;
+  }
+  function beginTwoFingerGesture(){
+    var pts = getTwoPointers();
+    if (!pts) { gesture = null; return; }
+    var mid = pointMid(pts[0], pts[1]);
+    gesture = {
+      startDistance: Math.max(1, pointDistance(pts[0], pts[1])),
+      startAngle: pointAngle(pts[0], pts[1]),
+      startMid: mid,
+      startX: state.x,
+      startY: state.y,
+      startZoom: state.zoom,
+      startRotation: state.rotation
+    };
+    state.dragging = false;
+  }
+
   canvas.addEventListener('pointerdown', function(evt){
     if (!guest) return;
+    evt.preventDefault();
     var p = canvasPoint(evt);
-    state.dragging = true;
-    state.lastX = p.x;
-    state.lastY = p.y;
+    activePointers.set(evt.pointerId, p);
+    try { canvas.setPointerCapture(evt.pointerId); } catch(e) {}
     canvas.classList.add('is-dragging');
-    canvas.setPointerCapture(evt.pointerId);
-  });
+
+    if (activePointers.size === 1) {
+      state.dragging = true;
+      state.lastX = p.x;
+      state.lastY = p.y;
+      gesture = null;
+    } else if (activePointers.size >= 2) {
+      beginTwoFingerGesture();
+    }
+  }, {passive:false});
+
   canvas.addEventListener('pointermove', function(evt){
-    if (!guest || !state.dragging) return;
+    if (!guest || !activePointers.has(evt.pointerId)) return;
+    evt.preventDefault();
     var p = canvasPoint(evt);
-    state.x += p.x - state.lastX;
-    state.y += p.y - state.lastY;
-    state.lastX = p.x;
-    state.lastY = p.y;
-    draw();
-  });
-  function endDrag(evt){
-    if (!state.dragging) return;
-    state.dragging = false;
-    canvas.classList.remove('is-dragging');
+    activePointers.set(evt.pointerId, p);
+
+    if (activePointers.size >= 2) {
+      if (!gesture) beginTwoFingerGesture();
+      var pts = getTwoPointers();
+      if (!pts || !gesture) return;
+
+      var dist = Math.max(1, pointDistance(pts[0], pts[1]));
+      var mid = pointMid(pts[0], pts[1]);
+      var angle = pointAngle(pts[0], pts[1]);
+
+      // Pinch zoom. Giữ cùng giới hạn với thanh Thu phóng (45%–400%).
+      state.zoom = Math.min(4, Math.max(.45, gesture.startZoom * (dist / gesture.startDistance)));
+
+      // Hai ngón di chuyển cùng nhau sẽ kéo ảnh theo tâm của hai ngón.
+      state.x = gesture.startX + (mid.x - gesture.startMid.x);
+      state.y = gesture.startY + (mid.y - gesture.startMid.y);
+
+      // Xoay hai ngón để xoay ảnh.
+      state.rotation = normalizeAngle(gesture.startRotation + normalizeAngle(angle - gesture.startAngle));
+
+      zoomInput.value = String(Math.round(state.zoom * 100));
+      rotateInput.value = String(Math.round(state.rotation));
+      updateOutputs();
+      draw();
+      return;
+    }
+
+    if (state.dragging) {
+      state.x += p.x - state.lastX;
+      state.y += p.y - state.lastY;
+      state.lastX = p.x;
+      state.lastY = p.y;
+      draw();
+    }
+  }, {passive:false});
+
+  function endPointer(evt){
+    if (!activePointers.has(evt.pointerId)) return;
+    activePointers.delete(evt.pointerId);
     try { canvas.releasePointerCapture(evt.pointerId); } catch(e) {}
+
+    if (activePointers.size >= 2) {
+      // Nếu còn từ 2 điểm chạm trở lên, lấy trạng thái hiện tại làm mốc mới.
+      beginTwoFingerGesture();
+    } else if (activePointers.size === 1) {
+      // Nhấc một ngón sau khi pinch: ngón còn lại tiếp tục kéo ảnh mượt mà.
+      var remaining = Array.from(activePointers.values())[0];
+      gesture = null;
+      state.dragging = true;
+      state.lastX = remaining.x;
+      state.lastY = remaining.y;
+    } else {
+      gesture = null;
+      state.dragging = false;
+      canvas.classList.remove('is-dragging');
+    }
   }
-  canvas.addEventListener('pointerup', endDrag);
-  canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('pointerup', endPointer);
+  canvas.addEventListener('pointercancel', endPointer);
+  canvas.addEventListener('lostpointercapture', function(evt){
+    // Một số WebView mobile có thể mất capture khi hệ thống can thiệp.
+    if (activePointers.has(evt.pointerId)) endPointer(evt);
+  });
 
   canvas.addEventListener('wheel', function(evt){
     if (!guest) return;
