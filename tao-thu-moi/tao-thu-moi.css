@@ -51,4 +51,4 @@ body.drcgf-invite-page .drcgf-panel{box-sizing:border-box}
 .invite-bg-progress small{display:block;color:#66758a;font-size:12px}
 @media(max-width:549px){.invite-bg-tools{grid-template-columns:1fr}}
 
-.name-size-control{display:grid;grid-template-columns:38px minmax(0,1fr) 38px;gap:8px;align-items:center}.name-size-control input[type="range"]{min-width:0}.size-step{height:34px;padding:0;border:1px solid #cbd5e1;border-radius:6px;background:#fff;color:#0b4ca3;font-weight:700;cursor:pointer;line-height:1}.size-step:hover{background:#f4f7fb}.size-step:active{transform:translateY(1px)}
+.name-size-control{display:grid;grid-template-columns:38px minmax(0,1fr) 38px;gap:8px;align-items:center}.name-size-control input[type="range"]{min-width:0}.size-step{height:34px;WIDTH: 35PX;padding:0;border:1px solid #cbd5e1;border-radius:6px;background:#fff;color:#0b4ca3;font-weight:700;cursor:pointer;line-height:1}.size-step:hover{background:#f4f7fb}.size-step:active{transform:translateY(1px)}
