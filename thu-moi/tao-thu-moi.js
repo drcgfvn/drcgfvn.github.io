@@ -39,7 +39,7 @@
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
   // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
   var HOLE = { x:527, y:674, w:473, h:422 };
-  var NAME = { x:768, y:1348, maxWidth:760, fontSize:60, minFontSize:18 };
+  var NAME = { x:768, y:1338, maxWidth:760, fontSize:60, minFontSize:18 };
 
   var state = {
     x: HOLE.x + HOLE.w / 2,
@@ -58,6 +58,13 @@
   var nameSizeValue = document.getElementById('name-size-value');
   var nameSizeMinus = document.getElementById('name-size-minus');
   var nameSizePlus = document.getElementById('name-size-plus');
+
+  // Đồng bộ cỡ chữ mặc định với thiết kế mới.
+  // Trước đây input HTML đang giữ value=52 nên nó ghi đè NAME.fontSize=60.
+  if (nameSizeInput) {
+    nameSizeInput.value = '60';
+    if (nameSizeValue) nameSizeValue.textContent = '60 px';
+  }
   var zoomInput = document.getElementById('photo-zoom');
   var rotateInput = document.getElementById('photo-rotate');
   var zoomValue = document.getElementById('zoom-value');
