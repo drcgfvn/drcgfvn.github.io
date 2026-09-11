@@ -27,7 +27,7 @@
       montserratReady = true;
       return Promise.resolve();
     }
-    return document.fonts.load('700 52px Montserrat').then(function(){
+    return document.fonts.load('700 60px Montserrat').then(function(){
       montserratReady = true;
       draw();
     }).catch(function(){
@@ -39,7 +39,7 @@
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
   // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
   var HOLE = { x:527, y:674, w:473, h:422 };
-  var NAME = { x:768, y:1265, maxWidth:760, fontSize:52, minFontSize:18 };
+  var NAME = { x:768, y:1338, maxWidth:760, fontSize:60, minFontSize:18 };
 
   var state = {
     x: HOLE.x + HOLE.w / 2,
@@ -86,7 +86,7 @@
       var sx = template.naturalWidth / 1536;
       var sy = template.naturalHeight / 2048;
       HOLE = { x:527*sx, y:674*sy, w:473*sx, h:422*sy };
-      NAME = { x:768*sx, y:1265*sy, maxWidth:760*sx, fontSize:52*sy, minFontSize:18*sy };
+      NAME = { x:768*sx, y:1338*sy, maxWidth:760*sx, fontSize:60*sy, minFontSize:18*sy };
       state.x = HOLE.x + HOLE.w/2;
       state.y = HOLE.y + HOLE.h/2;
     }
