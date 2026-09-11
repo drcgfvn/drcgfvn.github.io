@@ -13,10 +13,10 @@
   var processedGuestUrl = null;
   var removingBackground = false;
   var templateReady = false;
-
-  // Nạp Montserrat Bold (700) từ Google Fonts.
-  // Máy khách không cần cài sẵn font Montserrat.
   var montserratReady = false;
+
+  // Nạp Montserrat Bold (700) trực tiếp từ Google Fonts.
+  // Máy khách không cần cài sẵn font Montserrat.
   var montserratLink = document.createElement('link');
   montserratLink.rel = 'stylesheet';
   montserratLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap';
@@ -29,7 +29,7 @@
     }
     return document.fonts.load('700 52px Montserrat').then(function(){
       montserratReady = true;
-      draw(); // vẽ lại preview ngay khi font đã tải xong
+      draw();
     }).catch(function(){
       montserratReady = false;
     });
@@ -39,7 +39,7 @@
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
   // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
   var HOLE = { x:527, y:674, w:473, h:422 };
-  var NAME = { x:768, y:1222, maxWidth:760, fontSize:52, minFontSize:18 };
+  var NAME = { x:768, y:1265, maxWidth:760, fontSize:52, minFontSize:18 };
 
   var state = {
     x: HOLE.x + HOLE.w / 2,
@@ -86,7 +86,7 @@
       var sx = template.naturalWidth / 1536;
       var sy = template.naturalHeight / 2048;
       HOLE = { x:527*sx, y:674*sy, w:473*sx, h:422*sy };
-      NAME = { x:768*sx, y:1222*sy, maxWidth:760*sx, fontSize:52*sy, minFontSize:18*sy };
+      NAME = { x:768*sx, y:1265*sy, maxWidth:760*sx, fontSize:52*sy, minFontSize:18*sy };
       state.x = HOLE.x + HOLE.w/2;
       state.y = HOLE.y + HOLE.h/2;
     }
@@ -430,9 +430,11 @@
   downloadBtn.addEventListener('click', function(){
     if (!guest) { setStatus('Bạn cần chọn ảnh trước khi tải thư mời.', 'error'); fileInput.focus(); return; }
     if (!normalizedName()) { setStatus('Bạn cần nhập họ và tên trước khi tải thư mời.', 'error'); nameInput.focus(); return; }
+
     setStatus('Đang nạp Montserrat Bold...');
     montserratPromise.then(function(){
-      draw(); // đảm bảo JPG cũng dùng đúng Montserrat Bold
+      // Đảm bảo Canvas dùng Montserrat Bold trước khi xuất JPG.
+      draw();
       setStatus('Đang tạo ảnh JPG...');
       canvas.toBlob(function(blob){
       if (!blob) { setStatus('Không thể tạo file JPG. Vui lòng thử lại.', 'error'); return; }

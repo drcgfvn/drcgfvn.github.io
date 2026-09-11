@@ -14,6 +14,28 @@
   var removingBackground = false;
   var templateReady = false;
 
+  // Nạp Montserrat Bold (700) từ Google Fonts.
+  // Máy khách không cần cài sẵn font Montserrat.
+  var montserratReady = false;
+  var montserratLink = document.createElement('link');
+  montserratLink.rel = 'stylesheet';
+  montserratLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap';
+  document.head.appendChild(montserratLink);
+
+  function loadMontserrat(){
+    if (!document.fonts || !document.fonts.load) {
+      montserratReady = true;
+      return Promise.resolve();
+    }
+    return document.fonts.load('700 52px Montserrat').then(function(){
+      montserratReady = true;
+      draw(); // vẽ lại preview ngay khi font đã tải xong
+    }).catch(function(){
+      montserratReady = false;
+    });
+  }
+  var montserratPromise = loadMontserrat();
+
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
   // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
   var HOLE = { x:527, y:674, w:473, h:422 };
@@ -112,7 +134,7 @@
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#432817';
-    ctx.font = '700 ' + fontSize + 'px Arial, Helvetica, sans-serif';
+    ctx.font = '700 ' + fontSize + 'px Montserrat, Arial, Helvetica, sans-serif';
     ctx.fillText(text, NAME.x, NAME.y);
     return fontSize;
   }
@@ -408,9 +430,11 @@
   downloadBtn.addEventListener('click', function(){
     if (!guest) { setStatus('Bạn cần chọn ảnh trước khi tải thư mời.', 'error'); fileInput.focus(); return; }
     if (!normalizedName()) { setStatus('Bạn cần nhập họ và tên trước khi tải thư mời.', 'error'); nameInput.focus(); return; }
-    draw();
-    setStatus('Đang tạo ảnh JPG...');
-    canvas.toBlob(function(blob){
+    setStatus('Đang nạp Montserrat Bold...');
+    montserratPromise.then(function(){
+      draw(); // đảm bảo JPG cũng dùng đúng Montserrat Bold
+      setStatus('Đang tạo ảnh JPG...');
+      canvas.toBlob(function(blob){
       if (!blob) { setStatus('Không thể tạo file JPG. Vui lòng thử lại.', 'error'); return; }
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
@@ -421,8 +445,9 @@
       a.click();
       a.remove();
       setTimeout(function(){ URL.revokeObjectURL(url); }, 15000);
-      setStatus('Đã tạo thư mời. Nếu trình duyệt hỏi quyền tải file, hãy chọn Cho phép.', 'success');
-    }, 'image/jpeg', 0.96);
+        setStatus('Đã tạo thư mời. Nếu trình duyệt hỏi quyền tải file, hãy chọn Cho phép.', 'success');
+      }, 'image/jpeg', 0.96);
+    });
   });
 
   template.onload = function(){
