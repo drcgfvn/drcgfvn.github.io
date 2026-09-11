@@ -38,8 +38,8 @@
 
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
   // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
-  var HOLE = { x:527, y:874, w:473, h:422 };
-  var NAME = { x:768, y:1438, maxWidth:760, fontSize:60, minFontSize:18 };
+  var HOLE = { x:527, y:900, w:473, h:422 };
+  var NAME = { x:768, y:1360, maxWidth:760, fontSize:60, minFontSize:18 };
 
   var state = {
     x: HOLE.x + HOLE.w / 2,
@@ -92,8 +92,8 @@
     if (template.naturalWidth !== 1536 || template.naturalHeight !== 2048) {
       var sx = template.naturalWidth / 1536;
       var sy = template.naturalHeight / 2048;
-      HOLE = { x:527*sx, y:674*sy, w:473*sx, h:422*sy };
-      NAME = { x:768*sx, y:1338*sy, maxWidth:760*sx, fontSize:60*sy, minFontSize:18*sy };
+      HOLE = { x:527*sx, y:900*sy, w:473*sx, h:422*sy };
+      NAME = { x:768*sx, y:1360*sy, maxWidth:760*sx, fontSize:60*sy, minFontSize:18*sy };
       state.x = HOLE.x + HOLE.w/2;
       state.y = HOLE.y + HOLE.h/2;
     }
@@ -394,7 +394,7 @@
       guestUrl = processedGuestUrl;
       setGuestFromUrl(processedGuestUrl, 'Đã tách nền. Bạn vẫn có thể kéo, zoom và xoay ảnh như bình thường.');
       setBgProgress(100, 'Tách nền hoàn tất.');
-      setTimeout(hideBgProgress, 1400);
+      setTimeout(hideBgProgress, 1360);
       useOriginalBtn.disabled = false;
     } catch (err) {
       console.error(err);
