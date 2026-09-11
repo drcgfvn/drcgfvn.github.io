@@ -36,10 +36,42 @@
   }
   var montserratPromise = loadMontserrat();
 
-  // Tọa độ theo file PNG 1536 x 2048 hiện tại.
-  // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
-  var HOLE = { x:527, y:900, w:473, h:422 };
-  var NAME = { x:768, y:1360, maxWidth:760, fontSize:60, minFontSize:18 };
+  // ============================================================
+  // CẤU HÌNH NHANH — CHỈ CẦN SỬA CÁC GIÁ TRỊ Ở ĐÂY
+  // Tọa độ chuẩn theo mẫu PNG gốc 1536 x 2048.
+  // Khi đổi sang PNG cùng tỷ lệ nhưng kích thước khác, code sẽ tự scale.
+  // ============================================================
+  var CONFIG = {
+    image: {
+      x: 527,
+      y: 900,
+      width: 473,
+      height: 422
+    },
+    name: {
+      x: 768,
+      y: 1360,
+      maxWidth: 760,
+      fontSize: 60,
+      minFontSize: 18
+    }
+  };
+
+  // Từ đây trở xuống không cần sửa tọa độ trực tiếp.
+  var HOLE = {
+    x: CONFIG.image.x,
+    y: CONFIG.image.y,
+    w: CONFIG.image.width,
+    h: CONFIG.image.height
+  };
+
+  var NAME = {
+    x: CONFIG.name.x,
+    y: CONFIG.name.y,
+    maxWidth: CONFIG.name.maxWidth,
+    fontSize: CONFIG.name.fontSize,
+    minFontSize: CONFIG.name.minFontSize
+  };
 
   var state = {
     x: HOLE.x + HOLE.w / 2,
@@ -62,8 +94,8 @@
   // Đồng bộ cỡ chữ mặc định với thiết kế mới.
   // Trước đây input HTML đang giữ value=52 nên nó ghi đè NAME.fontSize=60.
   if (nameSizeInput) {
-    nameSizeInput.value = '60';
-    if (nameSizeValue) nameSizeValue.textContent = '60 px';
+    nameSizeInput.value = String(CONFIG.name.fontSize);
+    if (nameSizeValue) nameSizeValue.textContent = Math.round(CONFIG.name.fontSize) + ' px';
   }
   var zoomInput = document.getElementById('photo-zoom');
   var rotateInput = document.getElementById('photo-rotate');
@@ -92,8 +124,19 @@
     if (template.naturalWidth !== 1536 || template.naturalHeight !== 2048) {
       var sx = template.naturalWidth / 1536;
       var sy = template.naturalHeight / 2048;
-      HOLE = { x:527*sx, y:900*sy, w:473*sx, h:422*sy };
-      NAME = { x:768*sx, y:1360*sy, maxWidth:760*sx, fontSize:60*sy, minFontSize:18*sy };
+      HOLE = {
+        x: CONFIG.image.x * sx,
+        y: CONFIG.image.y * sy,
+        w: CONFIG.image.width * sx,
+        h: CONFIG.image.height * sy
+      };
+      NAME = {
+        x: CONFIG.name.x * sx,
+        y: CONFIG.name.y * sy,
+        maxWidth: CONFIG.name.maxWidth * sx,
+        fontSize: CONFIG.name.fontSize * sy,
+        minFontSize: CONFIG.name.minFontSize * sy
+      };
       state.x = HOLE.x + HOLE.w/2;
       state.y = HOLE.y + HOLE.h/2;
     }
