@@ -39,7 +39,7 @@
   // Tọa độ theo file PNG 1536 x 2048 hiện tại.
   // Ảnh khách nằm dưới PNG; vùng khoét trong PNG tự tạo mặt nạ.
   var HOLE = { x:527, y:674, w:473, h:422 };
-  var NAME = { x:768, y:1338, maxWidth:760, fontSize:60, minFontSize:18 };
+  var NAME = { x:768, y:1348, maxWidth:760, fontSize:60, minFontSize:18 };
 
   var state = {
     x: HOLE.x + HOLE.w / 2,
