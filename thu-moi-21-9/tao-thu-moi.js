@@ -189,8 +189,9 @@
     // Cỡ chữ do khách chọn phải có tác dụng trực tiếp.
     // Không tự co chữ ở đây vì việc auto-fit trước đây khiến kéo thanh lên
     // nhưng chữ dài vẫn bị ép về cùng một cỡ, trông như thanh không hoạt động.
-    var requestedSize = nameSizeInput ? Number(nameSizeInput.value) : NAME.fontSize;
-    var fontSize = Math.max(NAME.minFontSize, requestedSize);
+    // Giá trị trên thanh là cỡ chữ ở kích thước mẫu gốc; canvas xuất lớn gấp đôi.
+    var requestedSize = nameSizeInput ? Number(nameSizeInput.value) : CONFIG.name.fontSize;
+    var fontSize = Math.max(CONFIG.name.minFontSize, requestedSize) * renderScale;
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
