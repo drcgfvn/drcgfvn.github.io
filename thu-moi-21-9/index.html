@@ -428,9 +428,9 @@
       <div class="invite-range">
         <label for="name-size">Cỡ chữ</label>
         <div class="name-size-control">
-          <button id="name-size-minus" type="button" class="size-step" aria-label="Giảm cỡ chữ">A−</button>
+          <button id="name-size-minus" type="button" class="size-step" aria-label="Giảm cỡ chữ">−</button>
           <input id="name-size" type="range" min="18" max="100" value="60" step="1" />
-          <button id="name-size-plus" type="button" class="size-step" aria-label="Tăng cỡ chữ">A+</button>
+          <button id="name-size-plus" type="button" class="size-step" aria-label="Tăng cỡ chữ">+</button>
         </div>
         <output id="name-size-value" for="name-size">60 px</output>
       </div>
@@ -463,6 +463,16 @@
           <button id="photo-brightness-plus" type="button" class="size-step" aria-label="Tăng độ sáng">+</button>
         </div>
         <output id="brightness-value" for="photo-brightness">100%</output>
+      </div>
+
+      <div class="invite-range">
+        <label for="photo-contrast">Tương phản</label>
+        <div class="name-size-control">
+          <button id="photo-contrast-minus" type="button" class="size-step" aria-label="Giảm tương phản">−</button>
+          <input id="photo-contrast" type="range" min="50" max="180" value="100" step="1" />
+          <button id="photo-contrast-plus" type="button" class="size-step" aria-label="Tăng tương phản">+</button>
+        </div>
+        <output id="contrast-value" for="photo-contrast">100%</output>
       </div>
 
       <div class="invite-actions">

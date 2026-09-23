@@ -80,6 +80,7 @@
     zoom: 1,
     rotation: 0,
     brightness: 1,
+    contrast: 1,
     dragging: false,
     lastX: 0,
     lastY: 0
@@ -101,9 +102,11 @@
   var zoomInput = document.getElementById('photo-zoom');
   var rotateInput = document.getElementById('photo-rotate');
   var brightnessInput = document.getElementById('photo-brightness');
+  var contrastInput = document.getElementById('photo-contrast');
   var zoomValue = document.getElementById('zoom-value');
   var rotateValue = document.getElementById('rotate-value');
   var brightnessValue = document.getElementById('brightness-value');
+  var contrastValue = document.getElementById('contrast-value');
   var resetBtn = document.getElementById('reset-photo');
   var downloadBtn = document.getElementById('download-invite');
   var emptyHint = document.getElementById('invite-empty');
@@ -158,7 +161,7 @@
       ctx.translate(state.x, state.y);
       ctx.rotate(state.rotation * Math.PI / 180);
       ctx.scale(s, s);
-      ctx.filter = 'brightness(' + Math.round(state.brightness * 100) + '%)';
+      ctx.filter = 'brightness(' + Math.round(state.brightness * 100) + '%) contrast(' + Math.round(state.contrast * 100) + '%)';
       ctx.drawImage(guest, -guest.naturalWidth/2, -guest.naturalHeight/2);
       ctx.restore();
     }
@@ -202,9 +205,11 @@
     state.zoom = 1;
     state.rotation = 0;
     state.brightness = 1;
+    state.contrast = 1;
     zoomInput.value = '100';
     rotateInput.value = '0';
     brightnessInput.value = '100';
+    contrastInput.value = '100';
     updateOutputs();
     draw();
   }
@@ -213,6 +218,7 @@
     zoomValue.textContent = Math.round(state.zoom * 100) + '%';
     rotateValue.textContent = Math.round(state.rotation) + '°';
     brightnessValue.textContent = Math.round(state.brightness * 100) + '%';
+    contrastValue.textContent = Math.round(state.contrast * 100) + '%';
   }
 
   function setBgProgress(percent, label){
@@ -477,12 +483,13 @@
       if (nameSizeValue) nameSizeValue.textContent = Math.round(Number(this.value)) + ' px';
       draw();
     });
-    if (nameSizeMinus) nameSizeMinus.addEventListener('click', function(){ changeNameSize(-2); });
-    if (nameSizePlus) nameSizePlus.addEventListener('click', function(){ changeNameSize(2); });
+    if (nameSizeMinus) nameSizeMinus.addEventListener('click', function(){ changeNameSize(-1); });
+    if (nameSizePlus) nameSizePlus.addEventListener('click', function(){ changeNameSize(1); });
   }
   zoomInput.addEventListener('input', function(){ state.zoom = Number(this.value)/100; updateOutputs(); draw(); });
   rotateInput.addEventListener('input', function(){ state.rotation = Number(this.value); updateOutputs(); draw(); });
   brightnessInput.addEventListener('input', function(){ state.brightness = Number(this.value)/100; updateOutputs(); draw(); });
+  contrastInput.addEventListener('input', function(){ state.contrast = Number(this.value)/100; updateOutputs(); draw(); });
   function addStepButtons(input, amount){
     ['minus', 'plus'].forEach(function(direction){
       document.getElementById(input.id + '-' + direction).addEventListener('click', function(){
@@ -492,9 +499,10 @@
       });
     });
   }
-  addStepButtons(zoomInput, 5);
-  addStepButtons(rotateInput, 5);
-  addStepButtons(brightnessInput, 5);
+  addStepButtons(zoomInput, 1);
+  addStepButtons(rotateInput, 1);
+  addStepButtons(brightnessInput, 1);
+  addStepButtons(contrastInput, 1);
   resetBtn.addEventListener('click', function(){ resetTransform(); setStatus('Đã đưa ảnh về vị trí ban đầu.'); });
 
   downloadBtn.addEventListener('click', function(){
