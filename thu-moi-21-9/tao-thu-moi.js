@@ -14,6 +14,8 @@
   var removingBackground = false;
   var templateReady = false;
   var montserratReady = false;
+  // Giữ ảnh khách sắc nét hơn khi xuất JPG, dù PNG mẫu chỉ có 1086 x 1448 px.
+  var renderScale = 2;
 
   // Nạp Montserrat Bold (700) trực tiếp từ Google Fonts.
   // Máy khách không cần cài sẵn font Montserrat.
@@ -124,12 +126,12 @@
 
   function fitCanvasToTemplate(){
     if (!template.naturalWidth || !template.naturalHeight) return;
-    canvas.width = template.naturalWidth;
-    canvas.height = template.naturalHeight;
-    // Nếu bạn thay PNG khác kích thước nhưng cùng tỷ lệ, tọa độ sẽ tự scale.
-    if (template.naturalWidth !== 1536 || template.naturalHeight !== 2048) {
-      var sx = template.naturalWidth / 1536;
-      var sy = template.naturalHeight / 2048;
+    canvas.width = template.naturalWidth * renderScale;
+    canvas.height = template.naturalHeight * renderScale;
+    // Tọa độ theo kích thước canvas xuất, kể cả khi thay mẫu PNG cùng tỷ lệ.
+    if (canvas.width !== 1536 || canvas.height !== 2048) {
+      var sx = canvas.width / 1536;
+      var sy = canvas.height / 2048;
       HOLE = {
         x: CONFIG.image.x * sx,
         y: CONFIG.image.y * sy,
@@ -151,6 +153,8 @@
   function draw(){
     if (!templateReady) return;
     ctx.save();
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
