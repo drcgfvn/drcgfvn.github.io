@@ -437,14 +437,32 @@
 
       <div class="invite-range">
         <label for="photo-zoom">Thu phóng</label>
-        <input id="photo-zoom" type="range" min="45" max="400" value="100" step="1" />
+        <div class="name-size-control">
+          <button id="photo-zoom-minus" type="button" class="size-step" aria-label="Giảm thu phóng">−</button>
+          <input id="photo-zoom" type="range" min="45" max="400" value="100" step="1" />
+          <button id="photo-zoom-plus" type="button" class="size-step" aria-label="Tăng thu phóng">+</button>
+        </div>
         <output id="zoom-value" for="photo-zoom">100%</output>
       </div>
 
       <div class="invite-range">
         <label for="photo-rotate">Xoay ảnh</label>
-        <input id="photo-rotate" type="range" min="-180" max="180" value="0" step="1" />
+        <div class="name-size-control">
+          <button id="photo-rotate-minus" type="button" class="size-step" aria-label="Xoay ảnh sang trái">−</button>
+          <input id="photo-rotate" type="range" min="-180" max="180" value="0" step="1" />
+          <button id="photo-rotate-plus" type="button" class="size-step" aria-label="Xoay ảnh sang phải">+</button>
+        </div>
         <output id="rotate-value" for="photo-rotate">0°</output>
+      </div>
+
+      <div class="invite-range">
+        <label for="photo-brightness">Độ sáng</label>
+        <div class="name-size-control">
+          <button id="photo-brightness-minus" type="button" class="size-step" aria-label="Giảm độ sáng">−</button>
+          <input id="photo-brightness" type="range" min="50" max="180" value="100" step="1" />
+          <button id="photo-brightness-plus" type="button" class="size-step" aria-label="Tăng độ sáng">+</button>
+        </div>
+        <output id="brightness-value" for="photo-brightness">100%</output>
       </div>
 
       <div class="invite-actions">

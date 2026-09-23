@@ -79,6 +79,7 @@
     baseScale: 1,
     zoom: 1,
     rotation: 0,
+    brightness: 1,
     dragging: false,
     lastX: 0,
     lastY: 0
@@ -99,8 +100,10 @@
   }
   var zoomInput = document.getElementById('photo-zoom');
   var rotateInput = document.getElementById('photo-rotate');
+  var brightnessInput = document.getElementById('photo-brightness');
   var zoomValue = document.getElementById('zoom-value');
   var rotateValue = document.getElementById('rotate-value');
+  var brightnessValue = document.getElementById('brightness-value');
   var resetBtn = document.getElementById('reset-photo');
   var downloadBtn = document.getElementById('download-invite');
   var emptyHint = document.getElementById('invite-empty');
@@ -155,6 +158,7 @@
       ctx.translate(state.x, state.y);
       ctx.rotate(state.rotation * Math.PI / 180);
       ctx.scale(s, s);
+      ctx.filter = 'brightness(' + Math.round(state.brightness * 100) + '%)';
       ctx.drawImage(guest, -guest.naturalWidth/2, -guest.naturalHeight/2);
       ctx.restore();
     }
@@ -197,8 +201,10 @@
     state.baseScale = Math.max(HOLE.w / guest.naturalWidth, HOLE.h / guest.naturalHeight) * 1.08;
     state.zoom = 1;
     state.rotation = 0;
+    state.brightness = 1;
     zoomInput.value = '100';
     rotateInput.value = '0';
+    brightnessInput.value = '100';
     updateOutputs();
     draw();
   }
@@ -206,6 +212,7 @@
   function updateOutputs(){
     zoomValue.textContent = Math.round(state.zoom * 100) + '%';
     rotateValue.textContent = Math.round(state.rotation) + '°';
+    brightnessValue.textContent = Math.round(state.brightness * 100) + '%';
   }
 
   function setBgProgress(percent, label){
@@ -475,6 +482,19 @@
   }
   zoomInput.addEventListener('input', function(){ state.zoom = Number(this.value)/100; updateOutputs(); draw(); });
   rotateInput.addEventListener('input', function(){ state.rotation = Number(this.value); updateOutputs(); draw(); });
+  brightnessInput.addEventListener('input', function(){ state.brightness = Number(this.value)/100; updateOutputs(); draw(); });
+  function addStepButtons(input, amount){
+    ['minus', 'plus'].forEach(function(direction){
+      document.getElementById(input.id + '-' + direction).addEventListener('click', function(){
+        var change = direction === 'plus' ? amount : -amount;
+        input.value = String(Math.max(Number(input.min), Math.min(Number(input.max), Number(input.value) + change)));
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    });
+  }
+  addStepButtons(zoomInput, 5);
+  addStepButtons(rotateInput, 5);
+  addStepButtons(brightnessInput, 5);
   resetBtn.addEventListener('click', function(){ resetTransform(); setStatus('Đã đưa ảnh về vị trí ban đầu.'); });
 
   downloadBtn.addEventListener('click', function(){
