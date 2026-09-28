@@ -96,6 +96,8 @@
   var nameSizePlus = document.getElementById('name-size-plus');
   var nameHeightInput = document.getElementById('name-height');
   var nameHeightValue = document.getElementById('name-height-value');
+  var nameHeightDirection = document.getElementById('name-height-direction');
+  var nameHeightPixels = document.getElementById('name-height-pixels');
   var nameHeightUp = document.getElementById('name-height-up');
   var nameHeightDown = document.getElementById('name-height-down');
   var saveNameHeight = document.getElementById('save-name-height');
@@ -114,7 +116,8 @@
   function updateNameHeight(){
     if (!nameHeightInput) return;
     var offset = Number(nameHeightInput.value) || 0;
-    if (nameHeightValue) nameHeightValue.textContent = offset === 0 ? 'Vị trí gốc' : (offset < 0 ? 'Lên ' + -offset : 'Xuống ' + offset) + ' px';
+    if (nameHeightDirection) nameHeightDirection.textContent = offset < 0 ? 'Lên' : offset > 0 ? 'Xuống' : 'Gốc';
+    if (nameHeightPixels) nameHeightPixels.textContent = Math.abs(offset) + ' px';
     try {
       if (saveNameHeight && saveNameHeight.checked) localStorage.setItem(heightStorageKey, String(offset));
     } catch (error) { /* Vẫn cho phép chỉnh vị trí trong phiên hiện tại. */ }
