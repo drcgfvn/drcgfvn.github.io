@@ -1469,3 +1469,20 @@
     display: flex !important;
   }
 }
+
+/* Desktop: keep the main menu in normal page flow. */
+@media (min-width: 885px) {
+  #header,
+  #header.drcgf-fixed-header {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  #drcgf-fixed-header-space {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+}

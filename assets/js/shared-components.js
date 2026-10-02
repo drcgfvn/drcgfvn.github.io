@@ -150,7 +150,7 @@
       "stuck",
       "is-sticky"
     );
-    header.classList.add("drcgf-fixed-header");
+    header.classList.toggle("drcgf-fixed-header", mobileMedia.matches);
 
     var wrapper = header.querySelector(".header-wrapper");
     if (wrapper) {
@@ -168,12 +168,16 @@
       header.parentNode.insertBefore(spacer, header);
     }
 
-    if (header.parentElement !== document.body) document.body.appendChild(header);
-
     function updateHeaderSpace() {
       if (!spacer || !header) return;
-      var height = Math.ceil(header.getBoundingClientRect().height || (mobileMedia.matches ? 70 : 0));
-      if (mobileMedia.matches) height = 70;
+      // Keep the spacer as the original header location across viewport changes.
+      header.classList.toggle("drcgf-fixed-header", mobileMedia.matches);
+      if (mobileMedia.matches) {
+        if (header.parentElement !== document.body) document.body.appendChild(header);
+      } else if (spacer.parentNode && spacer.nextSibling !== header) {
+        spacer.parentNode.insertBefore(header, spacer.nextSibling);
+      }
+      var height = mobileMedia.matches ? 70 : 0;
       spacer.style.height = height + "px";
       spacer.style.minHeight = height + "px";
       document.documentElement.style.setProperty("--drcgf-header-height", height + "px");
@@ -202,7 +206,7 @@
   }
 
   function observeMobileHeader() {
-    /* Không dùng observer/sticky theo hướng cuộn. Header luôn fixed ngay từ đầu. */
+    /* PC cuộn theo trang; mobile giữ header fixed. */
   }
 
   function setupMobileControls() {
