@@ -40,22 +40,24 @@
 
   // ============================================================
   // CẤU HÌNH NHANH — CHỈ CẦN SỬA CÁC GIÁ TRỊ Ở ĐÂY
-  // Tọa độ chuẩn theo mẫu PNG gốc 1536 x 2048.
+  // Tọa độ chuẩn theo mẫu PNG mới 1536 x 2048.
+  // Đổi màu tên tại CONFIG.name.color (#123B86).
   // Khi đổi sang PNG cùng tỷ lệ nhưng kích thước khác, code sẽ tự scale.
   // ============================================================
   var CONFIG = {
     image: {
-      x: 527,
-      y: 850,
-      width: 473,
-      height: 422
+      x: 164,
+      y: 1058,
+      width: 530,
+      height: 465
     },
     name: {
-      x: 768,
-      y: 1370,
-      maxWidth: 760,
-      fontSize: 48,
-      minFontSize: 18
+      x: 440,
+      y: 1593,
+      maxWidth: 590,
+      fontSize: 58,
+      minFontSize: 18,
+      color: '#123B86'
     }
   };
 
@@ -236,8 +238,15 @@
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#432817';
+    ctx.fillStyle = CONFIG.name.color;
     ctx.font = '700 ' + fontSize + 'px Montserrat, Arial, Helvetica, sans-serif';
+    // Co nhẹ chỉ khi tên vượt quá vùng dành cho tên trên dải ruy băng.
+    var maxTextWidth = CONFIG.name.maxWidth * (canvas.width / 1536);
+    var measuredWidth = ctx.measureText(text).width;
+    if (measuredWidth > maxTextWidth) {
+      fontSize *= maxTextWidth / measuredWidth;
+      ctx.font = '700 ' + fontSize + 'px Montserrat, Arial, Helvetica, sans-serif';
+    }
     ctx.fillText(text, NAME.x, NAME.y + (nameHeightInput ? Number(nameHeightInput.value) || 0 : 0) * (canvas.height / 2048));
     return fontSize;
   }
