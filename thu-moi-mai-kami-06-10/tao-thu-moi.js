@@ -222,17 +222,17 @@
   }
 
   function normalizedName(){
-    return (nameInput.value || '').trim().replace(/\s+/g,' ');
+    return (nameInput.value || '').replace(/\r\n?/g, '\n').trim().split('\n').map(function(line){
+      return line.trim().replace(/[^\S\n]+/g, ' ');
+    }).join('\n');
   }
 
   function drawName(){
     var text = normalizedName();
     if (!text) return;
 
-    // Cỡ chữ do khách chọn phải có tác dụng trực tiếp.
-    // Không tự co chữ ở đây vì việc auto-fit trước đây khiến kéo thanh lên
-    // nhưng chữ dài vẫn bị ép về cùng một cỡ, trông như thanh không hoạt động.
-    // Giá trị trên thanh là cỡ chữ ở kích thước mẫu gốc; canvas xuất lớn gấp đôi.
+    var lines = text.split('\n');
+    // Dùng cùng cỡ chữ cho các dòng; chỉ thu nhỏ nếu dòng dài nhất vượt khung.
     var requestedSize = nameSizeInput ? Number(nameSizeInput.value) : CONFIG.name.fontSize;
     var fontSize = Math.max(CONFIG.name.minFontSize, requestedSize) * renderScale;
 
@@ -242,12 +242,19 @@
     ctx.font = '700 ' + fontSize + 'px Montserrat, Arial, Helvetica, sans-serif';
     // Co nhẹ chỉ khi tên vượt quá vùng dành cho tên trên dải ruy băng.
     var maxTextWidth = CONFIG.name.maxWidth * (canvas.width / 1536);
-    var measuredWidth = ctx.measureText(text).width;
+    var measuredWidth = Math.max.apply(null, lines.map(function(line){
+      return ctx.measureText(line).width;
+    }));
     if (measuredWidth > maxTextWidth) {
       fontSize *= maxTextWidth / measuredWidth;
       ctx.font = '700 ' + fontSize + 'px Montserrat, Arial, Helvetica, sans-serif';
     }
-    ctx.fillText(text, NAME.x, NAME.y + (nameHeightInput ? Number(nameHeightInput.value) || 0 : 0) * (canvas.height / 2048));
+    var lineHeight = fontSize * 1.25;
+    var centerY = NAME.y + (nameHeightInput ? Number(nameHeightInput.value) || 0 : 0) * (canvas.height / 2048);
+    var firstY = centerY - (lines.length - 1) * lineHeight / 2;
+    lines.forEach(function(line, index){
+      ctx.fillText(line, NAME.x, firstY + index * lineHeight);
+    });
     return fontSize;
   }
 
