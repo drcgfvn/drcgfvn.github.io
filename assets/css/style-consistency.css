@@ -322,3 +322,39 @@ body.drcgf-invite-page #main :is(.invite-bg-tools,.invite-actions) .drcgf-action
 body.drcgf-invite-page #main .invite-bg-tools{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
 body.drcgf-invite-page #main .invite-bg-tools button:disabled{background:#dceaf8!important;color:#537a9d!important;border-color:#c8ddf1!important;box-shadow:none!important;opacity:1!important}
 @media(max-width:379px){body.drcgf-invite-page #main .invite-bg-tools{grid-template-columns:1fr!important}}
+
+/* White image viewer, with readable controls on transparent images. */
+body #drcgf-image-lightbox,body #drcgf-image-lightbox .drcgf-lightbox-stage{background:#fff!important;color:#174d7e!important}
+body #drcgf-image-lightbox :is(.drcgf-lightbox-close,.drcgf-lightbox-prev,.drcgf-lightbox-next){background:#eaf4ff!important;color:#174d7e!important;border:1px solid #cfe3f7!important;box-shadow:none!important}
+body #drcgf-image-lightbox :is(.drcgf-lightbox-close,.drcgf-lightbox-prev,.drcgf-lightbox-next):hover{background:#d7ebff!important;color:#1769ce!important}
+body #drcgf-image-lightbox :is(.drcgf-lightbox-caption,.drcgf-lightbox-counter){color:#315b83!important;background:#ffffffeb!important}
+body:is(.drcgf-contact-page,.drcgf-resources-page) #main .drcgf-contact-heading .section-title>b{display:none!important}
+body.drcgf-contact-page #main .drcgf-contact-card a[href="tel:0987503528"]{font-weight:700!important}
+
+/* Center the close glyph independently of theme line-height and font metrics. */
+body #drcgf-image-lightbox .drcgf-lightbox-close.drcgf-round-close{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;margin:0!important;line-height:1!important;font-size:0!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;box-sizing:border-box!important;position:absolute!important}
+body #drcgf-image-lightbox .drcgf-lightbox-close.drcgf-round-close:before,body #drcgf-image-lightbox .drcgf-lightbox-close.drcgf-round-close:after{content:""!important;display:block!important;position:absolute!important;left:50%!important;top:50%!important;width:18px!important;height:2px!important;background:#174d7e!important;border:0!important;border-radius:2px!important;margin:0!important;padding:0!important;transform:translate(-50%,-50%) rotate(45deg)!important}
+body #drcgf-image-lightbox .drcgf-lightbox-close.drcgf-round-close:after{transform:translate(-50%,-50%) rotate(-45deg)!important}
+@media(max-width:700px){body #drcgf-image-lightbox .drcgf-lightbox-close.drcgf-round-close{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}}
+@media(max-width:549px){
+body.drcgf-resources-page .drcgf-resource-dock{left:10px!important;right:70px!important;bottom:12px!important;transform:none!important;width:auto!important;max-width:none!important;padding:6px!important;gap:5px!important;border-radius:10px!important}
+body.drcgf-resources-page .drcgf-resource-dock select{height:38px!important;padding:0 24px 0 7px!important;font-size:12px!important}
+body.drcgf-resources-page .drcgf-resource-dock button{height:38px!important;padding:0 8px!important;font-size:11px!important;max-width:88px;white-space:normal;line-height:1.3!important}
+}
+
+@media(max-width:549px){
+body.drcgf-resources-page .drcgf-resource-dock{left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:min(280px,calc(100% - 40px))!important;bottom:64px!important;padding:5px!important;gap:5px!important}
+body.drcgf-resources-page .drcgf-resource-dock select{height:34px!important;font-size:11px!important}
+body.drcgf-resources-page .drcgf-resource-dock button{height:34px!important;max-width:80px!important;font-size:10px!important;padding:0 7px!important}
+}
+
+.drcgf-resource-dock{opacity:.5;transition:opacity .2s ease}
+.drcgf-resource-dock:is(:hover,:focus-within,:active){opacity:.8}
+@media(max-width:549px){
+body.drcgf-resources-page .drcgf-resource-dock{width:min(240px,calc(100% - 140px))!important;bottom:12px!important}
+body.drcgf-resources-page .drcgf-resource-dock button{max-width:72px!important;padding:0 5px!important}
+}
+@media(prefers-reduced-motion:reduce){.drcgf-resource-dock{transition:none}}
+
+.drcgf-resource-dock:is(:hover,:focus-within,:active){opacity:.9}
+@media(max-width:549px){body.drcgf-resources-page .drcgf-resource-dock{opacity:.9!important}}

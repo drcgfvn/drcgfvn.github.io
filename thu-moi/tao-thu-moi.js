@@ -14,8 +14,6 @@
   var removingBackground = false;
   var templateReady = false;
   var montserratReady = false;
-  // Giữ ảnh khách sắc nét hơn khi xuất JPG, dù PNG mẫu chỉ có 1086 x 1448 px.
-  var renderScale = 2;
 
   // Nạp Montserrat Bold (700) trực tiếp từ Google Fonts.
   // Máy khách không cần cài sẵn font Montserrat.
@@ -40,24 +38,22 @@
 
   // ============================================================
   // CẤU HÌNH NHANH — CHỈ CẦN SỬA CÁC GIÁ TRỊ Ở ĐÂY
-  // Tọa độ chuẩn theo mẫu PNG mới 1536 x 2048.
-  // Đổi màu tên tại CONFIG.name.color (#123B86).
+  // Tọa độ chuẩn theo mẫu PNG gốc 1536 x 2048.
   // Khi đổi sang PNG cùng tỷ lệ nhưng kích thước khác, code sẽ tự scale.
   // ============================================================
   var CONFIG = {
     image: {
-      x: 164,
-      y: 1058,
-      width: 530,
-      height: 465
+      x: 527,
+      y: 900,
+      width: 473,
+      height: 422
     },
     name: {
-      x: 440,
-      y: 1593,
-      maxWidth: 590,
-      fontSize: 58,
-      minFontSize: 18,
-      color: '#123B86'
+      x: 768,
+      y: 1360,
+      maxWidth: 760,
+      fontSize: 60,
+      minFontSize: 18
     }
   };
 
@@ -83,8 +79,6 @@
     baseScale: 1,
     zoom: 1,
     rotation: 0,
-    brightness: 1,
-    contrast: 1,
     dragging: false,
     lastX: 0,
     lastY: 0
@@ -96,47 +90,6 @@
   var nameSizeValue = document.getElementById('name-size-value');
   var nameSizeMinus = document.getElementById('name-size-minus');
   var nameSizePlus = document.getElementById('name-size-plus');
-  var nameHeightInput = document.getElementById('name-height');
-  var nameHeightValue = document.getElementById('name-height-value');
-  var nameHeightDirection = document.getElementById('name-height-direction');
-  var nameHeightPixels = document.getElementById('name-height-pixels');
-  var nameHeightUp = document.getElementById('name-height-up');
-  var nameHeightDown = document.getElementById('name-height-down');
-  var saveNameHeight = document.getElementById('save-name-height');
-  var heightStorageKey = 'drcgf-invite-name-height-v1';
-  try {
-    var savedHeight = localStorage.getItem(heightStorageKey);
-    if (savedHeight !== null && nameHeightInput) {
-      var parsedHeight = Number(savedHeight);
-      if (Number.isFinite(parsedHeight)) {
-        nameHeightInput.value = String(Math.max(-300, Math.min(300, parsedHeight)));
-        if (saveNameHeight) saveNameHeight.checked = true;
-      }
-    }
-  } catch (error) { /* Trình duyệt có thể chặn bộ nhớ cục bộ. */ }
-
-  function updateNameHeight(){
-    if (!nameHeightInput) return;
-    var offset = Number(nameHeightInput.value) || 0;
-    if (nameHeightDirection) nameHeightDirection.textContent = offset < 0 ? 'Lên' : offset > 0 ? 'Xuống' : 'Gốc';
-    if (nameHeightPixels) nameHeightPixels.textContent = Math.abs(offset) + ' px';
-    try {
-      if (saveNameHeight && saveNameHeight.checked) localStorage.setItem(heightStorageKey, String(offset));
-    } catch (error) { /* Vẫn cho phép chỉnh vị trí trong phiên hiện tại. */ }
-    draw();
-  }
-  if (nameHeightInput) {
-    nameHeightInput.addEventListener('input', updateNameHeight);
-    if (nameHeightUp) nameHeightUp.addEventListener('click', function(){ nameHeightInput.value = String(Math.max(-300, Number(nameHeightInput.value) - 1)); updateNameHeight(); });
-    if (nameHeightDown) nameHeightDown.addEventListener('click', function(){ nameHeightInput.value = String(Math.min(300, Number(nameHeightInput.value) + 1)); updateNameHeight(); });
-    if (saveNameHeight) saveNameHeight.addEventListener('change', function(){
-      try {
-        if (this.checked) localStorage.setItem(heightStorageKey, nameHeightInput.value);
-        else localStorage.removeItem(heightStorageKey);
-      } catch (error) { /* Trình duyệt có thể chặn bộ nhớ cục bộ. */ }
-    });
-    updateNameHeight();
-  }
 
   // Đồng bộ cỡ chữ mặc định với thiết kế mới.
   // Trước đây input HTML đang giữ value=52 nên nó ghi đè NAME.fontSize=60.
@@ -146,12 +99,8 @@
   }
   var zoomInput = document.getElementById('photo-zoom');
   var rotateInput = document.getElementById('photo-rotate');
-  var brightnessInput = document.getElementById('photo-brightness');
-  var contrastInput = document.getElementById('photo-contrast');
   var zoomValue = document.getElementById('zoom-value');
   var rotateValue = document.getElementById('rotate-value');
-  var brightnessValue = document.getElementById('brightness-value');
-  var contrastValue = document.getElementById('contrast-value');
   var resetBtn = document.getElementById('reset-photo');
   var downloadBtn = document.getElementById('download-invite');
   var emptyHint = document.getElementById('invite-empty');
@@ -169,12 +118,12 @@
 
   function fitCanvasToTemplate(){
     if (!template.naturalWidth || !template.naturalHeight) return;
-    canvas.width = template.naturalWidth * renderScale;
-    canvas.height = template.naturalHeight * renderScale;
-    // Tọa độ theo kích thước canvas xuất, kể cả khi thay mẫu PNG cùng tỷ lệ.
-    if (canvas.width !== 1536 || canvas.height !== 2048) {
-      var sx = canvas.width / 1536;
-      var sy = canvas.height / 2048;
+    canvas.width = template.naturalWidth;
+    canvas.height = template.naturalHeight;
+    // Nếu bạn thay PNG khác kích thước nhưng cùng tỷ lệ, tọa độ sẽ tự scale.
+    if (template.naturalWidth !== 1536 || template.naturalHeight !== 2048) {
+      var sx = template.naturalWidth / 1536;
+      var sy = template.naturalHeight / 2048;
       HOLE = {
         x: CONFIG.image.x * sx,
         y: CONFIG.image.y * sy,
@@ -196,8 +145,6 @@
   function draw(){
     if (!templateReady) return;
     ctx.save();
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
@@ -208,7 +155,6 @@
       ctx.translate(state.x, state.y);
       ctx.rotate(state.rotation * Math.PI / 180);
       ctx.scale(s, s);
-      ctx.filter = 'brightness(' + Math.round(state.brightness * 100) + '%) contrast(' + Math.round(state.contrast * 100) + '%)';
       ctx.drawImage(guest, -guest.naturalWidth/2, -guest.naturalHeight/2);
       ctx.restore();
     }
@@ -222,39 +168,24 @@
   }
 
   function normalizedName(){
-    return (nameInput.value || '').replace(/\r\n?/g, '\n').trim().split('\n').map(function(line){
-      return line.trim().replace(/[^\S\n]+/g, ' ');
-    }).join('\n');
+    return (nameInput.value || '').trim().replace(/\s+/g,' ');
   }
 
   function drawName(){
     var text = normalizedName();
     if (!text) return;
 
-    var lines = text.split('\n');
-    // Dùng cùng cỡ chữ cho các dòng; chỉ thu nhỏ nếu dòng dài nhất vượt khung.
-    var requestedSize = nameSizeInput ? Number(nameSizeInput.value) : CONFIG.name.fontSize;
-    var fontSize = Math.max(CONFIG.name.minFontSize, requestedSize) * renderScale;
+    // Cỡ chữ do khách chọn phải có tác dụng trực tiếp.
+    // Không tự co chữ ở đây vì việc auto-fit trước đây khiến kéo thanh lên
+    // nhưng chữ dài vẫn bị ép về cùng một cỡ, trông như thanh không hoạt động.
+    var requestedSize = nameSizeInput ? Number(nameSizeInput.value) : NAME.fontSize;
+    var fontSize = Math.max(NAME.minFontSize, requestedSize);
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = CONFIG.name.color;
+    ctx.fillStyle = '#432817';
     ctx.font = '700 ' + fontSize + 'px Montserrat, Arial, Helvetica, sans-serif';
-    // Co nhẹ chỉ khi tên vượt quá vùng dành cho tên trên dải ruy băng.
-    var maxTextWidth = CONFIG.name.maxWidth * (canvas.width / 1536);
-    var measuredWidth = Math.max.apply(null, lines.map(function(line){
-      return ctx.measureText(line).width;
-    }));
-    if (measuredWidth > maxTextWidth) {
-      fontSize *= maxTextWidth / measuredWidth;
-      ctx.font = '700 ' + fontSize + 'px Montserrat, Arial, Helvetica, sans-serif';
-    }
-    var lineHeight = fontSize * 1.25;
-    var centerY = NAME.y + (nameHeightInput ? Number(nameHeightInput.value) || 0 : 0) * (canvas.height / 2048);
-    var firstY = centerY - (lines.length - 1) * lineHeight / 2;
-    lines.forEach(function(line, index){
-      ctx.fillText(line, NAME.x, firstY + index * lineHeight);
-    });
+    ctx.fillText(text, NAME.x, NAME.y);
     return fontSize;
   }
 
@@ -266,12 +197,8 @@
     state.baseScale = Math.max(HOLE.w / guest.naturalWidth, HOLE.h / guest.naturalHeight) * 1.08;
     state.zoom = 1;
     state.rotation = 0;
-    state.brightness = 1;
-    state.contrast = 1;
     zoomInput.value = '100';
     rotateInput.value = '0';
-    brightnessInput.value = '100';
-    contrastInput.value = '100';
     updateOutputs();
     draw();
   }
@@ -279,8 +206,6 @@
   function updateOutputs(){
     zoomValue.textContent = Math.round(state.zoom * 100) + '%';
     rotateValue.textContent = Math.round(state.rotation) + '°';
-    brightnessValue.textContent = Math.round(state.brightness * 100) + '%';
-    contrastValue.textContent = Math.round(state.contrast * 100) + '%';
   }
 
   function setBgProgress(percent, label){
@@ -545,26 +470,11 @@
       if (nameSizeValue) nameSizeValue.textContent = Math.round(Number(this.value)) + ' px';
       draw();
     });
-    if (nameSizeMinus) nameSizeMinus.addEventListener('click', function(){ changeNameSize(-1); });
-    if (nameSizePlus) nameSizePlus.addEventListener('click', function(){ changeNameSize(1); });
+    if (nameSizeMinus) nameSizeMinus.addEventListener('click', function(){ changeNameSize(-2); });
+    if (nameSizePlus) nameSizePlus.addEventListener('click', function(){ changeNameSize(2); });
   }
   zoomInput.addEventListener('input', function(){ state.zoom = Number(this.value)/100; updateOutputs(); draw(); });
   rotateInput.addEventListener('input', function(){ state.rotation = Number(this.value); updateOutputs(); draw(); });
-  brightnessInput.addEventListener('input', function(){ state.brightness = Number(this.value)/100; updateOutputs(); draw(); });
-  contrastInput.addEventListener('input', function(){ state.contrast = Number(this.value)/100; updateOutputs(); draw(); });
-  function addStepButtons(input, amount){
-    ['minus', 'plus'].forEach(function(direction){
-      document.getElementById(input.id + '-' + direction).addEventListener('click', function(){
-        var change = direction === 'plus' ? amount : -amount;
-        input.value = String(Math.max(Number(input.min), Math.min(Number(input.max), Number(input.value) + change)));
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-      });
-    });
-  }
-  addStepButtons(zoomInput, 1);
-  addStepButtons(rotateInput, 1);
-  addStepButtons(brightnessInput, 1);
-  addStepButtons(contrastInput, 1);
   resetBtn.addEventListener('click', function(){ resetTransform(); setStatus('Đã đưa ảnh về vị trí ban đầu.'); });
 
   downloadBtn.addEventListener('click', function(){

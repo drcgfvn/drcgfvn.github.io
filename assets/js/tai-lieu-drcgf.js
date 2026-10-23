@@ -150,7 +150,7 @@
     body.classList.remove('drcgf-viewer-scroll-locked');
     body.style.cssText=drcgfScrollLock.bodyCssText;
     html.style.cssText=drcgfScrollLock.htmlCssText;
-    window.scrollTo(0,y);
+    window.scrollTo({top:y,left:0,behavior:'instant'});
   }
 
   var lightboxState={items:[],index:0};
