@@ -390,15 +390,19 @@
     }
   }, true);
 
+  // Route static-site search directly; bypass legacy theme/WordPress AJAX handlers.
   document.addEventListener("submit", function (event) {
-    var form = event.target.closest("#main-menu form.searchform, #search-lightbox form.searchform");
+    var form = event.target.closest("#header form.searchform, #main-menu form.searchform, #search-lightbox form.searchform");
     if (!form) return;
-    var input = form.querySelector('input[name="q"]');
-    if (input && !input.value.trim()) {
-      event.preventDefault();
-      input.focus();
-    }
-  });
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    var input = form.querySelector('input[name="q"],input[name="s"]');
+    var query = input ? input.value.trim() : "";
+    if (!query) { if(input) input.focus(); return; }
+    var destination = new URL("tim-kiem/index.html", siteRoot);
+    destination.searchParams.set("q", query);
+    window.location.assign(destination.href);
+  }, true);
 
 
   var lastTopActivation = 0;
