@@ -57,3 +57,5 @@ Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham
 Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
 
 Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.

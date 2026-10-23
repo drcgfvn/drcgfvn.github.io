@@ -316,3 +316,9 @@ body #main .drcgf-related-news ul>li>a:before{display:none!important;content:non
 .drcgf-resource-dock button:hover{background:#dceeff}
 body.drcgf-resources-page #footer{padding-bottom:100px}
 @media(max-width:549px){.drcgf-resource-dock{bottom:10px;padding:9px;gap:7px}.drcgf-resource-dock button{padding:0 10px;font-size:12px}}
+
+/* Invitation controls: override theme button spacing, retain readable labels. */
+body.drcgf-invite-page #main :is(.invite-bg-tools,.invite-actions) .drcgf-action-button{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;height:auto!important;min-height:46px!important;padding:12px 14px!important;margin:0!important;line-height:1.4!important;letter-spacing:0!important;font-size:14px!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important;text-align:center!important;box-sizing:border-box!important;border-radius:10px!important}
+body.drcgf-invite-page #main .invite-bg-tools{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+body.drcgf-invite-page #main .invite-bg-tools button:disabled{background:#dceaf8!important;color:#537a9d!important;border-color:#c8ddf1!important;box-shadow:none!important;opacity:1!important}
+@media(max-width:379px){body.drcgf-invite-page #main .invite-bg-tools{grid-template-columns:1fr!important}}
