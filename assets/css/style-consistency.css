@@ -358,3 +358,10 @@ body.drcgf-resources-page .drcgf-resource-dock button{max-width:72px!important;p
 
 .drcgf-resource-dock:is(:hover,:focus-within,:active){opacity:.9}
 @media(max-width:549px){body.drcgf-resources-page .drcgf-resource-dock{opacity:.9!important}}
+
+/* Reserve the mobile header before scripts initialize; no entrance motion. */
+#drcgf-fixed-header-space{height:0;min-height:0}
+@media(max-width:884px){#drcgf-fixed-header-space{height:70px;min-height:70px}}
+body #header,body #header .header-wrapper{animation:none!important;transition:none!important}
+
+@media(max-width:884px){body #header a[data-open="#search-lightbox"],body #header a[data-open="#search-lightbox"] .icon-search{color:#1769ce!important}}
