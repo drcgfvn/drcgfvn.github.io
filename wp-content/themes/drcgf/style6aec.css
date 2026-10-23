@@ -167,7 +167,7 @@ select,
   line-height: 150%;
   padding: 0;
   line-height: 56px;
-  color: #585858;
+  color: #44698e;
 }
 .header-bottom .nav .sub-menu > li > a {
   font-size: 15px;
@@ -224,8 +224,8 @@ select,
   top: 0px;
   left: calc(100% + 1px);
   position: absolute;
-  -webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
-  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 1px 1px 15px rgba(15, 66, 117, 0.15);
+  box-shadow: 1px 1px 15px rgba(15, 66, 117, 0.15);
   z-index: 99999;
   opacity: 0;
   visibility: hidden;
@@ -258,7 +258,7 @@ select,
 .nav-click::after,
 .nav-click::before {
   content: "";
-  background-color: #000;
+  background-color: #153e68;
   position: absolute;
   height: 2px;
   transition: all 0.3s ease-in-out;
@@ -354,10 +354,10 @@ select,
 }
 .flatsome_recent_posts .recent-blog-posts {
   padding: 16px 0;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #cbdff2;
 }
 .flatsome_recent_posts .recent-blog-posts-li:last-child .recent-blog-posts {
-  border-bottom: 0 solid #000;
+  border-bottom: 0 solid #153e68;
 }
 .flatsome_recent_posts .recent-blog-posts .badge {
   width: 100%;
@@ -528,7 +528,7 @@ select,
   left: 0;
   width: 100%;
   z-index: 9;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(15, 66, 117, 0.5);
   padding: 10px 10px;
 }
 .sh-blog-shortcode.layout-8 .element .post-title {
@@ -653,13 +653,13 @@ ul.links li {
   width: 40px;
   line-height: 37px;
   background: #fff;
-  border: 1px solid #121212;
+  border: 1px solid #164575;
   font-weight: normal;
 }
 /* Single Post */
 .related-post .related-title,
 .entry-header h1.entry-title {
-  color: var(--primary-1, #121212);
+  color: var(--primary-1, #164575);
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -759,7 +759,7 @@ ul.links li {
 }
 .absolute-footer {
   padding: 10px 0 10px;
-  box-shadow: 0px -4px 15px 0px #000;
+  box-shadow: 0px -4px 15px 0px #153e68;
   z-index: 1;
   position: relative;
   font-size: 14px;
@@ -785,11 +785,11 @@ ul.links li {
 ## Custom Css 
 --------------------------------------------------------------*/
 .header-main {
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #cbdff2;
 }
 .header-bottom {
   background: #fff;
-  box-shadow: 0px 11px 14px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 11px 14px 0px rgba(15, 66, 117, 0.08);
 }
 .ux-search-box .search-field {
   border-radius: 8px 0 0 8px;
@@ -800,7 +800,7 @@ ul.links li {
   border-radius: 0 8px 8px 0;
   height: 40px;
   border: 0;
-  background: #9b9b9b;
+  background: #2779c9;
 }
 .header-search-form {
   max-width: 265px;
@@ -885,7 +885,7 @@ ul.links li {
   margin-bottom: 0;
 }
 /* .custom-text .custom-headline {
-    color: var(--primary-1, #121212);
+    color: var(--primary-1, #164575);
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
@@ -897,7 +897,7 @@ ul.links li {
 .tpnb .box .box-text {
   padding: 8px;
   border-radius: 4px;
-  background: var(--primary-2, #2f2f2f);
+  background: var(--primary-2, #184e82);
 }
 .tpnb .box .box-text h4 {
   margin: 0;
@@ -925,9 +925,9 @@ ul.links li {
 }
 .custom-column > .col-inner {
   border-radius: 20px;
-  background: #efefef;
+  background: #edf6ff;
   padding: 40px;
-  box-shadow: 0px 7px 19px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 7px 19px 0px rgba(15, 66, 117, 0.15);
 }
 .feedback .icon-box .icon-box-text {
   font-size: 16px;
@@ -966,8 +966,8 @@ ul.links li {
   width: 148px;
   height: 40px;
   border-radius: 4px;
-  background: var(--primary-2, #2f2f2f);
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  background: var(--primary-2, #184e82);
+  box-shadow: 0px 1px 5px 0px rgba(15, 66, 117, 0.25);
 }
 .form-dk > p {
   display: flex;

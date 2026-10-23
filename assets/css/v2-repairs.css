@@ -1,0 +1,62 @@
+/* Focused repairs on the v2 baseline. */
+/* The mobile overlay is never part of the desktop document layout. */
+@media(min-width:885px) {
+ body #drcgf-mobile-backdrop {display:none!important}
+ body #header #wide-nav li.has-dropdown>.nav-dropdown {height:auto!important;max-height:70vh!important;overflow-y:auto!important;z-index:1005!important}
+ body #header #wide-nav li.has-dropdown:hover>.nav-dropdown,
+ body #header #wide-nav li.has-dropdown:focus-within>.nav-dropdown {opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+}
+body #footer {margin-top:0!important;margin-bottom:0!important;padding-bottom:0!important;background:#082648}
+body #top-link.back-to-top {position:fixed!important;right:18px!important;bottom:18px!important;margin:0!important}
+/* Centre icon glyphs as well as their SVG canvas. */
+body #header .list-social>li>a,body #footer .list-social>li>a {display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;box-sizing:border-box!important}
+body #header .list-social>li>a i,body #footer .list-social>li>a i {display:flex!important;align-items:center!important;justify-content:center!important;line-height:1!important;text-align:center!important}
+body #header .list-social>li>a i:before,body #footer .list-social>li>a i:before {line-height:1!important;display:block!important}
+body #header .list-social>li>a svg,body #footer .list-social>li>a svg {display:block!important;flex:none!important;margin:0!important;vertical-align:middle!important}
+/* Remove the extra search ring, keeping the original border. */
+body #header input.search-field:focus,body #main-menu input.search-field:focus {outline:none!important;box-shadow:none!important;border-color:#368ce0!important}
+body #header .ux-search-submit:focus,body #main-menu .ux-search-submit:focus {outline:none!important;box-shadow:none!important}
+/* Use two product columns throughout the phone layout, including search results. */
+@media(max-width:600px) {
+ body #main .catalogue-grid,body #main .drcgf-results-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ body #main .catalogue-container {width:calc(100% - 24px)}
+ body #main .catalogue-card,body #main .drcgf-result-card {min-width:0;border-radius:12px}
+ body #main .catalogue-card__body,body #main .drcgf-result-card__body {padding:12px 10px}
+ body #main .catalogue-card h3,body #main .drcgf-result-card h2 {font-size:13px;line-height:1.45;overflow-wrap:anywhere;margin:8px 0}
+ body #main .catalogue-card__group,body #main .drcgf-result-card__group {font-size:9px;line-height:1.5;letter-spacing:.025em}
+ body #main .catalogue-card__body>p,body #main .drcgf-result-card__vn {font-size:12px}
+ body #main .catalogue-card__body>.catalogue-card__price,body #main .drcgf-result-card__price {font-size:13px;line-height:1.5;white-space:normal}
+ body #main .catalogue-card__image img {inset:10px!important;width:calc(100% - 20px)!important;height:calc(100% - 20px)!important;max-width:calc(100% - 20px)!important;max-height:calc(100% - 20px)!important}
+ body #main .drcgf-result-card__image {padding:10px}
+}
+body #main-menu .nav .sub-menu>li>a,body #main-menu .nav ul.children>li>a {color:#235486!important}
+body #main-menu .nav .sub-menu>li>a:hover,body #main-menu .nav ul.children>li>a:hover {color:#1769ce!important;background:#ddecff!important}
+/* Stable dropdown: identical geometry in every hover/focus state. */
+@media(min-width:885px) {
+ body #header #wide-nav .nav>li.has-dropdown {position:relative!important;transform:none!important;margin:0!important;padding:0!important}
+ body #header #wide-nav .nav>li.has-dropdown>a.nav-top-link,
+ body #header #wide-nav .nav>li.has-dropdown:is(:hover,:focus-within,.current-dropdown)>a.nav-top-link {min-height:40px!important;padding:0 22px!important;border:0!important;line-height:20px!important;font-weight:600!important;border-radius:999px!important;transform:none!important;box-shadow:none!important}
+ body #header #wide-nav .nav>li.has-dropdown>ul.sub-menu.nav-dropdown {position:absolute!important;top:100%!important;left:0!important;right:auto!important;width:320px!important;min-width:0!important;max-width:calc(100vw - 32px)!important;height:auto!important;max-height:65vh!important;margin:0!important;padding:7px!important;box-sizing:border-box!important;background:#fff!important;border:1px solid #d5e6f6!important;border-radius:12px!important;box-shadow:0 12px 30px #1035631a!important;overflow-x:hidden!important;overflow-y:auto!important;transform:none!important;animation:none!important;transition:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;z-index:1005!important}
+ body #header #wide-nav .nav>li.has-dropdown:is(:hover,:focus-within)>ul.sub-menu.nav-dropdown {opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important}
+ body #header #wide-nav .nav>li.has-dropdown:nth-last-child(2)>ul.sub-menu.nav-dropdown {left:auto!important;right:0!important}
+ body #header #wide-nav .nav>li.has-dropdown>ul.sub-menu.nav-dropdown>li {margin:0!important;padding:0!important;border:0!important;transform:none!important}
+ body #header #wide-nav .nav>li.has-dropdown>ul.sub-menu.nav-dropdown>li>a,
+ body #header #wide-nav .nav>li.has-dropdown>ul.sub-menu.nav-dropdown>li>a:is(:hover,:focus-visible) {display:flex!important;align-items:center!important;min-height:42px!important;width:100%!important;margin:0!important;padding:10px 14px!important;box-sizing:border-box!important;border:0!important;border-radius:7px!important;font-size:14px!important;line-height:22px!important;font-weight:500!important;white-space:normal!important;text-indent:0!important;transform:none!important;box-shadow:none!important;transition:color .15s,background-color .15s!important}
+ body #header #wide-nav .nav>li.has-dropdown>ul.sub-menu.nav-dropdown>li>a {color:#235486!important;background:#fff!important}
+ body #header #wide-nav .nav>li.has-dropdown>ul.sub-menu.nav-dropdown>li>a:is(:hover,:focus-visible) {background:#eaf4ff!important;color:#1267c5!important}
+ body #header #wide-nav .nav>li.has-dropdown>a.nav-top-link>i,
+ body #header #wide-nav .nav>li.has-dropdown:hover>a.nav-top-link>i {transform:none!important;transition:none!important}
+}
+/* Mobile submenu: a compact inset list, with a dedicated toggle target. */
+@media(max-width:884px) {
+ body #main-menu .nav-sidebar>li.menu-item-has-children {position:relative!important}
+ body #main-menu .nav-sidebar>li.menu-item-has-children>a {padding-right:58px!important;border-radius:10px!important;font-size:14px!important}
+ body #main-menu .nav-sidebar>li.menu-item-has-children.drcgf-submenu-open>a {background:#eaf4ff!important;color:#1769ce!important}
+ body #main-menu .nav-sidebar>li.menu-item-has-children>.drcgf-submenu-toggle {top:6px!important;right:6px!important;width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;margin:0!important;padding:0!important;background:#f0f7ff!important;border:1px solid #d9eafa!important;border-radius:10px!important;box-shadow:none!important;color:#1769ce!important}
+ body #main-menu .nav-sidebar>li.menu-item-has-children>.sub-menu {width:calc(100% - 12px)!important;margin:6px 0 12px 6px!important;padding:4px!important;background:#f5faff!important;border:1px solid #e0edfa!important;border-left:3px solid #91c2ef!important;border-radius:0 10px 10px 0!important;box-sizing:border-box!important}
+ body #main-menu .nav-sidebar>li.menu-item-has-children>.sub-menu>li {margin:0!important;padding:0!important;border:0!important}
+ body #main-menu .nav-sidebar>li.menu-item-has-children>.sub-menu>li>a {display:block!important;min-height:42px!important;margin:0!important;padding:10px 12px!important;border:0!important;border-radius:6px!important;line-height:22px!important;font-size:14px!important;font-weight:500!important;color:#235486!important;white-space:normal!important;text-indent:0!important;transform:none!important;box-shadow:none!important;box-sizing:border-box!important}
+ body #main-menu .nav-sidebar>li.menu-item-has-children>.sub-menu>li>a:is(:hover,:focus-visible) {background:#e5f1ff!important;color:#1769ce!important}
+}
+/* Zoom is controlled independently of the selected class, so fade-out never resets it. */
+#slider-247421510 .drcgf-slide-desktop {animation:none!important}

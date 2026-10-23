@@ -1,0 +1,59 @@
+﻿CẬP NHẬT INPUT: Các ô nhập, textarea, select và ô tìm kiếm chỉ đổi màu viền sẵn có khi focus. Không outline/box-shadow bao ngoài.
+
+CẬP NHẬT HOTLINE: Đã sửa nháy sáng khi hover bằng nền màu đơn ở cả hai trạng thái; chữ hover trắng. Không còn chuyển gradient hoặc đổ bóng cho nút này.
+
+CẬP NHẬT: Đã gỡ hoàn toàn thanh tiến độ cuộn ở đầu website trên mọi trang.
+
+DR.CGF — DANH MỤC DÙNG CHUNG THẺ SẢN PHẨM
+
+- 7 nhóm danh mục dùng bố cục giống trang Sản phẩm: cùng thẻ ảnh/tên/dung tích/giá.
+- Bỏ thanh bên, thay bằng dãy nút chọn nhóm giống trang sản phẩm và mobile.
+- Bỏ nút Xem chi tiết trong từng thẻ.
+- Mỗi thẻ là một liên kết duy nhất, bấm được cả ảnh, chữ, giá và khoảng trống.
+- Áp dụng vùng bấm toàn thẻ cho trang chủ, trang Sản phẩm, nhóm danh mục và tìm kiếm.
+- Hỗ trợ Enter, Ctrl/Cmd-click và mở tab mới bằng hành vi liên kết mặc định.
+- Giữ 2 cột trên điện thoại; tên/ảnh/dung tích/giá lấy từ cùng dữ liệu sản phẩm.
+- Giữ địa chỉ mới, CSS menu, footer, breadcrumb và zoom slide của bản trước.
+
+CÁCH DÙNG
+Giải nén vào thư mục mới. Nếu có Python, chạy START-PREVIEW.cmd rồi mở
+http://127.0.0.1:8080 . Website dùng fetch nên cần HTTP cho menu/footer.
+Khi tải hosting, giữ đủ cấu trúc tệp, xóa cache nếu có rồi Ctrl+F5.
+Chưa thay đổi website đang hoạt động.
+
+KIỂM TRA
+- 62 trang và 80 URL tài nguyên trực tiếp trả HTTP 200.
+- 48 thẻ tĩnh có đúng một liên kết, không liên kết lồng nhau; dữ liệu đúng theo JSON.
+- Giữ nguyên thành viên và thứ tự sản phẩm trong 7 nhóm danh mục.
+- Bấm khoảng trống dưới giá mở đúng trang chi tiết.
+- Thử Enter trên thẻ tìm kiếm mở đúng trang sản phẩm.
+- Kiểm tra mobile 390px: 2 cột, không tràn ngang.
+- Mã menu, footer và zoom slide giữ nguyên từng byte so với bản trước.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.
+
+Cap nhat: the thanh phan va tin tuc bam duoc toan khung; bo outline the san pham; menu mobile accordion; dropdown PC cach 10px co vung noi hover; so cong bo khong nen.

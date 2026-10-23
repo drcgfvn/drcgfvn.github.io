@@ -117,13 +117,13 @@
 }
 
 #header .header-wrapper.stuck {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 4px 16px rgba(15, 66, 117, 0.12) !important;
 }
 
 /* Đường phân cách nhẹ phía dưới menu chính. */
 #header #wide-nav {
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #eeeeee;
+  border-top: 1px solid #e8f2fc;
+  border-bottom: 1px solid #e8f2fc;
 }
 
 /* Màu chữ rõ trên nền trắng ở cả trạng thái thường và sticky. */
@@ -134,7 +134,7 @@
 #header .header-wrapper.stuck .nav > li > a,
 #header .header-wrapper.stuck .html,
 #header .header-wrapper.stuck .custom-text-head {
-  color: #333333 !important;
+  color: #234e78 !important;
 }
 
 /* Menu con desktop. */
@@ -233,7 +233,7 @@
     overflow: hidden !important;
     transform: translate3d(-104%, 0, 0) !important;
     transition: transform .26s ease, opacity .2s ease, visibility 0s linear .26s !important;
-    box-shadow: 12px 0 32px rgba(0, 0, 0, .18) !important;
+    box-shadow: 12px 0 32px rgba(15, 66, 117, .18) !important;
     pointer-events: none !important;
   }
 
@@ -400,7 +400,7 @@
     transform: translate3d(-50%, -18px, 0) scale(.98) !important;
     transition: transform .22s ease, opacity .2s ease, visibility 0s linear .22s !important;
     pointer-events: none !important;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, .24);
+    box-shadow: 0 24px 60px rgba(15, 66, 117, .24);
   }
 
   #search-lightbox.drcgf-mobile-panel-open {
@@ -714,9 +714,9 @@
     min-height: 42px !important;
     padding: 0 !important;
     z-index: 9999 !important;
-    color: #777 !important;
+    color: #52769a !important;
     background: transparent !important;
-    border-color: #777 !important;
+    border-color: #52769a !important;
     box-shadow: none !important;
     -webkit-tap-highlight-color: transparent;
     opacity: 0 !important;
@@ -1077,7 +1077,7 @@
     overflow: hidden !important;
     transform: translate3d(-104%, 0, 0) !important;
     transition: transform .26s ease, opacity .2s ease, visibility 0s linear .26s !important;
-    box-shadow: 12px 0 32px rgba(0, 0, 0, .18) !important;
+    box-shadow: 12px 0 32px rgba(15, 66, 117, .18) !important;
     pointer-events: none !important;
   }
 
@@ -1123,7 +1123,7 @@
     transform: translate3d(-50%, -18px, 0) scale(.98) !important;
     transition: transform .22s ease, opacity .2s ease, visibility 0s linear .22s !important;
     pointer-events: none !important;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, .24) !important;
+    box-shadow: 0 24px 60px rgba(15, 66, 117, .24) !important;
   }
 
   #search-lightbox.drcgf-mobile-panel-open {

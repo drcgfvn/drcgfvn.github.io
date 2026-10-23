@@ -1,0 +1,7 @@
+FLECHAZO — GIAO DIỆN XANH LÁ HÀN QUỐC — 20/10/2026
+
+Giải nén và upload toàn bộ nội dung vào repository GitHub hiện đang kết nối Cloudflare. index.html phải nằm ngay ở gốc repository. Commit changes để Cloudflare triển khai bản mới. Không cần thay DNS hoặc tên miền.
+
+Đã thêm green-refresh.css; sửa index.html và dấu cộng SVG trong app.js. Các file ảnh, sản phẩm và bản dịch giữ theo ZIP cung cấp.
+
+Đã kiểm tra cú pháp JS, dựng nội dung 27 tổ hợp trang/ngôn ngữ, cửa sổ chọn số lượng và tổng giỏ hàng. Chưa kiểm tra trực quan bằng trình duyệt.

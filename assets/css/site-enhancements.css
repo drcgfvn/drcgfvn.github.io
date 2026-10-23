@@ -123,7 +123,7 @@
   border-radius: 7px;
   min-height: 48px;
   padding: 0 24px;
-  background: #121212;
+  background: #164575;
   color: #fff !important;
   font-weight: 700;
   cursor: pointer;
@@ -285,11 +285,11 @@ body.drcgf-contact-page .drcgf-contact-heading .section-title-container {
 }
 body.drcgf-contact-page .drcgf-contact-heading .section-title {
   margin: 0;
-  color: #121212;
+  color: #164575;
 }
 body.drcgf-contact-page .drcgf-contact-heading .section-title-main {
   border: 0;
-  color: #121212;
+  color: #164575;
   font-size: clamp(25px, 3vw, 34px);
   font-weight: 700;
   letter-spacing: .01em;
@@ -297,40 +297,40 @@ body.drcgf-contact-page .drcgf-contact-heading .section-title-main {
   text-transform: uppercase;
 }
 body.drcgf-contact-page .drcgf-contact-heading .section-title b {
-  background-color: #d8d8d8;
+  background-color: #cbdff2;
   height: 1px;
   opacity: 1;
 }
 body.drcgf-contact-page .drcgf-contact-heading p {
-  color: #555;
+  color: #44698e;
   font-size: 16px;
   margin: 0 auto;
   max-width: 760px;
 }
 body.drcgf-contact-page .drcgf-panel {
-  border: 1px solid #e3e3e3;
+  border: 1px solid #d9e8f7;
   border-radius: 4px;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, .06);
+  box-shadow: 0 6px 22px rgba(15, 66, 117, .06);
 }
 body.drcgf-contact-page .drcgf-contact-form label,
 body.drcgf-contact-page .drcgf-contact-card strong {
-  color: #222;
+  color: #163f6b;
 }
 body.drcgf-contact-page .drcgf-contact-form input,
 body.drcgf-contact-page .drcgf-contact-form select,
 body.drcgf-contact-page .drcgf-contact-form textarea {
-  border-color: #d7d7d7;
+  border-color: #cbdff2;
   border-radius: 3px;
 }
 body.drcgf-contact-page .drcgf-contact-form input:focus,
 body.drcgf-contact-page .drcgf-contact-form select:focus,
 body.drcgf-contact-page .drcgf-contact-form textarea:focus {
-  border-color: #121212;
-  box-shadow: 0 0 0 2px rgba(18, 18, 18, .08);
+  border-color: #164575;
+  box-shadow: 0 0 0 2px rgba(15, 66, 117, .08);
 }
 body.drcgf-contact-page .drcgf-action-button {
-  background: #121212;
-  border: 1px solid #121212;
+  background: #164575;
+  border: 1px solid #164575;
   border-radius: 3px;
   color: #fff !important;
   transition: background-color .18s ease, border-color .18s ease, color .18s ease;
@@ -341,21 +341,21 @@ body.drcgf-contact-page .drcgf-action-button:hover {
 }
 body.drcgf-contact-page .drcgf-action-button--outline {
   background: #fff;
-  border-color: #121212;
-  color: #121212 !important;
+  border-color: #164575;
+  color: #164575 !important;
 }
 body.drcgf-contact-page .drcgf-action-button--outline:hover {
-  background: #121212;
-  border-color: #121212;
+  background: #164575;
+  border-color: #164575;
   color: #fff !important;
 }
 body.drcgf-contact-page .drcgf-contact-card h2 {
-  color: #121212;
+  color: #164575;
   font-size: 22px;
   text-transform: uppercase;
 }
 body.drcgf-contact-page .drcgf-form-note {
-  color: #000000 !important;
+  color: #153e68 !important;
   font-weight: 400;
 }
 @media (max-width: 560px) {

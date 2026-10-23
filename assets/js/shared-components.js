@@ -5,7 +5,7 @@
   var siteRoot = new URL("/", window.location.origin);
   var mobileMedia = window.matchMedia("(max-width: 884px)");
 
-  ensureStylesheet("drcgf-site-enhancements", "assets/css/site-enhancements.css?v=20260729-menu885");
+  ensureStylesheet("drcgf-site-enhancements", "assets/css/site-enhancements.css?v=20261023-v2r1");
 
   function ensureStylesheet(id, relativePath) {
     if (document.getElementById(id)) return;
@@ -67,7 +67,27 @@
           slot.remove();
         });
 
-        if (componentName === "menumain") scheduleMobileSetup();
+        if (componentName === "menumain") {
+          scheduleMobileSetup();
+          var currentPath = window.location.pathname.replace(/index\.html$/, "").replace(/\/$/, "");
+          var navItems = document.querySelectorAll("#wide-nav .nav > li");
+          var bestItem = null, bestLength = -1;
+          Array.prototype.forEach.call(navItems, function (item) {
+            item.classList.remove("current-menu-item", "current-menu-ancestor");
+            var anchor = item.querySelector("a.nav-top-link");
+            if (!anchor) return;
+            anchor.removeAttribute("aria-current");
+            var path = new URL(anchor.href).pathname.replace(/index\.html$/, "").replace(/\/$/, "");
+            var match = currentPath === path || (path && currentPath.indexOf(path + "/") === 0);
+            if (path === "/san-pham" && currentPath.indexOf("/danh-muc-san-pham") === 0) match = true;
+            if (path === "/category/tin-tuc" && (/^\/(tin-tuc|tai-lieu)/).test(currentPath)) match = true;
+            if (match && path.length > bestLength) {bestItem = item; bestLength = path.length;}
+          });
+          if (bestItem) {
+            bestItem.classList.add("current-menu-item");
+            bestItem.querySelector("a.nav-top-link").setAttribute("aria-current", "page");
+          }
+        }
         if (componentName === "footermain") {
           setupSharedBackToTop();
           syncMobileBackToTop();
@@ -356,8 +376,16 @@
     var submenuButton = event.target.closest(".drcgf-submenu-toggle");
     if (submenuButton) {
       event.preventDefault();
+      event.stopImmediatePropagation();
       var item = submenuButton.parentElement;
-      var isOpen = item.classList.toggle("drcgf-submenu-open");
+      var wasOpen = item.classList.contains("drcgf-submenu-open");
+      Array.prototype.forEach.call(item.parentElement.children, function (sibling) {
+        sibling.classList.remove("drcgf-submenu-open");
+        var toggle = sibling.querySelector(".drcgf-submenu-toggle");
+        if (toggle) toggle.setAttribute("aria-expanded", "false");
+      });
+      var isOpen = !wasOpen;
+      item.classList.toggle("drcgf-submenu-open", isOpen);
       submenuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
     }
   }, true);
