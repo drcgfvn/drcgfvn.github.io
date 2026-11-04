@@ -1,5 +1,31 @@
 [
   {
+    "slug": "dr-cgf-nano-bubble-detox-mask",
+    "name": "DR.CGF NANO BUBBLE DETOX MASK",
+    "vn": "Mặt nạ Detox DR.CGF",
+    "price": "890.000 VNĐ",
+    "size": "100 g",
+    "image": "dr-cgf-nano-bubble-detox-mask.png",
+    "group": "Mặt nạ",
+    "skin": "Da dầu, da hỗn hợp, da thường.",
+    "benefits": [
+      "Mặt nạ giúp làm sạch da, hỗ trợ dưỡng ẩm da, cho da sạch và mịn màng.",
+      "Công thức mặt nạ bọt khí kết hợp than hoạt tính giúp làm sạch bụi bẩn, dầu thừa và tạp chất trên bề mặt da.",
+      "Glycerin cùng chiết xuất rau má, trà xanh và hoa cúc hỗ trợ dưỡng ẩm, mang lại làn da mềm mại, sạch thoáng."
+    ],
+    "ingredients": [
+      "Glycerin",
+      "Charcoal Powder",
+      "Gluconolactone (PHA)",
+      "Fulvic Acid",
+      "Centella Asiatica Extract",
+      "Camellia Sinensis Leaf Extract",
+      "Chamomilla Recutita (Matricaria) Flower Extract"
+    ],
+    "usage": "Làm sạch và lau khô da mặt. Thoa một lớp mặt nạ vừa đủ lên da, tránh vùng mắt và môi. Đợi mặt nạ tạo bọt, massage nhẹ nhàng rồi rửa sạch với nước.",
+    "notification": "338296/26/CBMP-QLD"
+  },
+  {
     "slug": "dr-cgf-micellar-clinisoft-cleansing-water",
     "name": "DR.CGF MICELLAR CLINISOFT CLEANSING WATER",
     "vn": "Nước tẩy trang Micellar DR.CGF",

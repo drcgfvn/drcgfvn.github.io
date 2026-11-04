@@ -1538,7 +1538,7 @@
         '<p>' + escapeHtml(product.size) + '</p><p class="drcgf-result-card__price">' + escapeHtml(product.price) + '</p></div></a></article>';
     }).join("");
   }
-  fetch("../assets/js/product-data.json", {cache: "no-store"})
+  fetch("../assets/js/product-data.json?v=20261104-detox", {cache: "no-store"})
     .then(function (response) { if (!response.ok) throw new Error("Không tải được dữ liệu"); return response.json(); })
     .then(render)
     .catch(function () {
