@@ -461,3 +461,48 @@ body #main .catalogue-card__body>.catalogue-card__group{font-size:13px!important
 @media(max-width:549px){body #main .catalogue-card__body>.catalogue-card__group{font-size:12px!important}}
 
 body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has-dropdown>a.nav-top-link,body #header #wide-nav .nav>li.has-dropdown:is(:hover,:focus-within,.current-dropdown,.current-menu-item)>a.nav-top-link,body #main-menu .nav-sidebar>li>a{text-transform:uppercase!important}
+
+/* A brief light sweep that does not move the logo, images or buttons. */
+@media (prefers-reduced-motion: no-preference) {
+  #header #logo > a,
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.drcgf-action-button,.button.primary),
+  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"] {
+    position: relative;
+    overflow: hidden;
+  }
+  #main .product-verified__image {overflow:hidden}
+  #header #logo > a::after,
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image,.drcgf-action-button,.button.primary)::after,
+  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"]::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    border-radius:inherit;
+    pointer-events:none;
+    opacity:0;
+    background:linear-gradient(112deg,transparent 32%,rgba(130,198,251,.18) 43%,rgba(255,255,255,.66) 50%,rgba(130,198,251,.18) 57%,transparent 68%);
+    background-size:235% 100%;
+    background-position:100% 0;
+  }
+  #header #logo > a::after {animation:drcgf-shine-sweep 1.15s .45s both}
+  #main .catalogue-card__link:is(:hover,:focus-visible,:active) .catalogue-card__image::after,
+  #main .drcgf-result-card__link:is(:hover,:focus-visible,:active) .drcgf-result-card__image::after,
+  #main .product-verified__image:hover::after,
+  #main :is(.drcgf-action-button,.button.primary):not(:disabled):is(:hover,:focus-visible,:active)::after,
+  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"]:is(:hover,:focus-visible)::before {
+    animation:drcgf-shine-sweep 1.05s ease-in-out both;
+  }
+  @media (max-width:900px) {
+    #main .product-verified__image {position:relative}
+  }
+  @media (hover:none) {
+    #main .catalogue-grid > .catalogue-card:first-child.blue-reveal .catalogue-card__image::after,
+    #main .product-verified__image.blue-reveal::after {animation:drcgf-shine-sweep 1.15s .25s both}
+  }
+}
+@keyframes drcgf-shine-sweep {
+  0% {background-position:100% 0;opacity:0}
+  18%,78% {opacity:1}
+  100% {background-position:0 0;opacity:0}
+}
