@@ -465,15 +465,13 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
 /* A brief light sweep that does not move the logo, images or buttons. */
 @media (prefers-reduced-motion: no-preference) {
   #header #logo > a,
-  #main :is(.catalogue-card__image,.drcgf-result-card__image,.drcgf-action-button,.button.primary),
-  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"] {
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.drcgf-action-button,.button.primary) {
     position: relative;
     overflow: hidden;
   }
   #main .product-verified__image {overflow:hidden}
   #header #logo > a::after,
-  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image,.drcgf-action-button,.button.primary)::after,
-  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"]::before {
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image,.drcgf-action-button,.button.primary)::after {
     content:"";
     position:absolute;
     inset:0;
@@ -487,8 +485,7 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
   }
   #header #logo > a::after,
   #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image)::after,
-  #main :is(.drcgf-action-button,.button.primary):not(:disabled)::after,
-  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"]::before {
+  #main :is(.drcgf-action-button,.button.primary):not(:disabled)::after {
     animation:drcgf-shine-sweep 7s ease-in-out infinite;
     animation-delay:var(--drcgf-shine-delay,.45s);
   }
@@ -497,11 +494,12 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
     -webkit-mask:url("../images/logo.png") center / contain no-repeat;
     mask:url("../images/logo.png") center / contain no-repeat;
     mask-mode:alpha;
+    animation-name:drcgf-logo-shine;
+    background-image:linear-gradient(112deg,transparent 27%,rgba(159,218,255,.32) 40%,rgba(255,255,255,.9) 50%,rgba(159,218,255,.32) 60%,transparent 73%);
   }
   #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image) {--drcgf-shine-delay:1.9s}
   #main :is(.catalogue-card,.drcgf-result-card):nth-child(even) :is(.catalogue-card__image,.drcgf-result-card__image) {--drcgf-shine-delay:2.6s}
-  #main :is(.drcgf-action-button,.button.primary),
-  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"] {--drcgf-shine-delay:3.8s}
+  #main :is(.drcgf-action-button,.button.primary) {--drcgf-shine-delay:3.8s}
   @media (max-width:900px) {
     #main .product-verified__image {position:relative}
   }
@@ -510,4 +508,10 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
   0% {background-position:100% 0;opacity:0}
   3%,12% {opacity:1}
   16%,100% {background-position:0 0;opacity:0}
+}
+
+@keyframes drcgf-logo-shine {
+  0% {background-position:100% 0;opacity:0}
+  6%,24% {opacity:1}
+  32%,100% {background-position:0 0;opacity:0}
 }
