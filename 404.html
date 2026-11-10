@@ -460,12 +460,28 @@
 <!-- Mobile Left Elements -->
 <div class="flex-col show-for-medium flex-left">
 <ul class="mobile-nav nav nav-left">
-<li class="nav-icon has-icon">
-<a aria-controls="main-menu" aria-expanded="false" aria-label="Menu" class="is-small" data-bg="/main-menu-overlay" data-color="" data-open="#main-menu" data-pos="left" href="#">
-<div class="nav-click">
-<span></span>
+<li class="header-search header-search-lightbox has-icon">
+<a aria-label="Tìm kiếm" class="is-small" data-focus="input.search-field" data-open="#search-lightbox" href="#search-lightbox">
+<i class="icon-search" style="font-size: 16px"></i></a>
+<div class="mfp-hide dark text-center" id="search-lightbox">
+<div class="searchform-wrapper ux-search-box relative is-large">
+<form action="/tim-kiem/index.html" class="searchform" method="get" role="search">
+<div class="flex-row relative">
+<div class="flex-col flex-grow">
+<label class="screen-reader-text" for="woocommerce-product-search-field-1">Tìm kiếm:</label>
+<input class="search-field mb-0" id="woocommerce-product-search-field-1" name="q" placeholder="Tìm kiếm…" type="search" value=""/>
+<input name="post_type" type="hidden" value="product"/>
 </div>
-</a>
+<div class="flex-col">
+<button aria-label="Gửi đi" class="ux-search-submit submit-button secondary button icon mb-0" type="submit" value="Tìm kiếm">
+<i class="icon-search"></i>
+</button>
+</div>
+</div>
+<div class="live-search-results text-left z-top"></div>
+</form>
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -524,28 +540,12 @@
 <!-- Mobile Right Elements -->
 <div class="flex-col show-for-medium flex-right">
 <ul class="mobile-nav nav nav-right">
-<li class="header-search header-search-lightbox has-icon">
-<a aria-label="Tìm kiếm" class="is-small" data-focus="input.search-field" data-open="#search-lightbox" href="#search-lightbox">
-<i class="icon-search" style="font-size: 16px"></i></a>
-<div class="mfp-hide dark text-center" id="search-lightbox">
-<div class="searchform-wrapper ux-search-box relative is-large">
-<form action="/tim-kiem/index.html" class="searchform" method="get" role="search">
-<div class="flex-row relative">
-<div class="flex-col flex-grow">
-<label class="screen-reader-text" for="woocommerce-product-search-field-1">Tìm kiếm:</label>
-<input class="search-field mb-0" id="woocommerce-product-search-field-1" name="q" placeholder="Tìm kiếm…" type="search" value=""/>
-<input name="post_type" type="hidden" value="product"/>
+<li class="nav-icon has-icon">
+<a aria-controls="main-menu" aria-expanded="false" aria-label="Menu" class="is-small" data-bg="/main-menu-overlay" data-color="" data-open="#main-menu" data-pos="left" href="#">
+<div class="nav-click">
+<span></span>
 </div>
-<div class="flex-col">
-<button aria-label="Gửi đi" class="ux-search-submit submit-button secondary button icon mb-0" type="submit" value="Tìm kiếm">
-<i class="icon-search"></i>
-</button>
-</div>
-</div>
-<div class="live-search-results text-left z-top"></div>
-</form>
-</div>
-</div>
+</a>
 </li>
 </ul>
 </div>
