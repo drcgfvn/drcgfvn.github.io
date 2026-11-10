@@ -471,7 +471,8 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
   }
   #main .product-verified__image {overflow:hidden}
   #header #logo > a::after,
-  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image,.drcgf-action-button,.button.primary)::after {
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image).has-product-shine::after,
+  #main :is(.drcgf-action-button,.button.primary)::after {
     content:"";
     position:absolute;
     inset:0;
@@ -484,11 +485,24 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
     background-position:100% 0;
   }
   #header #logo > a::after,
-  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image)::after,
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image).has-product-shine::after,
   #main :is(.drcgf-action-button,.button.primary):not(:disabled)::after {
     animation:drcgf-shine-sweep 7s ease-in-out infinite;
     animation-delay:var(--drcgf-shine-delay,.45s);
   }
+  /* Match the image box, then clip to the PNG's opaque pixels. */
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image).has-product-shine::after {
+    inset:auto;
+    left:var(--drcgf-image-left);
+    top:var(--drcgf-image-top);
+    width:var(--drcgf-image-width);
+    height:var(--drcgf-image-height);
+    -webkit-mask:var(--drcgf-image-mask) center / contain no-repeat;
+    mask:var(--drcgf-image-mask) center / contain no-repeat;
+    mask-mode:alpha;
+  }
+  #main .catalogue-card__image.has-product-shine::after {transition:transform .7s var(--ease)}
+  #main .catalogue-card:hover .catalogue-card__image.has-product-shine::after {transform:scale(1.055)}
   /* Clip the sweep to the existing PNG alpha channel. */
   #header #logo > a::after {
     -webkit-mask:url("../images/logo.png") center / contain no-repeat;
