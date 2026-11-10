@@ -485,24 +485,29 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
     background-size:235% 100%;
     background-position:100% 0;
   }
-  #header #logo > a::after {animation:drcgf-shine-sweep 1.15s .45s both}
-  #main .catalogue-card__link:is(:hover,:focus-visible,:active) .catalogue-card__image::after,
-  #main .drcgf-result-card__link:is(:hover,:focus-visible,:active) .drcgf-result-card__image::after,
-  #main .product-verified__image:hover::after,
-  #main :is(.drcgf-action-button,.button.primary):not(:disabled):is(:hover,:focus-visible,:active)::after,
-  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"]:is(:hover,:focus-visible)::before {
-    animation:drcgf-shine-sweep 1.05s ease-in-out both;
+  #header #logo > a::after,
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image)::after,
+  #main :is(.drcgf-action-button,.button.primary):not(:disabled)::after,
+  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"]::before {
+    animation:drcgf-shine-sweep 7s ease-in-out infinite;
+    animation-delay:var(--drcgf-shine-delay,.45s);
   }
+  /* Clip the sweep to the existing PNG alpha channel. */
+  #header #logo > a::after {
+    -webkit-mask:url("../images/logo.png") center / contain no-repeat;
+    mask:url("../images/logo.png") center / contain no-repeat;
+    mask-mode:alpha;
+  }
+  #main :is(.catalogue-card__image,.drcgf-result-card__image,.product-verified__image) {--drcgf-shine-delay:1.9s}
+  #main :is(.catalogue-card,.drcgf-result-card):nth-child(even) :is(.catalogue-card__image,.drcgf-result-card__image) {--drcgf-shine-delay:2.6s}
+  #main :is(.drcgf-action-button,.button.primary),
+  #header #wide-nav a.nav-top-link[href="/lien-he/index.html"] {--drcgf-shine-delay:3.8s}
   @media (max-width:900px) {
     #main .product-verified__image {position:relative}
-  }
-  @media (hover:none) {
-    #main .catalogue-grid > .catalogue-card:first-child.blue-reveal .catalogue-card__image::after,
-    #main .product-verified__image.blue-reveal::after {animation:drcgf-shine-sweep 1.15s .25s both}
   }
 }
 @keyframes drcgf-shine-sweep {
   0% {background-position:100% 0;opacity:0}
-  18%,78% {opacity:1}
-  100% {background-position:0 0;opacity:0}
+  3%,12% {opacity:1}
+  16%,100% {background-position:0 0;opacity:0}
 }
