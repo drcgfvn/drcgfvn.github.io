@@ -515,7 +515,7 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
   #main :is(.catalogue-card,.drcgf-result-card):nth-child(even) :is(.catalogue-card__image,.drcgf-result-card__image) {--drcgf-shine-delay:2.6s}
   #main :is(.drcgf-action-button,.button.primary) {--drcgf-shine-delay:3.8s}
   @media (max-width:900px) {
-    #main .product-verified__image {position:relative}
+    #main .product-verified__image {position:relative;top:auto;right:auto;bottom:auto;left:auto}
   }
 }
 @keyframes drcgf-shine-sweep {
