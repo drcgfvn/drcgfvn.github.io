@@ -160,7 +160,7 @@ window.DRCGF_RESOURCE_DATA = [
   {
     "id": 18,
     "title": "Phiếu công bố",
-    "type": "document",
+    "type": "image",
     "slug": "phieu-cong-bo",
     "images": [],
     "files": []

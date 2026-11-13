@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T10:36:40.304Z",
+  "generatedAt": "2026-11-13T07:57:01.371Z",
   "resources": {
     "hinh-anh-san-pham-don": {
       "images": [
@@ -200,7 +200,19 @@
       "files": []
     },
     "phieu-cong-bo": {
-      "images": [],
+      "images": [
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20B5%20EXOSOME%20AMPOULE.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20EXOCELL%20HEALING%20CREAM.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20EXTRA%20WHITENING%20MASK%20PACK.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20MELA%20EXOSOME%20NMN%20DAY%20CREAM.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20MELA%20EXOSOME%20SPICULE%20AMPOULE.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20MELA%20EXOSOME%20SPICULE%20NIGHT%20CREAM.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20NANO%20BUBBLE%20DETOX%20MASK.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20RETINAL%20BAKUCHIOL%20CREAM.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20STEM%20CELL%20SOLUTION%20PREMIUM%20EX.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20TONE-UP%20%26%20BRIGHTENING%20SUNCREAM.png",
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20TRANEXAMIC%20MELA%20EXOSOME%20AMPOULE.png"
+      ],
       "files": [
         "../tai-lieu/phieu-cong-bo/files/DR.CGF%20B5%20EXOSOME%20AMPOULE.pdf",
         "../tai-lieu/phieu-cong-bo/files/DR.CGF%20EXOCELL%20HEALING%20CREAM.pdf",
