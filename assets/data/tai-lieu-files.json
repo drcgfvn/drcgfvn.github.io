@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T07:57:01.371Z",
+  "generatedAt": "2026-11-13T08:07:07.736Z",
   "resources": {
     "hinh-anh-san-pham-don": {
       "images": [
@@ -211,21 +211,16 @@
         "../tai-lieu/phieu-cong-bo/img/DR.CGF%20RETINAL%20BAKUCHIOL%20CREAM.png",
         "../tai-lieu/phieu-cong-bo/img/DR.CGF%20STEM%20CELL%20SOLUTION%20PREMIUM%20EX.png",
         "../tai-lieu/phieu-cong-bo/img/DR.CGF%20TONE-UP%20%26%20BRIGHTENING%20SUNCREAM.png",
-        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20TRANEXAMIC%20MELA%20EXOSOME%20AMPOULE.png"
+        "../tai-lieu/phieu-cong-bo/img/DR.CGF%20TRANEXAMIC%20MELA%20EXOSOME%20AMPOULE.png",
+        "../tai-lieu/phieu-cong-bo/img/GEL%20L%C3%94%20H%E1%BB%98I%20L%C3%80M%20D%E1%BB%8AU.png",
+        "../tai-lieu/phieu-cong-bo/img/KEM%20B5%2050G.png",
+        "../tai-lieu/phieu-cong-bo/img/KEM%20MASSAGE.png",
+        "../tai-lieu/phieu-cong-bo/img/N%C6%AF%E1%BB%9AC%20HOA%20H%E1%BB%92NG%201000ML.png",
+        "../tai-lieu/phieu-cong-bo/img/N%C6%AF%E1%BB%9AC%20T%E1%BA%A8Y%20TRANG%201000ML.png",
+        "../tai-lieu/phieu-cong-bo/img/S%E1%BB%AEA%20R%E1%BB%ACA%20M%E1%BA%B6T%201000ML.png",
+        "../tai-lieu/phieu-cong-bo/img/T%E1%BA%A8Y%20DA%20CH%E1%BA%BET%201000ML.png"
       ],
-      "files": [
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20B5%20EXOSOME%20AMPOULE.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20EXOCELL%20HEALING%20CREAM.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20EXTRA%20WHITENING%20MASK%20PACK.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20MELA%20EXOSOME%20NMN%20DAY%20CREAM.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20MELA%20EXOSOME%20SPICULE%20AMPOULE.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20MELA%20EXOSOME%20SPICULE%20NIGHT%20CREAM.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20NANO%20BUBBLE%20DETOX%20MASK.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20RETINAL%20BAKUCHIOL%20CREAM.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20STEM%20CELL%20SOLUTION%20PREMIUM%20EX.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20TONE-UP%20%26%20BRIGHTENING%20SUNCREAM.pdf",
-        "../tai-lieu/phieu-cong-bo/files/DR.CGF%20TRANEXAMIC%20MELA%20EXOSOME%20AMPOULE.pdf"
-      ]
+      "files": []
     },
     "phieu-kiem-nghiem": {
       "images": [],
