@@ -63,9 +63,13 @@
       var content=doc.querySelector("#main,main,#content");
       // Page-wide 2D shell styling is redundant inside the catalogue drawer.
       content.classList.remove("drcgf-page-shell");
+      content.querySelectorAll(".row").forEach(function(row){
+        var cols=Array.from(row.children);
+        if(cols.length>1 && cols.every(function(col){return col.classList.contains("col") && !!col.querySelector(".drcgf-content-card,.catalogue-card");})) row.classList.add("sw-card-grid");
+      });
       new MutationObserver(notificationPreviews).observe(content,{childList:true,subtree:true});
       doc.documentElement.dataset.siteWindow = "true";
-      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=4";
+      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=5";
       function ready() {
         if (token !== serial) return;
         clearTimeout(loadTimer);

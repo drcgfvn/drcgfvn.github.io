@@ -40,3 +40,7 @@
 
 #catalog.has-content{overflow:hidden!important}
 #site-window .sw-frame-host{min-height:0;overflow:hidden}
+
+/* Allow Vietnamese descenders and long headings to occupy their full line boxes. */
+#site-window .sw-heading{overflow:visible}
+#site-window h2{display:block;-webkit-line-clamp:unset;overflow:visible;line-height:1.35;padding-bottom:5px;margin-bottom:10px;max-height:none}

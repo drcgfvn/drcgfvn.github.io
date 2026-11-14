@@ -73,3 +73,14 @@ html:root[data-site-window] body[class] #wrapper #main#main :is(.drcgf-file-grid
 html:root[data-site-window] body[class] #wrapper #main#main .row.row-small.align-middle>.product_by_attr{grid-column:1 / -1!important}
 html:root[data-site-window] body[class] #wrapper #main#main .product_by_attr>.col-inner>.row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:start!important}
 @media(max-width:480px){html:root[data-site-window] body[class] #wrapper #main#main .product_by_attr>.col-inner>.row{grid-template-columns:minmax(0,1fr)!important}}
+
+html:root[data-site-window] body[class] #wrapper #main#main .sw-card-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:stretch!important}
+html:root[data-site-window] body[class] #wrapper #main#main .sw-card-grid>.col{width:100%!important;max-width:100%!important;flex:none!important;margin:0!important;padding:0!important}
+html:root[data-site-window] body[class] #wrapper #main#main .sw-card-grid>.col>.col-inner{height:100%!important}
+html:root[data-site-window] body[class] #wrapper #main#main .sw-card-grid :is(.drcgf-content-card,.catalogue-card){height:100%!important;margin:0!important}
+html:root[data-site-window] body[class] #wrapper #main#main .section:has(.sw-card-grid),html:root[data-site-window] body[class] #wrapper #main#main .section:has(.catalogue-grid){background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;overflow:visible!important}
+html:root[data-site-window] body[class] #wrapper #main#main .drcgf-category-nav{display:flex!important;flex-wrap:wrap!important;gap:7px!important;padding:0 0 14px!important;margin:0!important;overflow:visible!important;max-height:none!important;border:0!important;background:transparent!important}
+html:root[data-site-window] body[class] #wrapper #main#main .drcgf-category-nav>a{width:auto!important;max-width:100%!important;flex:0 1 auto!important;white-space:normal!important;min-height:34px!important;padding:7px 10px!important;font-size:12px!important;line-height:1.45!important}
+html:root[data-site-window] body[class] #wrapper #main#main .drcgf-category-nav>a:is(.active,[aria-current=page],.is-active){background:linear-gradient(120deg,#d0edff,#d7d8ff)!important;border-color:#fff!important;box-shadow:0 0 9px #ccf3ff,inset 0 1px #fff!important}
+html:root[data-site-window] body[class] #wrapper #main#main .catalogue-card__group{display:block;line-height:1.5!important;letter-spacing:0!important}
+@media(max-width:480px){html:root[data-site-window] body[class] #wrapper #main#main .sw-card-grid{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}}
