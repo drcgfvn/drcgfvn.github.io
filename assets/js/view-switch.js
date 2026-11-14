@@ -16,7 +16,13 @@
     nav.id = "drcgf-view-switch";
     nav.className = "drcgf-view-switch" + (is3D ? " is-showroom" : "");
     nav.setAttribute("aria-label", "Chuyển giao diện website");
-    nav.innerHTML = '<a href="/2d/" title="Website 2D"'+(!is3D?' aria-current="page"':'')+'>2D</a><a href="/" title="Showroom 3D"'+(is3D?' aria-current="page"':'')+'>3D</a>';
+    nav.innerHTML = '<a href="/2d/" data-site-view="2d" title="Website 2D"'+(!is3D?' aria-current="page"':'')+'>2D</a><a href="/" data-site-view="3d" title="Showroom 3D"'+(is3D?' aria-current="page"':'')+'>3D</a>';
+    nav.addEventListener("click", function (event) {
+      var choice = event.target.closest("a[data-site-view]");
+      if (!choice) return;
+      try { window.localStorage.setItem("drcgf.preferredView", choice.dataset.siteView); }
+      catch (error) { /* Navigation still works when browser storage is unavailable. */ }
+    });
     document.body.appendChild(nav);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);

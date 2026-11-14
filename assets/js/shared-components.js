@@ -511,4 +511,4 @@
 })();
 
 // Shared view navigation for the existing company website.
-(function(){var s=document.createElement("script");s.src="/assets/js/view-switch.js?v=4";s.defer=true;document.head.appendChild(s);})();
+(function(){var s=document.createElement("script");s.src="/assets/js/view-switch.js?v=5";s.defer=true;document.head.appendChild(s);})();
