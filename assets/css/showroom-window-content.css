@@ -35,7 +35,7 @@ html:root[data-site-window] body[class] #wrapper #main#main::-webkit-scrollbar{w
 
 html[data-site-window] .blue-reveal{animation:none!important;opacity:1!important;transform:none!important}
 
-@media(max-width:480px){html:root[data-site-window] body[class] #wrapper #main#main .post-item{flex:0 0 100%!important;max-width:100%!important;padding:0 0 12px!important}html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:480px){html:root[data-site-window] body[class] #wrapper #main#main .post-item{flex:0 0 100%!important;max-width:100%!important;padding:0 0 12px!important}}
 
 /* Layouts sized for the catalogue drawer rather than a full-width 2D page. */
 html:root[data-site-window] body[class] #wrapper #main#main .row.row-small.align-middle{display:grid!important;grid-template-columns:minmax(0,2fr) minmax(0,3fr)!important;gap:18px!important;align-items:start!important}
@@ -68,7 +68,7 @@ html:root[data-site-window] body[class] #wrapper #main#main .drcgf-resource-cont
 html:root[data-site-window] body[class] #wrapper #main#main :is(.drcgf-file-card,.drcgf-video-card,.drcgf-resource-empty,.drcgf-image-card){background:linear-gradient(145deg,#f4faffad,#e6ebff80)!important;border:1px solid #ffffffb8!important;border-radius:12px!important;color:#233e76!important}
 html:root[data-site-window] body[class] #wrapper #main#main :is(.drcgf-file-grid,.drcgf-video-grid){grid-template-columns:repeat(2,minmax(0,1fr))!important}
 @media(max-width:600px){html:root[data-site-window] body[class] #wrapper #main#main .row.row-small.align-middle{grid-template-columns:1fr!important;gap:14px!important}html:root[data-site-window] body[class] #wrapper #main#main .row.row-small.align-middle img{max-height:210px;object-fit:contain}html:root[data-site-window] body[class] #wrapper #main#main .drcgf-resource-toolbar{align-items:stretch!important;flex-direction:column!important}html:root[data-site-window] body[class] #wrapper #main#main .drcgf-resource-title{font-size:14px!important}}
-@media(max-width:480px){html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid,html:root[data-site-window] body[class] #wrapper #main#main .product_by_attr>.row,html:root[data-site-window] body[class] #wrapper #main#main :is(.drcgf-file-grid,.drcgf-video-grid){grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:480px){html:root[data-site-window] body[class] #wrapper #main#main .product_by_attr>.row,html:root[data-site-window] body[class] #wrapper #main#main :is(.drcgf-file-grid,.drcgf-video-grid){grid-template-columns:minmax(0,1fr)!important}}
 
 html:root[data-site-window] body[class] #wrapper #main#main .row.row-small.align-middle>.product_by_attr{grid-column:1 / -1!important}
 html:root[data-site-window] body[class] #wrapper #main#main .product_by_attr>.col-inner>.row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:start!important}
@@ -143,4 +143,11 @@ html:root[data-site-window] body[class] #wrapper #main#main .drcgf-related-news 
 @media(hover:hover) and (pointer:fine){
  html:root[data-site-window] body[class] #wrapper #main#main .drcgf-content-card{transition:background .2s,border-color .2s,box-shadow .2s!important}
  html:root[data-site-window] body[class] #wrapper #main#main .drcgf-content-card:is(:hover,:focus-within){transform:none!important;background:linear-gradient(145deg,#edfaffd9,#dce6ffc9)!important;border-color:#fff!important;box-shadow:inset 0 0 0 1px #c5f0ff,inset 0 0 18px #d4f3ff88!important}
+}
+
+@media(max-width:480px){
+ html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid{gap:8px!important}
+ html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid .catalogue-card__body{padding:8px!important;overflow-wrap:anywhere}
+ html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid .catalogue-card__body h3{font-size:13px!important}
+ html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid .catalogue-card__image{height:140px!important}
 }
