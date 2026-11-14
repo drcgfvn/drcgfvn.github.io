@@ -263,7 +263,7 @@ body { background:#dce7fb; }
 h1 { font-size:clamp(28px,3.2vw,49px); color:#fff; font-weight:700; line-height:1.15; letter-spacing:-.045em; margin:3px 0 10px; text-shadow:0 0 18px #d9adff,0 2px 8px #4e6ba2; }
 #lens-status { top:174px; left:50%; right:auto; transform:translateX(-50%); padding:7px 17px; border:1px solid #e8dcff; color:#fff; background:linear-gradient(100deg,#ba83e0aa,#6ac6e9b0); box-shadow:0 0 15px #bdeeff,inset 0 0 10px #fff8; white-space:nowrap; }
 #zones { position:absolute; z-index:3; display:flex; flex-direction:column; left:22px; top:230px; width:183px; padding:13px; border:1px solid #f5f8ff; border-radius:23px; background:linear-gradient(140deg,#ecf0ffb8,#a3afe387); box-shadow:0 0 14px #bce5ff,inset 0 0 20px #fff8; backdrop-filter:blur(16px); }
-#zones::before { content:"Danh mục DR.CGF"; padding:10px 7px 15px; font-size:15px; font-weight:700; border-bottom:1px solid #ffffff80; }
+#zones::before { content:"Phân loại"; padding:10px 7px 15px; font-size:15px; font-weight:700; border-bottom:1px solid #ffffff80; }
 #zones button { justify-content:flex-start; gap:8px; text-align:left; border-radius:10px; min-height:49px; font-size:12px; color:#183564; border-bottom:1px solid #ffffff70; }
 #zones button[aria-pressed=true] { background:#eff9ffc9; border-color:#fff; box-shadow:0 0 12px #ccf3ff; }
 #zones button span { font-size:10px; color:#5971a8; }

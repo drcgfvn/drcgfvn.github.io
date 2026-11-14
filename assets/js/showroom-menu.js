@@ -17,7 +17,7 @@
     var view=document.getElementById('drcgf-view-switch');
     if(desktop.matches){header.insertBefore(nav,actions);header.insertBefore(toggle,actions);}
     else {document.body.appendChild(nav);document.body.appendChild(toggle);}
-    if(small.matches){if(view)tools.appendChild(view);tools.appendChild(toggle);}
+    if(small.matches){if(view)document.body.appendChild(view);actions.appendChild(toggle);}
     else if(view){document.body.appendChild(view);}
     positionTools();
   }
