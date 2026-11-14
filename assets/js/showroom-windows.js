@@ -70,7 +70,7 @@
       });
       new MutationObserver(notificationPreviews).observe(content,{childList:true,subtree:true});
       doc.documentElement.dataset.siteWindow = "true";
-      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=11";
+      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=12";
       function ready() {
         if (token !== serial) return;
         clearTimeout(loadTimer);
