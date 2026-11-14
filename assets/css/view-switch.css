@@ -19,3 +19,6 @@
 /* Same switch location in both website views, including phones. */
 .drcgf-view-switch.is-showroom{left:20px;right:auto;bottom:22px}
 @media(max-width:600px){.drcgf-view-switch.is-showroom{left:12px;right:auto;bottom:16px}}
+
+/* The content window supplies its own section-aware mode switch. */
+body.site-window-open #drcgf-view-switch{visibility:hidden}

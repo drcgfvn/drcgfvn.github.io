@@ -1,5 +1,6 @@
 (function () {
   "use strict";
+  if (document.documentElement.dataset.siteWindow === "true") return;
 
   // Cloudflare-safe: không suy ra site root từ document.currentScript vì Rocket Loader có thể thay đổi script đang thực thi.
   var siteRoot = new URL("/", window.location.origin);
@@ -511,4 +512,4 @@
 })();
 
 // Shared view navigation for the existing company website.
-(function(){var s=document.createElement("script");s.src="/assets/js/view-switch.js?v=5";s.defer=true;document.head.appendChild(s);})();
+(function(){if(document.querySelector('script[src*="/view-switch.js"]'))return;var s=document.createElement("script");s.src="/assets/js/view-switch.js?v=6";s.defer=true;document.head.appendChild(s);})();
