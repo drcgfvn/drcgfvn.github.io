@@ -758,3 +758,9 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   #details #product-line { font-size:12px; }
   #details #position { font-size:11px; }
 }
+
+/* Reserve a fixed scrollbar lane so filtering never changes the desktop dock height. */
+@media(min-width:901px){
+  #product-dock{height:120px}
+  #product-strip{height:98px;align-items:flex-start;overflow-y:hidden}
+}
