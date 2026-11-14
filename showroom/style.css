@@ -771,3 +771,9 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 
 /* Mobile controls use the continuous showroom background without a separate fill. */
 @media(max-width:900px){#controls{background:transparent;box-shadow:none}#product-dock{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}}
+
+/* Keep one viewport-sized room behind both mobile camera modes. */
+@media(max-width:900px){
+ #experience::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:#d7e4f6 url("assets/showroom-empty.png") center/cover no-repeat}
+ #stage{background:transparent}
+}
