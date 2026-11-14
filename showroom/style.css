@@ -762,5 +762,5 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 /* Reserve a fixed scrollbar lane so filtering never changes the desktop dock height. */
 @media(min-width:901px){
   #product-dock{height:120px;padding:10px 13px}
-  #product-strip{height:98px;padding:calc((98px - 77px)/2) 3px 0;align-items:flex-start;overflow-y:hidden}
+  #product-strip{height:103px;padding:calc((98px - 77px)/2) 3px 0;align-items:flex-start;overflow-y:hidden}
 }
