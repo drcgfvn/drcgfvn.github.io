@@ -137,3 +137,8 @@ body[data-view="3d"] .top .brand::after{
  #experience:not(.inspect) #table-controls{bottom:calc(var(--sm3-footer-space) + 12px);left:auto;right:12px;transform:none}
  #experience:not(.inspect) #product-dock{left:12px;width:calc(100% - 170px);transform:none}
 }
+
+@media(max-width:900px) and (orientation:portrait){
+ #experience:not(.inspect) #table-controls{bottom:var(--sm3-tools-bottom,172px)}
+ #experience:not(.inspect) #render{top:135px;--overview-reserve:calc(var(--sm3-tools-bottom,172px) + 40px)}
+}

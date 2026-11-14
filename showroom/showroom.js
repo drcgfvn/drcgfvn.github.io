@@ -893,20 +893,30 @@ function buildRoom() {
       targetCamera.set(x+offset,top+height*.49,z+distance);
     } else {
       if (mobile.matches) {
-        // Fit the rotating display (including the floor ring) inside the usable
-        // view. A square fitting area makes its shorter side the limiting one.
+        // Fit the round base using its projected tangent, rather than a box
+        // with corners in front of the table. Also fit the vertical silhouette.
         const radius = 5.36;
-        const height = Math.max(...models.map(model => model.top + model.height));
         const lensHeight = 5.65;
-        const halfView = Math.tan(T.MathUtils.degToRad(camera.fov / 2))
-          * Math.min(1, camera.aspect) * .92;
-        const distance = radius + radius / halfView;
-        const nearDepth = distance - radius;
-        const farDepth = distance + radius;
-        const lowerEdge = -lensHeight / nearDepth;
-        const upperEdge = (height - lensHeight) / farDepth;
-        targetAim.set(0, lensHeight + (lowerEdge + upperEdge) * distance / 2, 0);
-        targetCamera.set(0, lensHeight, distance);
+        const lensHalfHeight = Math.tan(T.MathUtils.degToRad(camera.fov / 2)) * .96;
+        const tiers = [{radius, top:0}, ...models.map(model => ({
+          radius:model.radius + model.mesh.scale.x / 2,
+          top:model.top + model.height
+        }))];
+        const verticalEdges = distance => [
+          -lensHeight / (distance - radius),
+          Math.max(...tiers.map(tier => (tier.top - lensHeight) / (distance + tier.radius)))
+        ];
+        let nearest = Math.hypot(radius, radius / (lensHalfHeight * camera.aspect));
+        let farthest = Math.max(nearest, radius + lensHeight / lensHalfHeight);
+        for (let step = 0; step < 16; step++) {
+          const distance = (nearest + farthest) / 2;
+          const [bottom, top] = verticalEdges(distance);
+          if (top - bottom > 2 * lensHalfHeight) nearest = distance;
+          else farthest = distance;
+        }
+        const [bottom, top] = verticalEdges(farthest);
+        targetAim.set(0, lensHeight + (bottom + top) * farthest / 2, 0);
+        targetCamera.set(0, lensHeight, farthest);
       } else {
         targetAim.set(0,1.50,0);
         targetCamera.set(0,5.20,Math.max(13.6,15.8/camera.aspect));
@@ -998,6 +1008,9 @@ function buildRoom() {
   }
 
   new ResizeObserver(resize).observe(render);
+  new ResizeObserver(() => {
+    if (mobile.matches && selected < 0) requestAnimationFrame(resize);
+  }).observe($('#product-dock'));
   resize();
   camera.position.copy(targetCamera);
   aim.copy(targetAim);
