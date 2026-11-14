@@ -750,7 +750,7 @@ function buildRoom() {
     const texture = loader.load(photo(p));
     texture.colorSpace = T.SRGBColorSpace;
     texture.anisotropy = Math.min(8,renderer.capabilities.getMaxAnisotropy());
-    const material = new T.MeshBasicMaterial({map:texture,transparent:true,depthWrite:mobile.matches,alphaTest:.08,alphaToCoverage:mobile.matches,side:T.DoubleSide,toneMapped:false,fog:false});
+    const material = new T.MeshBasicMaterial({map:texture,transparent:mobile.matches,depthWrite:true,alphaTest:.08,alphaToCoverage:true,side:T.DoubleSide,toneMapped:false,fog:false});
     const focus={value:matchesGroup(p) ? 1 : 0,target:matchesGroup(p) ? 1 : 0};
     material.onBeforeCompile = shader => {
       shader.uniforms.uGroupFocus=focus;
@@ -779,7 +779,7 @@ function buildRoom() {
     mesh.position.set(x,top,z);
     mesh.scale.set(height*p.aspect,height,1);
     mesh.userData.index = index;
-    mesh.renderOrder = mobile.matches ? 0 : 10;
+    mesh.renderOrder = 0;
     table.add(mesh);
     return {mesh,x,z,top,height,angle,radius,ring:placement.ring,focus};
   });
@@ -811,7 +811,7 @@ function buildRoom() {
     models.forEach(({mesh,focus},index) => {
       mesh.visible=matchesGroup(products[index]);
       focus.value=focus.target=1;
-      mesh.material.depthWrite=mobile.matches;
+      mesh.material.depthWrite=true;
     });
     if (groupFilter !== null && selected < 0) {
       const indexes = products.flatMap((p,index) => matchesGroup(p) ? [index] : []);
@@ -893,12 +893,15 @@ function buildRoom() {
     camera.aspect = width/height;
     camera.updateProjectionMatrix();
     models.forEach(({mesh}) => {
-      mesh.material.depthWrite=mobile.matches;
-      mesh.renderOrder=mobile.matches ? 0 : 10;
-      if (mesh.material.alphaToCoverage !== mobile.matches) {
-        mesh.material.alphaToCoverage=mobile.matches;
+      mesh.material.depthWrite=true;
+      mesh.renderOrder=0;
+      // Desktop cutouts use per-pixel depth rather than transparent-object sorting.
+      // Multisample alpha coverage keeps their silhouettes smooth without dithering.
+      if (mesh.material.transparent !== mobile.matches) {
+        mesh.material.transparent=mobile.matches;
         mesh.material.needsUpdate=true;
       }
+      mesh.material.alphaToCoverage=true;
     });
     const density = renderDensity();
     if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
