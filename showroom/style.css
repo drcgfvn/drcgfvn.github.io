@@ -497,7 +497,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   .catalog-header h2 { font-size:27px; }
   #catalog-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
   #catalog-grid button { font-size:10px; min-height:116px; }
-  .inspect #stage { height:57dvh; min-height:340px; }
+  .inspect #stage { --mobile-closeup-height:max(57dvh,340px); height:var(--mobile-closeup-height); }
   .inspect #render { inset:105px 0 80px; }
   #exit { top:107px; right:12px; width:36px; height:36px; }
   #controls { bottom:12px; left:50%; }
@@ -521,7 +521,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   #render { inset:195px 0 140px; }
   #table-controls { bottom:132px; }
   #product-strip button { height:60px; flex-basis:59px; }
-  .inspect #stage { height:55dvh; min-height:290px; }
+  .inspect #stage { --mobile-closeup-height:max(55dvh,290px); }
   .inspect #render { inset:103px 0 67px; }
   #details { height:calc(45dvh - 16px); }
 }
@@ -794,6 +794,18 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   background:#d7e4f6 url("assets/showroom-empty.png") center/cover no-repeat;
  }
  body[data-view="3d"] #stage{background:transparent}
+ .inspect:has(#details.await-camera) #stage{height:var(--stage)}
+ .inspect #render{
+  --closeup-framing-height:calc(var(--mobile-closeup-height) - 77px - var(--closeup-control-space,0px));
+  padding:0;
+ }
+ .inspect #render::before{
+  content:"";
+  position:absolute;
+  width:0;
+  height:var(--closeup-framing-height);
+  pointer-events:none;
+ }
  .inspect #controls{
   opacity:1;
   translate:0 0;

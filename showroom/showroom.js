@@ -952,7 +952,14 @@ function buildRoom() {
     const controlSpace = mobile.matches && experience.classList.contains('inspect')
       ? parseFloat(getComputedStyle(render).getPropertyValue('--closeup-control-space')) || 0
       : 0;
-    const framingHeight = Math.max(1,height-controlSpace);
+    // During the flight the canvas extends behind the future panel. Frame the
+    // product against the final closeup height so revealing the panel cannot move it.
+    const closeupHeight = controlSpace
+      ? parseFloat(getComputedStyle(render,'::before').height)
+      : NaN;
+    const framingHeight = Number.isFinite(closeupHeight)
+      ? Math.max(1,closeupHeight)
+      : Math.max(1,height-controlSpace);
     viewportBounds = {top:bounds.top,height:framingHeight};
     canvasProjectionScale = framingHeight/height;
     camera.aspect = width/framingHeight;
