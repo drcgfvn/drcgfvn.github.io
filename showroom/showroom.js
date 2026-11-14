@@ -643,10 +643,6 @@ function buildRoom() {
     color:0x83c9df,metalness:.22,roughness:.17,clearcoat:1,clearcoatRoughness:.16,envMapIntensity:.45,emissive:0x8cc6df,emissiveIntensity:.04,
     transparent:false,opacity:1,depthWrite:true
   });
-  // Broaden the top tier's light reflection so it reads as a soft glass highlight.
-  const topGlassSurface = glassSurface.clone();
-  topGlassSurface.roughness = .36;
-  topGlassSurface.clearcoatRoughness = .42;
   const violetLight = new T.MeshBasicMaterial({color:0xd8e8ff,toneMapped:false});
   const edgeClock={value:0};
   const edgeTint=new T.ShaderMaterial({
@@ -694,9 +690,9 @@ function buildRoom() {
   }
 
   const tabletopReflection = new T.ShaderMaterial({
-    uniforms:{uTime:edgeClock,uStrength:{value:1}},transparent:true,depthWrite:false,side:T.DoubleSide,toneMapped:false,
+    uniforms:{uTime:edgeClock,uStrength:{value:1},uSoftLamp:{value:0}},transparent:true,depthWrite:false,side:T.DoubleSide,toneMapped:false,
     vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
-    fragmentShader:`varying vec2 vUv;uniform float uTime;uniform float uStrength;void main(){
+    fragmentShader:`varying vec2 vUv;uniform float uTime;uniform float uStrength;uniform float uSoftLamp;void main(){
       vec2 p=vUv-.5;float r=length(p);if(r>.493)discard;
       float sweep=p.x*.74+p.y*.67-(.10+sin(uTime*.09)*.035);
       float broad=exp(-pow(sweep/.075,2.0));
@@ -705,7 +701,11 @@ function buildRoom() {
       float rim=exp(-pow((r-.469)/.006,2.0))*(.5+.5*cos(angle-1.1));
       float fade=1.0-smoothstep(.43,.493,r);
       float alpha=(broad*.105+slim*.11)*fade+rim*.24;
-      gl_FragColor=vec4(.91,.99,1.0,alpha*uStrength);
+      // Diffuse reflection only: a feathered glow without a concentrated light core.
+      vec2 lampA=(p-vec2(-.15,-.17))/vec2(.052,.17);
+      vec2 lampB=(p-vec2(.15,-.17))/vec2(.052,.17);
+      float softLamp=exp(-dot(lampA,lampA)*1.5)+exp(-dot(lampB,lampB)*1.5);
+      gl_FragColor=vec4(.94,.99,1.0,alpha*uStrength+softLamp*uSoftLamp*fade);
     }`
   });
   const shadowLip = new T.MeshStandardMaterial({color:0x6d829f,metalness:.45,roughness:.31});
@@ -719,10 +719,11 @@ function buildRoom() {
     hoop(radius-.305,base+.06,.014,lavenderTrim);
     disc(radius,.075,top-.10,silver);
     disc(radius-.018,.041,top-.047,[edgeTint,light,light]);
-    disc(radius-.035,.058,top-.003,top===3.09 ? topGlassSurface : glassSurface);
+    disc(radius-.035,.058,top-.003,glassSurface);
     const reflection=tabletopReflection.clone();
     reflection.uniforms.uTime=edgeClock;
     reflection.uniforms.uStrength.value=1;
+    reflection.uniforms.uSoftLamp.value=top===3.09 ? .22 : 0;
     plane(radius*2,radius*2,0,top+.036,0,reflection,true,table);
     hoop(radius-.026,top+.018,.014,violetLight);
     hoop(radius-.22,top+.027,.009,silver);
@@ -739,14 +740,6 @@ function buildRoom() {
     hoop(radius-.022,top-.047,.045,glowMat);
     hoop(radius-.11,base+.055,.018,light);
   }
-  // Lower tiers receive round specular highlights from the lights on the tier above.
-  // Supply an equivalent overhead pair for the top tier, which has no tier above it.
-  const topCyanReflection = new T.PointLight(0xe8faff,.09,2.8,2);
-  topCyanReflection.position.set(-.7,3.28,-.2);
-  table.add(topCyanReflection);
-  const topPinkReflection = new T.PointLight(0xffeaf7,.075,2.8,2);
-  topPinkReflection.position.set(.7,3.28,-.2);
-  table.add(topPinkReflection);
   hoop(5.34,.007,.018,light,scene);
 
   const edgeGlow = new T.MeshBasicMaterial({
