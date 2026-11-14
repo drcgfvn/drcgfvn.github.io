@@ -16,7 +16,7 @@
   var catalogShell=document.getElementById("catalog");
   var dialog = document.createElement("div"); dialog.id = "site-window";dialog.hidden=true;dialog.setAttribute("role","region");
   dialog.setAttribute("aria-labelledby", "site-window-title");
-  dialog.innerHTML = '<header class="sw-header"><div class="sw-heading"><span class="sw-eyebrow">DR.CGF / KHÔNG GIAN 3D</span><h2 id="site-window-title">Đang mở nội dung…</h2></div><div class="sw-actions"><button id="sw-back" type="button" title="Quay lại mục trước" aria-label="Quay lại mục trước"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button><nav class="sw-mode" aria-label="Giao diện nội dung"><a id="sw-2d" title="Xem mục này ở giao diện 2D">2D</a><span aria-current="page">3D</span></nav><button id="sw-close" type="button" aria-label="Đóng cửa sổ nội dung" title="Đóng cửa sổ"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></header><nav class="sw-tabs" aria-label="Các mục trong không gian 3D"><a href="/gioi-thieu/index.html">Giới thiệu</a><a href="/san-pham/index.html">Sản phẩm</a><a href="/thanh-phan/index.html">Thành phần</a><a href="/category/tin-tuc/index.html">Tin tức</a><a href="/lien-he/index.html">Liên hệ</a></nav><div class="sw-body"><div class="sw-status" role="status" aria-live="polite"><span class="sw-spinner" aria-hidden="true"></span><span>Đang mở nội dung…</span></div><div class="sw-frame-host"></div></div>';
+  dialog.innerHTML = '<header class="sw-header"><div class="sw-heading"><span class="sw-eyebrow">DR.CGF / KHÔNG GIAN 3D</span><h2 id="site-window-title">Đang mở nội dung…</h2></div><div class="sw-actions"><button id="sw-back" type="button" title="Quay lại mục trước" aria-label="Quay lại mục trước"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button><nav class="sw-mode" aria-label="Giao diện nội dung"><a id="sw-2d" title="Xem mục này ở giao diện 2D">2D</a><span aria-current="page">3D</span></nav><button id="sw-close" type="button" aria-label="Đóng cửa sổ nội dung" title="Đóng cửa sổ"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></header><div class="sw-body"><div class="sw-status" role="status" aria-live="polite"><span class="sw-spinner" aria-hidden="true"></span><span>Đang mở nội dung…</span></div><div class="sw-frame-host"></div></div>';
   catalogShell.appendChild(dialog);
   var title = dialog.querySelector("#site-window-title"), status = dialog.querySelector(".sw-status"), host = dialog.querySelector(".sw-frame-host"), back = dialog.querySelector("#sw-back"), twoD = dialog.querySelector("#sw-2d");
   function announce() { window.dispatchEvent(new CustomEvent("drcgf:pagechange", {detail:{page:current}})); }
@@ -33,10 +33,6 @@
   function updateHeader(url) {
     twoD.href = route(url);
     back.disabled = !history.state || !history.state.depth;
-    dialog.querySelectorAll(".sw-tabs a").forEach(function (a) {
-      var section = new URL(a.href).pathname.split("/")[1], active = url.pathname.split("/")[1] === section || (section === "category" && url.pathname.indexOf("/tin-tuc/") === 0) || (section === "san-pham" && url.pathname.indexOf("/danh-muc-san-pham/") === 0);
-      if (active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
-    });
   }
   function loading() { status.hidden = false; status.innerHTML = '<span class="sw-spinner" aria-hidden="true"></span><span>Đang mở nội dung…</span>'; }
   function fail(message) {
@@ -68,7 +64,7 @@
       var content=doc.querySelector("#main,main,#content");
       new MutationObserver(notificationPreviews).observe(content,{childList:true,subtree:true});
       doc.documentElement.dataset.siteWindow = "true";
-      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=1";
+      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=2";
       function ready() {
         if (token !== serial) return;
         clearTimeout(loadTimer);
@@ -76,8 +72,14 @@
         title.textContent = text || "DR.CGF"; activeFrame.title = "Nội dung: " + title.textContent; document.title = title.textContent + " | DR.CGF 3D";
         status.hidden = true; activeFrame.classList.add("is-ready");
       }
-      if(doc.getElementById("drcgf-window-content-style")) ready();
-      else {css.addEventListener("load", ready, {once:true}); css.addEventListener("error", function(){fail("Không tải được giao diện nội dung. Vui lòng thử lại.");}, {once:true}); doc.head.appendChild(css);}
+      var existingStyle=doc.getElementById("drcgf-window-content-style");
+      if(existingStyle && existingStyle.href===css.href) ready();
+      else {
+        css.id="drcgf-window-content-style";
+        css.addEventListener("load",function(){if(existingStyle)existingStyle.remove();ready();},{once:true});
+        css.addEventListener("error",function(){fail("Không tải được giao diện nội dung. Vui lòng thử lại.");},{once:true});
+        doc.head.appendChild(css);
+      }
       doc.addEventListener("click", function (event) {
         var a = event.target.closest && event.target.closest("a[href]");
         if (!a || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || a.hasAttribute("download") || a.target === "_blank") return;

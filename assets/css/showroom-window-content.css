@@ -3,3 +3,26 @@ html[data-site-window]{background:transparent!important;scrollbar-width:thin;scr
 html[data-site-window] body :is(.breadcrumbs,.rank-math-breadcrumb,#dark-breadcrumbs){display:none!important}
 
 @media(max-width:700px){html[data-site-window] body #main :is(p,li){font-size:14px!important;line-height:1.8!important}html[data-site-window] body #main h2{font-size:20px!important;line-height:1.4!important}}
+
+/* The parent #catalog already supplies the 17px outer padding. Avoid stacking page gutters. */
+html[data-site-window] body #main,
+html[data-site-window] body #content{padding:0 7px 14px 0!important;margin:0!important;max-width:none!important}
+html[data-site-window] body #main :is(.page-wrapper,.container,.section-content){padding-left:0!important;padding-right:0!important;max-width:100%!important}
+html[data-site-window] body #main .row{width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}
+html[data-site-window] body #main .col{padding-left:0!important;padding-right:0!important;min-width:0}
+html[data-site-window] body #main .section{padding:10px 0!important}
+html[data-site-window] body #main :is(.catalogue-card,.drcgf-content-card,.drcgf-result-card,.drcgf-contact-card,.drcgf-form-card){background:linear-gradient(145deg,#f4faffad,#e6ebff80)!important;border:1px solid #ffffffb8!important;border-radius:15px!important;box-shadow:inset 0 1px #ffffffd9!important;color:#233e6c}
+html[data-site-window] body #main :is(h1,h2,h3,h4){color:#233e76;text-shadow:0 1px 8px #ffffffa8}
+html[data-site-window] body #main :is(a.button,button[type=submit],input[type=submit]){background:linear-gradient(135deg,#eafaffd9,#c9d4ffb8)!important;border:1px solid #fff!important;box-shadow:inset 0 1px #fff,0 0 10px #ccf3ff66!important;color:#233e76!important}
+html[data-site-window]{scrollbar-color:#91a9d1 #e3eaff70}
+html[data-site-window]::-webkit-scrollbar-track{background:#e3eaff70}
+html[data-site-window]::-webkit-scrollbar-thumb{background:linear-gradient(#9ad9ee,#799bdb);border:1px solid #eaf7ff}
+@media(max-width:700px){html[data-site-window] body #main,html[data-site-window] body #content{padding:0 7px 12px 0!important}}
+
+html:root[data-site-window] body[class] #wrapper #main{padding:0 7px 12px 0!important;background:transparent!important}
+html:root[data-site-window] body[class] #wrapper #main :is(.page-wrapper,.blog-wrapper,.drcgf-page-container,.catalogue-hero){width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;background:transparent!important}
+html:root[data-site-window] body[class] #wrapper #main :is(.drcgf-page-heading,.drcgf-contact-heading,.catalogue-title){background:transparent!important;border:0!important;box-shadow:none!important;padding:0 0 12px!important;margin:0 0 12px!important;border-radius:0!important}
+html:root[data-site-window] body[class] #wrapper #main :is(.drcgf-panel,.drcgf-contact-card,.drcgf-transfer-card,.info-box){background:linear-gradient(145deg,#f4faffad,#e6ebff80)!important;border:1px solid #ffffffb8!important;border-radius:15px!important;box-shadow:inset 0 1px #ffffffd9!important;padding:14px!important}
+html:root[data-site-window] body[class] #wrapper #main .drcgf-contact-layout{gap:12px!important}
+html:root[data-site-window] body[class] #wrapper #main :is(input,textarea,select){background:#f4faff85!important;border:1px solid #ffffffbd!important;box-shadow:inset 0 1px 5px #c5d8ed33!important}
+html:root[data-site-window] body[class] #wrapper #main :is(input,textarea,select):focus{outline:none!important;border-color:#56abd9!important;box-shadow:0 0 0 2px #74c7f033,0 0 13px #74c7f026!important}
