@@ -695,12 +695,12 @@ function buildRoom() {
     fragmentShader:`varying vec2 vUv;uniform float uTime;uniform float uStrength;uniform float uSoftLamp;void main(){
       vec2 p=vUv-.5;float r=length(p);if(r>.493)discard;
       float sweep=p.x*.74+p.y*.67-(.10+sin(uTime*.09)*.035);
-      float broad=exp(-pow(sweep/.075,2.0));
-      float slim=exp(-pow((sweep-.025)/.012,2.0));
+      // Broad, low-contrast reflection without a thin scratch-like highlight.
+      float broad=exp(-pow(sweep/.15,2.0));
       float angle=atan(p.y,p.x);
-      float rim=exp(-pow((r-.469)/.006,2.0))*(.5+.5*cos(angle-1.1));
+      float rim=exp(-pow((r-.469)/.014,2.0))*(.5+.5*cos(angle-1.1));
       float fade=1.0-smoothstep(.43,.493,r);
-      float alpha=(broad*.105+slim*.11)*fade+rim*.24;
+      float alpha=broad*.055*fade+rim*.09;
       // Diffuse reflection only: a feathered glow without a concentrated light core.
       vec2 lampA=(p-vec2(-.15,-.17))/vec2(.052,.17);
       vec2 lampB=(p-vec2(.15,-.17))/vec2(.052,.17);
