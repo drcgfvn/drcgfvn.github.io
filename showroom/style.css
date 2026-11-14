@@ -783,11 +783,26 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
  #details.await-camera{animation:none!important;visibility:hidden;opacity:0;pointer-events:none}
 }
 
-/* Reveal the mobile navigation lane together with the details, after the camera arrives. */
+/* Keep the room visible while the mobile camera and overlays change. */
 @media(max-width:900px){
- .inspect #stage{clip-path:inset(0);transition:clip-path .42s cubic-bezier(.22,.7,.3,1)}
- .inspect:has(#details.await-camera) #stage{clip-path:inset(0 0 80px);transition:none}
- .inspect #controls{opacity:1;translate:0 0;transition:opacity .42s ease,translate .42s cubic-bezier(.22,.7,.3,1)}
- .inspect:has(#details.await-camera) #controls{opacity:0;translate:0 8px;pointer-events:none;transition:none}
+ body[data-view="3d"] #experience::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:#d7e4f6 url("assets/showroom-empty.png") center/cover no-repeat;
+ }
+ body[data-view="3d"] #stage{background:transparent}
+ .inspect #controls{
+  opacity:1;
+  translate:0 0;
+  transition:opacity .42s ease,translate .42s cubic-bezier(.22,.7,.3,1);
+ }
+ .inspect:has(#details.await-camera) #controls{
+  visibility:hidden;
+  opacity:0;
+  translate:0 8px;
+  transition:none;
+ }
 }
-@media(max-width:900px) and (max-height:700px){.inspect:has(#details.await-camera) #stage{clip-path:inset(0 0 67px)}}
