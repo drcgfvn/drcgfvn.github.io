@@ -65,14 +65,14 @@
       content.classList.remove("drcgf-page-shell");
       new MutationObserver(notificationPreviews).observe(content,{childList:true,subtree:true});
       doc.documentElement.dataset.siteWindow = "true";
-      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=3";
+      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=4";
       function ready() {
         if (token !== serial) return;
         clearTimeout(loadTimer);
         var h = content.querySelector("h1,.section-title-main,.entry-title,.catalogue-title h2"), text = (h && h.textContent.trim()) || doc.title.replace(/\s*[|–-]\s*DR\.CGF.*$/i, "");
         if(h){var headingBlock=h.closest(".section-title-container,.catalogue-title") || h;headingBlock.setAttribute("data-sw-duplicate-heading", "true");}
-        title.textContent = text || "DR.CGF"; activeFrame.title = "Nội dung: " + title.textContent; document.title = title.textContent + " | DR.CGF 3D";
-        status.hidden = true; activeFrame.classList.add("is-ready");
+        title.textContent = text || "DR.CGF"; activeFrame.removeAttribute("title"); activeFrame.setAttribute("aria-label",title.textContent); document.title = title.textContent + " | DR.CGF 3D";
+        content.scrollTop=0; status.hidden = true; activeFrame.classList.add("is-ready");
       }
       var existingStyle=doc.getElementById("drcgf-window-content-style");
       if(existingStyle && existingStyle.href===css.href) ready();
@@ -124,7 +124,7 @@
     }
     fitPanel();
     if (frame) frame.remove();
-    frame = document.createElement("iframe"); frame.title = "Nội dung DR.CGF"; frame.name = "drcgf-content-window";
+    frame = document.createElement("iframe"); frame.setAttribute("aria-label","Nội dung DR.CGF"); frame.name = "drcgf-content-window";
     frame.setAttribute("referrerpolicy", "same-origin"); frame.setAttribute("scrolling","no"); bindFrame(frame, token);
     url.searchParams.set("embed3d", "1"); frame.src = url.href; host.appendChild(frame);
     announce(); return true;
