@@ -782,3 +782,12 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
  #details{animation:mobile-details-in .42s cubic-bezier(.22,.7,.3,1) both}
  #details.await-camera{animation:none!important;visibility:hidden;opacity:0;pointer-events:none}
 }
+
+/* Reveal the mobile navigation lane together with the details, after the camera arrives. */
+@media(max-width:900px){
+ .inspect #stage{clip-path:inset(0);transition:clip-path .42s cubic-bezier(.22,.7,.3,1)}
+ .inspect:has(#details.await-camera) #stage{clip-path:inset(0 0 80px);transition:none}
+ .inspect #controls{opacity:1;translate:0 0;transition:opacity .42s ease,translate .42s cubic-bezier(.22,.7,.3,1)}
+ .inspect:has(#details.await-camera) #controls{opacity:0;translate:0 8px;pointer-events:none;transition:none}
+}
+@media(max-width:900px) and (max-height:700px){.inspect:has(#details.await-camera) #stage{clip-path:inset(0 0 67px)}}
