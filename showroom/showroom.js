@@ -565,7 +565,7 @@ function buildRoom() {
   renderer = new T.WebGLRenderer({antialias:true,alpha:true});
   const renderDensity = () => mobile.matches
     ? Math.min(devicePixelRatio || 1,2.5)
-    : Math.max(2,Math.min(devicePixelRatio || 1,2.5));
+    : Math.max(1.5,Math.min(devicePixelRatio || 1,1.75));
   renderer.setPixelRatio(renderDensity());
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
