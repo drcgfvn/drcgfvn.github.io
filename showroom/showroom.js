@@ -305,7 +305,6 @@ function toggleCatalog(open, trigger = listToggle) {
   }
   catalog.hidden = !open;
   listToggle.setAttribute('aria-expanded', String(open));
-  if (open) search.focus({preventScroll:true});
 }
 listToggle.onclick = () => toggleCatalog(catalog.hidden || !!(window.DRCGFWindows && window.DRCGFWindows.currentPage()));
 $('#explore').onclick = event => toggleCatalog(true,event.currentTarget);
