@@ -802,7 +802,9 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   bottom:calc(var(--stage) - var(--mobile-closeup-height) + 12px);
  }
  .inspect #render{
-  --closeup-framing-height:calc(var(--mobile-closeup-height) - 77px - var(--closeup-control-space,0px));
+  --closeup-framing-top:77px;
+  --closeup-framing-height:calc(var(--mobile-closeup-height) - var(--closeup-framing-top) - var(--closeup-control-space,0px));
+  top:0;
   padding:0;
  }
  .inspect #render::before{
