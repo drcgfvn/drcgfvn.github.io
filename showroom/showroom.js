@@ -145,7 +145,7 @@ function hideStripTooltip() {
   stripTooltip.hidden = true;
 }
 function showStripTooltip(button) {
-  if (!button?.dataset.productName) return;
+  if (selected >= 0 || !button?.dataset.productName) return;
   tooltipButton?.removeAttribute('aria-describedby');
   tooltipButton = button;
   stripTooltip.textContent = button.dataset.productName;
@@ -164,7 +164,10 @@ productStrip.addEventListener('pointerover',event => {
 productStrip.addEventListener('pointerout',event => {
   if (tooltipButton && !tooltipButton.contains(event.relatedTarget)) hideStripTooltip();
 });
-productStrip.addEventListener('focusin',event => showStripTooltip(event.target.closest('button')));
+productStrip.addEventListener('focusin',event => {
+  const button = event.target.closest('button');
+  if (button?.matches(':focus-visible')) showStripTooltip(button);
+});
 productStrip.addEventListener('focusout',hideStripTooltip);
 productStrip.addEventListener('pointerdown',hideStripTooltip);
 productStrip.addEventListener('scroll',hideStripTooltip,{passive:true});
