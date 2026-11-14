@@ -13,20 +13,23 @@
     } catch (error) { return null; }
   }
   function route(url) { return url.pathname + url.search + url.hash; }
-  var dialog = document.createElement("dialog"); dialog.id = "site-window";
+  var catalogShell=document.getElementById("catalog");
+  var dialog = document.createElement("div"); dialog.id = "site-window";dialog.hidden=true;dialog.setAttribute("role","region");
   dialog.setAttribute("aria-labelledby", "site-window-title");
   dialog.innerHTML = '<header class="sw-header"><div class="sw-heading"><span class="sw-eyebrow">DR.CGF / KHÔNG GIAN 3D</span><h2 id="site-window-title">Đang mở nội dung…</h2></div><div class="sw-actions"><button id="sw-back" type="button" title="Quay lại mục trước" aria-label="Quay lại mục trước"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button><nav class="sw-mode" aria-label="Giao diện nội dung"><a id="sw-2d" title="Xem mục này ở giao diện 2D">2D</a><span aria-current="page">3D</span></nav><button id="sw-close" type="button" aria-label="Đóng cửa sổ nội dung" title="Đóng cửa sổ"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></header><nav class="sw-tabs" aria-label="Các mục trong không gian 3D"><a href="/gioi-thieu/index.html">Giới thiệu</a><a href="/san-pham/index.html">Sản phẩm</a><a href="/thanh-phan/index.html">Thành phần</a><a href="/category/tin-tuc/index.html">Tin tức</a><a href="/lien-he/index.html">Liên hệ</a></nav><div class="sw-body"><div class="sw-status" role="status" aria-live="polite"><span class="sw-spinner" aria-hidden="true"></span><span>Đang mở nội dung…</span></div><div class="sw-frame-host"></div></div>';
-  document.body.appendChild(dialog);
+  catalogShell.appendChild(dialog);
   var title = dialog.querySelector("#site-window-title"), status = dialog.querySelector(".sw-status"), host = dialog.querySelector(".sw-frame-host"), back = dialog.querySelector("#sw-back"), twoD = dialog.querySelector("#sw-2d");
   function announce() { window.dispatchEvent(new CustomEvent("drcgf:pagechange", {detail:{page:current}})); }
   function hide() {
     serial++; current = null;
     if (frame) { frame.remove(); frame = null; }
-    if (dialog.open) dialog.close();
+    dialog.hidden=true;
+    catalogShell.classList.remove("has-content");catalogShell.hidden=true;catalogShell.style.removeProperty("height");catalogShell.setAttribute("aria-label","Sản phẩm");
+    var listButton=document.getElementById("list-toggle");if(listButton)listButton.setAttribute("aria-expanded","false");
     document.body.classList.remove("site-window-open"); document.title = homeTitle; announce();
     if (opener && opener.isConnected) opener.focus({preventScroll:true});
   }
-  function close() { if (!dialog.open) return; history.pushState({drcgfPage:null,depth:0}, "", "/"); hide(); }
+  function close() { if (dialog.hidden) return; history.pushState({drcgfPage:null,depth:0}, "", "/"); hide(); }
   function updateHeader(url) {
     twoD.href = route(url);
     back.disabled = !history.state || !history.state.depth;
@@ -100,20 +103,22 @@
   function open(value, push) {
     var url = pageURL(value); if (!url) return false;
     var next = route(url);
-    if (next === current && dialog.open) return true;
+    if (next === current && !dialog.hidden) return true;
     current = next; var token = ++serial;
     if (push) history.pushState({drcgfPage:current,depth:((history.state && history.state.depth)||0)+1}, "", "/?page=" + encodeURIComponent(current));
     updateHeader(url); loading(); title.textContent = "Đang mở nội dung…";
-    if (!dialog.open) {
+    if (dialog.hidden) {
       opener = document.activeElement;
-      // Close the existing product catalogue before presenting another content window.
-      var catalog = document.querySelector("#catalog"), button = document.querySelector("#catalog-close");
-      if (catalog && !catalog.hidden && button) button.click();
+      if(typeof stopAutoTour === "function") stopAutoTour();
       var menu=document.querySelector("#sm3-nav"), menuToggle=document.querySelector("#sm3-toggle");
       if(menu){menu.classList.remove("is-open");menu.querySelectorAll("details[open]").forEach(function(d){d.open=false;});}
       if(menuToggle){menuToggle.setAttribute("aria-expanded","false");menuToggle.setAttribute("aria-label","Mở menu website");}
-      dialog.showModal(); document.body.classList.add("site-window-open");
+      dialog.hidden=false;catalogShell.hidden=false;catalogShell.classList.add("has-content");
+      catalogShell.setAttribute("aria-label","Nội dung DR.CGF");
+      document.getElementById("list-toggle").setAttribute("aria-expanded","true");
+      document.body.classList.add("site-window-open");
     }
+    fitPanel();
     if (frame) frame.remove();
     frame = document.createElement("iframe"); frame.title = "Nội dung DR.CGF"; frame.name = "drcgf-content-window";
     frame.setAttribute("referrerpolicy", "same-origin"); bindFrame(frame, token);
@@ -123,8 +128,9 @@
   dialog.querySelector("#sw-close").addEventListener("click", close);
   back.addEventListener("click", function () { if (!back.disabled) history.back(); });
   twoD.addEventListener("click", function () { try { localStorage.setItem("drcgf.preferredView", "2d"); } catch(error) {} });
-  dialog.addEventListener("cancel", function (event) { event.preventDefault(); close(); });
-  dialog.addEventListener("click", function (event) { var r=dialog.getBoundingClientRect(); if(event.target===dialog && (event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom)) close(); });
+  function fitPanel(){if(!dialog.hidden)catalogShell.style.height=getComputedStyle(catalogShell).maxHeight;}
+  window.addEventListener("resize",fitPanel);
+  document.addEventListener("keydown",function(event){if(event.key==="Escape" && !dialog.hidden){event.preventDefault();event.stopImmediatePropagation();close();}},true);
   document.addEventListener("click", function (event) {
     var a = event.target.closest && event.target.closest("#sm3-nav a[href], .sw-tabs a[href]");
     if (!a || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || a.target === "_blank") return;

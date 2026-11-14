@@ -294,6 +294,7 @@ const zoneButtons = groups.map((name,index) => {
 });
 
 function toggleCatalog(open, trigger = listToggle) {
+  if(window.DRCGFWindows && window.DRCGFWindows.currentPage())window.DRCGFWindows.close();
   if (open) {
     stopAutoTour();
     hovered = -1;
@@ -306,7 +307,7 @@ function toggleCatalog(open, trigger = listToggle) {
   listToggle.setAttribute('aria-expanded', String(open));
   if (open) search.focus({preventScroll:true});
 }
-listToggle.onclick = () => toggleCatalog(catalog.hidden);
+listToggle.onclick = () => toggleCatalog(catalog.hidden || !!(window.DRCGFWindows && window.DRCGFWindows.currentPage()));
 $('#explore').onclick = event => toggleCatalog(true,event.currentTarget);
 $('#catalog-close').onclick = () => {
   toggleCatalog(false);

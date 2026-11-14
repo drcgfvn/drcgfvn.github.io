@@ -10,7 +10,7 @@
 
 ## Cửa sổ nội dung 3D
 
-- Các mục Giới thiệu, Sản phẩm, Thành phần, Tin tức, Liên hệ và mục con mở trên showroom bằng cửa sổ kính, hỗ trợ PC và mobile.
+- Các mục Giới thiệu, Sản phẩm, Thành phần, Tin tức, Liên hệ và mục con mở trong chính khung `#catalog` của showroom: bên phải trên PC và cùng bố cục bảng Sản phẩm trên mobile. Khung giữ nền kính, bo góc và vị trí sẵn có, không dùng hộp thoại giữa màn hình.
 - Đường dẫn chia sẻ/khôi phục: `/?page=%2Fgioi-thieu%2Findex.html`. Đóng cửa sổ trở về `/`; nút quay lại và lịch sử trình duyệt giữ từng mục đã mở.
 - `assets/js/showroom-windows.js` quản lý cửa sổ và điều hướng cùng website. `assets/css/showroom-windows.css` định dạng khung; `showroom-window-content.css` định dạng nội dung.
 - Nội dung dùng chính các trang đang có trong khung cùng tên miền, giữ các chức năng tìm kiếm, biểu mẫu và liên kết. Thanh đầu/cuối của 2D được ẩn trong cửa sổ.
