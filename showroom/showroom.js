@@ -900,6 +900,10 @@ function buildRoom() {
   let viewportBounds = render.getBoundingClientRect();
   let canvasProjectionScale = 1;
   let canvasProjectionShift = 0;
+  const mobileOverviewZoom = 1.05;
+  let displayedZoom = mobile.matches ? mobileOverviewZoom : 1;
+  let startZoom = displayedZoom;
+  let targetZoom = displayedZoom;
   let entryProjectionScale = 1;
   let entryProjectionShift = 0;
   function setTargets() {
@@ -970,6 +974,8 @@ function buildRoom() {
     const sameRing = selected >= 0 && previousSelection >= 0
       && models[selected].ring === models[previousSelection].ring
       && now >= flightStarted+flightDuration;
+    startZoom = displayedZoom;
+    targetZoom = mobile.matches && selected < 0 ? mobileOverviewZoom : 1;
     startAim.copy(aim);
     startCamera.copy(camera.position);
     if (sameRing) {
@@ -1000,6 +1006,9 @@ function buildRoom() {
     const height = render.clientHeight;
     if (!width || !height) return;
     const bounds = render.getBoundingClientRect();
+    if (previousSelection < 0 && selected < 0 && performance.now() >= flightStarted + flightDuration) {
+      displayedZoom = startZoom = targetZoom = mobile.matches ? mobileOverviewZoom : 1;
+    }
     const renderStyle = getComputedStyle(render);
     const inspecting = experience.classList.contains('inspect');
     const controlSpace = mobile.matches && inspecting
@@ -1144,15 +1153,15 @@ function buildRoom() {
     // Shift the lens vertically to frame the target without tilting vertical lines.
     camera.lookAt(aim.x,camera.position.y,aim.z);
     const aimDepth = Math.max(.01,Math.hypot(camera.position.x-aim.x,camera.position.z-aim.z));
-    if(canvasProjectionScale!==1 || canvasProjectionShift!==0 || entryProjectionScale!==1 || entryProjectionShift!==0){
-      camera.updateProjectionMatrix();
-      const remaining=1-T.MathUtils.smootherstep(t,0,1);
-      const lensScale=1+(entryProjectionScale-1)*remaining;
-      camera.projectionMatrix.elements[0]*=lensScale;
-      camera.projectionMatrix.elements[5]*=lensScale*canvasProjectionScale;
-      camera.projectionMatrix.elements[9]=(aim.y-camera.position.y)*camera.projectionMatrix.elements[5]/aimDepth+entryProjectionShift*remaining*canvasProjectionScale+canvasProjectionShift;
-      if(t===1){entryProjectionScale=1;entryProjectionShift=0;}
-    }else camera.projectionMatrix.elements[9] = (aim.y-camera.position.y)*camera.projectionMatrix.elements[5]/aimDepth;
+    const progress = T.MathUtils.smootherstep(t,0,1);
+    displayedZoom = T.MathUtils.lerp(startZoom,targetZoom,progress);
+    camera.updateProjectionMatrix();
+    const remaining = 1-progress;
+    const lensScale = displayedZoom * (1+(entryProjectionScale-1)*remaining);
+    camera.projectionMatrix.elements[0]*=lensScale;
+    camera.projectionMatrix.elements[5]*=lensScale*canvasProjectionScale;
+    camera.projectionMatrix.elements[9]=(aim.y-camera.position.y)*camera.projectionMatrix.elements[5]/aimDepth+entryProjectionShift*remaining*canvasProjectionScale+canvasProjectionShift;
+    if(t===1){entryProjectionScale=1;entryProjectionShift=0;}
     camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
     camera.updateMatrixWorld();
     glowMat.color.lerp(tint.setHex(tones[zone]),blend);
