@@ -786,6 +786,26 @@ function buildRoom() {
     return {mesh,x,z,top,height,angle,radius,ring:placement.ring,focus};
   });
 
+  function updateProductEdges() {
+    // Small overview cutouts need blended alpha edges instead of MSAA coverage steps.
+    // Keep the accepted close-up treatment and mobile rendering unchanged.
+    const softOverview = !mobile.matches && selected < 0;
+    models.forEach(({mesh}) => {
+      const material = mesh.material;
+      const transparent = mobile.matches || softOverview;
+      const coverage = !softOverview;
+      const cutoff = softOverview ? .01 : .08;
+      if (material.transparent !== transparent || material.alphaToCoverage !== coverage || material.alphaTest !== cutoff) {
+        material.transparent = transparent;
+        material.alphaToCoverage = coverage;
+        material.alphaTest = cutoff;
+        material.needsUpdate = true;
+      }
+      material.depthWrite = true;
+      mesh.renderOrder = 0;
+    });
+  }
+
   let tableAngle = 0;
   let rotationTarget = null;
   let rotationStart = 0;
@@ -859,6 +879,7 @@ function buildRoom() {
   }
 
   refreshView = () => {
+    updateProductEdges();
     const density = renderDensity();
     if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
     const now = performance.now();
@@ -896,17 +917,7 @@ function buildRoom() {
     if (!width || !height) return;
     camera.aspect = width/height;
     camera.updateProjectionMatrix();
-    models.forEach(({mesh}) => {
-      mesh.material.depthWrite=true;
-      mesh.renderOrder=0;
-      // Desktop cutouts use per-pixel depth rather than transparent-object sorting.
-      // Multisample alpha coverage keeps their silhouettes smooth without dithering.
-      if (mesh.material.transparent !== mobile.matches) {
-        mesh.material.transparent=mobile.matches;
-        mesh.material.needsUpdate=true;
-      }
-      mesh.material.alphaToCoverage=true;
-    });
+    updateProductEdges();
     const density = renderDensity();
     if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
     renderer.setSize(width,height,false);
