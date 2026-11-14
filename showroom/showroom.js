@@ -901,7 +901,7 @@ function buildRoom() {
   let canvasProjectionScale = 1;
   let canvasProjectionShift = 0;
   const mobileOverviewZoom = 1.05;
-  const mobileProductScale = 1.5;
+  const overviewProductScale = 1.1;
   let displayedZoom = mobile.matches ? mobileOverviewZoom : 1;
   let startZoom = displayedZoom;
   let targetZoom = displayedZoom;
@@ -928,8 +928,8 @@ function buildRoom() {
         const lensHeight = 5.65;
         const lensHalfHeight = Math.tan(T.MathUtils.degToRad(camera.fov / 2)) * .96;
         const tiers = [{radius, top:0}, ...models.map((model,index) => ({
-          radius:model.radius + model.height * products[index].aspect * mobileProductScale / 2,
-          top:model.top + model.height * mobileProductScale
+          radius:model.radius + model.height * products[index].aspect * overviewProductScale / 2,
+          top:model.top + model.height * overviewProductScale
         }))];
         const verticalEdges = distance => [
           -lensHeight / (distance - radius),
@@ -1174,7 +1174,7 @@ function buildRoom() {
       focus.value=T.MathUtils.lerp(focus.value,focus.target,blend);
       mesh.rotation.set(0,productYaw-tableAngle,0);
       const width = height*products[index].aspect;
-      const overviewScale = mobile.matches && selected < 0 ? mobileProductScale : 1;
+      const overviewScale = selected < 0 ? overviewProductScale : 1;
       const targetScale = overviewScale * (hovered === index && selected < 0 ? 1.08 : 1);
       const scale = T.MathUtils.lerp(mesh.scale.y/height,targetScale,blend);
       mesh.scale.set(width*scale,height*scale,1);
