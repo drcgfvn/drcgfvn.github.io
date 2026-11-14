@@ -70,7 +70,7 @@
       });
       new MutationObserver(notificationPreviews).observe(content,{childList:true,subtree:true});
       doc.documentElement.dataset.siteWindow = "true";
-      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=6";
+      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=7";
       function ready() {
         if (token !== serial) return;
         clearTimeout(loadTimer);
@@ -105,7 +105,13 @@
         new FormData(form).forEach(function(value,key){if(typeof value==="string")dest.searchParams.set(key,value);});
         event.preventDefault();open(dest.href,true);
       },true);
-      doc.addEventListener("keydown", function (event) { if (event.key === "Escape") { event.preventDefault(); close(); } });
+      doc.addEventListener("keydown", function(event){
+        if(event.key!=="Escape")return;
+        var viewer=doc.querySelector(".drcgf-image-lightbox.is-open,.drcgf-pdf-viewer.is-open");
+        event.preventDefault();event.stopImmediatePropagation();
+        if(viewer){var dismiss=viewer.querySelector(".drcgf-lightbox-close,.drcgf-pdf-close");if(dismiss)dismiss.click();}
+        else close();
+      },true);
 
     });
   }

@@ -102,3 +102,20 @@ html:root[data-site-window] body[class] #wrapper #main#main .catalogue-card__ima
 html:root[data-site-window] body[class] #wrapper #main#main .catalogue-card__image.has-product-shine::after{display:none!important}
 html:root[data-site-window] body[class] #wrapper #main#main .drcgf-category-nav>a{background:linear-gradient(145deg,#f4faffad,#e6ebff80)!important;border:1px solid #ffffffb8!important;box-shadow:inset 0 1px #ffffffd9!important;font-family:"Segoe UI",Arial,sans-serif!important;color:#233e6c!important}
 html:root[data-site-window] body[class] #wrapper #main#main .drcgf-category-nav>a:hover{background:#eff9ffe6!important;box-shadow:0 0 12px #ccf3ff,inset 0 1px #fff!important}
+
+/* Let the showroom glass show through instead of stacking pale 2D surfaces. */
+html:root[data-site-window] body[class] #wrapper #main#main :is(.catalogue-card,.drcgf-image-card){background:linear-gradient(145deg,#b4d6fa30,#aab4e636)!important;border-color:#ffffff9c!important;box-shadow:inset 0 1px #ffffff88,0 4px 14px #536ab012!important}
+html:root[data-site-window] body[class] #wrapper #main#main :is(.catalogue-card__image,.catalogue-card__body,.drcgf-image-media){background:transparent!important}
+html:root[data-site-window] body[class] #wrapper #main#main .catalogue-card__image img{mix-blend-mode:multiply}
+html:root[data-site-window] body[class] #wrapper #main#main .catalogue-card:hover,html:root[data-site-window] body[class] #wrapper #main#main .drcgf-image-card:hover{background:linear-gradient(145deg,#d6f0ff60,#bcc7f65c)!important;box-shadow:0 0 12px #ccf3ff88,inset 0 1px #ffffffb8!important}
+html:root[data-site-window] body[class] #wrapper #main#main .drcgf-category-nav>a{background:linear-gradient(145deg,#c4e4ff42,#b8c4ef42)!important}
+html:root[data-site-window] body[class] #wrapper #main#main .drcgf-image-media{padding:8px!important}
+html:root[data-site-window] body[class] #wrapper #main#main .drcgf-image-caption{background:#aabbeb24!important;border-top:1px solid #ffffff70!important;color:#29496b!important}
+
+/* Viewer portals live beside #wrapper and must remain visible inside the iframe. */
+html[data-site-window] body #drcgf-image-lightbox.is-open,html[data-site-window] body #drcgf-pdf-viewer.is-open{display:flex!important;visibility:visible!important;position:fixed!important;inset:0!important;z-index:10000000!important;background:linear-gradient(145deg,#263c66ed,#414d7aeF)!important;backdrop-filter:blur(18px);color:#fff!important}
+html[data-site-window] body #drcgf-image-lightbox .drcgf-lightbox-stage{background:transparent!important;visibility:visible!important}
+html[data-site-window] body #drcgf-image-lightbox :is(.drcgf-lightbox-caption,.drcgf-lightbox-counter){background:#dbeaff24!important;color:#fff!important;border:1px solid #ffffff70;border-radius:10px;padding:6px 10px}
+html[data-site-window] body #drcgf-image-lightbox :is(.drcgf-lightbox-close,.drcgf-lightbox-prev,.drcgf-lightbox-next){background:#dbeaff24!important;color:#fff!important;border:1px solid #ffffff80!important;backdrop-filter:blur(10px)}
+html[data-site-window] body #drcgf-image-lightbox .drcgf-lightbox-close:before,html[data-site-window] body #drcgf-image-lightbox .drcgf-lightbox-close:after{background:#fff!important}
+html:root[data-site-window] body[class].drcgf-lightbox-open #wrapper #main#main,html:root[data-site-window] body[class].drcgf-pdf-open #wrapper #main#main{overflow:hidden!important}
