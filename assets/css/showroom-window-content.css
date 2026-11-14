@@ -138,3 +138,9 @@ html:root[data-site-window] body[class] #wrapper #main#main .product-verified .c
 html:root[data-site-window] body[class] #wrapper #main#main .drcgf-related-news{background:linear-gradient(145deg,#f4faffad,#e6ebff80)!important;border:1px solid #ffffffb8!important;border-radius:15px!important;box-shadow:inset 0 1px #ffffffd9!important;padding:14px!important;margin:18px 0 0!important}
 html:root[data-site-window] body[class] #wrapper #main#main .drcgf-related-news ul>li>a{background:linear-gradient(145deg,#c4e4ff42,#b8c4ef42)!important;border:1px solid #ffffffa8!important;border-radius:12px!important;color:#233e76!important;box-shadow:inset 0 1px #ffffff88!important;font-family:inherit!important}
 html:root[data-site-window] body[class] #wrapper #main#main .drcgf-related-news ul>li>a:is(:hover,:focus-visible){background:#eff9ffb8!important;border-color:#fff!important;box-shadow:0 0 12px #ccf3ff,inset 0 1px #fff!important}
+
+/* Keep hover feedback inside cards at the scroll viewport's top edge. */
+@media(hover:hover) and (pointer:fine){
+ html:root[data-site-window] body[class] #wrapper #main#main .drcgf-content-card{transition:background .2s,border-color .2s,box-shadow .2s!important}
+ html:root[data-site-window] body[class] #wrapper #main#main .drcgf-content-card:is(:hover,:focus-within){transform:none!important;background:linear-gradient(145deg,#edfaffd9,#dce6ffc9)!important;border-color:#fff!important;box-shadow:inset 0 0 0 1px #c5f0ff,inset 0 0 18px #d4f3ff88!important}
+}
