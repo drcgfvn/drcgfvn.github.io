@@ -120,3 +120,6 @@ body[data-view="3d"] .top .brand::after{
  .drcgf-view-switch.is-showroom{position:fixed;left:12px;right:auto;bottom:16px;transform:none}
 }
 @media(max-width:380px){.top-nav #auto-tour{padding-inline:6px;font-size:10px}.top-nav #list-toggle{padding-inline:6px;font-size:10px}.top-nav #sm3-toggle{flex-basis:30px;width:30px;min-width:30px;height:30px;min-height:30px}}
+
+/* Draw the table behind the mobile controls instead of clipping at their lane. */
+@media(max-width:900px){#render,.inspect #render{bottom:0}}
