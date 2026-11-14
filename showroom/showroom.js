@@ -565,7 +565,9 @@ function buildRoom() {
   renderer = new T.WebGLRenderer({antialias:true,alpha:true});
   const renderDensity = () => mobile.matches
     ? Math.min(devicePixelRatio || 1,2.5)
-    : Math.max(1.5,Math.min(devicePixelRatio || 1,1.75));
+    : selected >= 0
+      ? Math.max(1.5,Math.min(devicePixelRatio || 1,1.75))
+      : Math.max(1.25,Math.min(devicePixelRatio || 1,1.5));
   renderer.setPixelRatio(renderDensity());
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -857,6 +859,8 @@ function buildRoom() {
   }
 
   refreshView = () => {
+    const density = renderDensity();
+    if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
     const now = performance.now();
     const sameRing = selected >= 0 && previousSelection >= 0
       && models[selected].ring === models[previousSelection].ring
