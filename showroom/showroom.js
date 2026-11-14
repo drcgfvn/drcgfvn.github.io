@@ -866,6 +866,9 @@ function buildRoom() {
   let flightStarted = 0;
   let flightDuration = 0;
   let previousSelection = -1;
+  let viewportBounds = render.getBoundingClientRect();
+  let entryProjectionScale = 1;
+  let entryProjectionShift = 0;
   function setTargets() {
     if (selected >= 0) {
       const {radius,top,height} = models[selected];
@@ -894,6 +897,20 @@ function buildRoom() {
     const density = renderDensity();
     if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
     const now = performance.now();
+    const enteringOnMobile = mobile.matches && selected >= 0 && previousSelection < 0;
+    entryProjectionScale = 1;
+    entryProjectionShift = 0;
+    if(enteringOnMobile && !reducedMotion.matches){
+      // The inspect layout shrinks and moves the canvas before the camera flies.
+      // Preserve its former pixel scale and screen centre, then ease to the new lens.
+      const before = viewportBounds;
+      resize();
+      const after = viewportBounds;
+      if(before.height && after.height){
+        entryProjectionScale = before.height/after.height;
+        entryProjectionShift = 2*((before.top+before.height/2)-(after.top+after.height/2))/after.height;
+      }
+    }
     const sameRing = selected >= 0 && previousSelection >= 0
       && models[selected].ring === models[previousSelection].ring
       && now >= flightStarted+flightDuration;
@@ -906,7 +923,6 @@ function buildRoom() {
     } else {
       setTargets();
     }
-    const enteringOnMobile = mobile.matches && selected >= 0 && previousSelection < 0;
     const rotationMs = reducedMotion.matches ? 0 : enteringOnMobile ? 950 : 580;
     if (selected >= 0) {
       orientTo(selected,rotationMs);
@@ -927,6 +943,7 @@ function buildRoom() {
     const width = render.clientWidth;
     const height = render.clientHeight;
     if (!width || !height) return;
+    viewportBounds = render.getBoundingClientRect();
     camera.aspect = width/height;
     camera.updateProjectionMatrix();
     updateProductEdges();
@@ -1046,7 +1063,15 @@ function buildRoom() {
     // Shift the lens vertically to frame the target without tilting vertical lines.
     camera.lookAt(aim.x,camera.position.y,aim.z);
     const aimDepth = Math.max(.01,Math.hypot(camera.position.x-aim.x,camera.position.z-aim.z));
-    camera.projectionMatrix.elements[9] = (aim.y-camera.position.y)*camera.projectionMatrix.elements[5]/aimDepth;
+    if(entryProjectionScale!==1 || entryProjectionShift!==0){
+      camera.updateProjectionMatrix();
+      const remaining=1-T.MathUtils.smootherstep(t,0,1);
+      const lensScale=1+(entryProjectionScale-1)*remaining;
+      camera.projectionMatrix.elements[0]*=lensScale;
+      camera.projectionMatrix.elements[5]*=lensScale;
+      camera.projectionMatrix.elements[9]=(aim.y-camera.position.y)*camera.projectionMatrix.elements[5]/aimDepth+entryProjectionShift*remaining;
+      if(t===1){entryProjectionScale=1;entryProjectionShift=0;}
+    }else camera.projectionMatrix.elements[9] = (aim.y-camera.position.y)*camera.projectionMatrix.elements[5]/aimDepth;
     camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
     camera.updateMatrixWorld();
     glowMat.color.lerp(tint.setHex(tones[zone]),blend);
