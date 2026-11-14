@@ -56,7 +56,7 @@
           var product=typeof products !== "undefined" && products.find(function(p){return name.indexOf("DR.CGF "+p.line.toUpperCase())>=0;});
           if(product && product.notificationImage){
             a.href=new URL(product.notificationImage,location.origin).href;
-            a.textContent="Xem trang đầu phiếu công bố";a.target="_blank";a.rel="noopener";a.removeAttribute("download");
+            a.textContent="Xem trang đầu phiếu công bố";a.dataset.notificationPreview="";a.removeAttribute("target");a.removeAttribute("download");
           }else a.remove();
         });
       }
@@ -92,6 +92,11 @@
         if (!a || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || a.hasAttribute("download") || a.target === "_blank") return;
         var dest;
         try { dest = new URL(a.getAttribute("href"), doc.baseURI); } catch(error) { return; }
+        if (a.hasAttribute("data-notification-preview") && typeof openNotificationViewer === "function") {
+          event.preventDefault();
+          openNotificationViewer(dest.href,a.textContent);
+          return;
+        }
         if (dest.origin === location.origin && /^\/(?:index\.html)?$/.test(dest.pathname) && !dest.hash) { event.preventDefault(); close(); return; }
         var next = pageURL(dest.href);
         if (!next || (next.pathname === url.pathname && next.search === url.search && next.hash)) return;
@@ -144,7 +149,7 @@
   back.addEventListener("click", function () { if (!back.disabled) history.back(); });
   function fitPanel(){if(!dialog.hidden)catalogShell.style.height=getComputedStyle(catalogShell).maxHeight;}
   window.addEventListener("resize",fitPanel);
-  document.addEventListener("keydown",function(event){if(event.key==="Escape" && !dialog.hidden){event.preventDefault();event.stopImmediatePropagation();close();}},true);
+  document.addEventListener("keydown",function(event){if(event.key==="Escape" && !dialog.hidden && !document.getElementById("notification-viewer")?.open){event.preventDefault();event.stopImmediatePropagation();close();}},true);
   document.addEventListener("click", function (event) {
     var a = event.target.closest && event.target.closest("#sm3-nav a[href], .sw-tabs a[href]");
     if (!a || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || a.target === "_blank") return;

@@ -826,3 +826,22 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   transition:none;
  }
 }
+
+#notification-viewer {
+  max-width:calc(100vw - 24px);
+  max-height:calc(100dvh - 24px);
+  padding:0 12px 12px;
+  border:1px solid #ffffffa8;
+  border-radius:20px;
+  background:#192d53;
+  color:white;
+  overflow:auto;
+}
+#notification-viewer::backdrop {background:#101d37c9;backdrop-filter:blur(8px)}
+#notification-viewer img {display:block;max-width:100%;height:auto;margin:auto}
+#notification-viewer form {position:sticky;top:0;padding:8px 0;display:flex;justify-content:flex-end}
+#notification-viewer button {
+  width:36px;height:36px;
+  border:1px solid #ffffff80;border-radius:50%;
+  background:#263e68;color:white;font-size:24px;
+}
