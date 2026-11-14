@@ -398,3 +398,6 @@ body.home .hero-slide{background-image:var(--mobile-bg)!important;}
 #top-link.back-to-top:active i {
   color: #fff !important;
 }
+
+/* Keep the consultation message field within the contact panel. */
+.drcgf-contact-form textarea#message{height:128px;min-height:128px;max-height:240px;max-width:100%;resize:vertical;overflow-y:auto;box-sizing:border-box}
