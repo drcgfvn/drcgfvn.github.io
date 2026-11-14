@@ -905,7 +905,8 @@ function buildRoom() {
     } else {
       setTargets();
     }
-    const rotationMs = reducedMotion.matches ? 0 : 580;
+    const enteringOnMobile = mobile.matches && selected >= 0 && previousSelection < 0;
+    const rotationMs = reducedMotion.matches ? 0 : enteringOnMobile ? 950 : 580;
     if (selected >= 0) {
       orientTo(selected,rotationMs);
       rotationStarted = now;
