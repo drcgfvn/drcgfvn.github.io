@@ -119,3 +119,6 @@ html[data-site-window] body #drcgf-image-lightbox :is(.drcgf-lightbox-caption,.d
 html[data-site-window] body #drcgf-image-lightbox :is(.drcgf-lightbox-close,.drcgf-lightbox-prev,.drcgf-lightbox-next){background:#dbeaff24!important;color:#fff!important;border:1px solid #ffffff80!important;backdrop-filter:blur(10px)}
 html[data-site-window] body #drcgf-image-lightbox .drcgf-lightbox-close:before,html[data-site-window] body #drcgf-image-lightbox .drcgf-lightbox-close:after{background:#fff!important}
 html:root[data-site-window] body[class].drcgf-lightbox-open #wrapper #main#main,html:root[data-site-window] body[class].drcgf-pdf-open #wrapper #main#main{overflow:hidden!important}
+
+/* The catalogue container also receives an opaque background from the 2D theme. */
+html:root[data-site-window] body[class] #wrapper #main#main .catalogue-hero .catalogue-container{background:transparent!important;border:0!important;box-shadow:none!important}
