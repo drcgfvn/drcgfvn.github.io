@@ -11,7 +11,8 @@
 ## Cửa sổ nội dung 3D
 
 - Các mục Giới thiệu, Sản phẩm, Thành phần, Tin tức, Liên hệ và mục con mở trong chính khung `#catalog` của showroom: bên phải trên PC và cùng bố cục bảng Sản phẩm trên mobile. Khung giữ nền kính, bo góc và vị trí sẵn có, không dùng hộp thoại giữa màn hình.
-- Đường dẫn chia sẻ/khôi phục: `/?page=%2Fgioi-thieu%2Findex.html`. Đóng cửa sổ trở về `/`; nút quay lại và lịch sử trình duyệt giữ từng mục đã mở.
+- Đường dẫn chia sẻ/khôi phục: `/3d/gioi-thieu/`. Đóng cửa sổ trở về `/`; nút quay lại và lịch sử trình duyệt giữ từng mục đã mở.
+- Link cũ `/?page=...` tự chuẩn hóa sang `/3d/.../` bằng history.replaceState. `scripts/generate-3d-pages.js` tạo trang vào tĩnh cho từng mục khi build, nên link chia sẻ và tải lại hoạt động trên hosting tĩnh.
 - `assets/js/showroom-windows.js` quản lý cửa sổ và điều hướng cùng website. `assets/css/showroom-windows.css` định dạng khung; `showroom-window-content.css` định dạng nội dung.
 - Nội dung dùng chính các trang đang có trong khung cùng tên miền, giữ các chức năng tìm kiếm, biểu mẫu và liên kết. Thanh đầu/cuối của 2D được ẩn trong cửa sổ.
 - Nút 2D/3D có trên toàn bộ trang nội dung 2D và giữ đúng mục, từ khóa, neo liên kết khi đổi chế độ. Khung nội dung dùng nút chuyển chung bên ngoài, không có nút 2D/3D riêng bên trong.

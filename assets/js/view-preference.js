@@ -23,6 +23,6 @@
     } else target += window.location.search + window.location.hash;
     window.location.replace(target);
   } else if (preferred === "3d" && (is2DHome || content)) {
-    window.location.replace(content ? "/?page=" + encodeURIComponent(path + window.location.search + window.location.hash) : "/" + window.location.search + window.location.hash);
+    window.location.replace(content ? "/3d" + path.replace(/\/index\.html$/,"/") + window.location.search + window.location.hash : "/" + window.location.search + window.location.hash);
   }
 })();

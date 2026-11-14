@@ -19,7 +19,7 @@
       else path = /^\/2d(?:\/(?:index\.html)?)?$/.test(location.pathname) ? null : location.pathname + location.search + location.hash;
       if (path === "/" || path === "/index.html") path = null;
       nav.querySelector('[data-site-view="2d"]').href = path || "/2d/";
-      nav.querySelector('[data-site-view="3d"]').href = path ? "/?page=" + encodeURIComponent(path) : "/";
+      nav.querySelector('[data-site-view="3d"]').href = path ? "/3d" + path.replace(/\/index\.html(?=[?#]|$)/,"/") : "/";
       nav.querySelector('[data-site-view="' + (is3D ? "3d" : "2d") + '"]').setAttribute("aria-current", "page");
     }
     nav.addEventListener("click", function (event) {

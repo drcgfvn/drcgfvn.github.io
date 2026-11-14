@@ -13,6 +13,7 @@
     } catch (error) { return null; }
   }
   function route(url) { return url.pathname + url.search + url.hash; }
+  function showroomURL(page){return "/3d"+page;}
   var catalogShell=document.getElementById("catalog");
   var dialog = document.createElement("div"); dialog.id = "site-window";dialog.hidden=true;dialog.setAttribute("role","region");
   dialog.setAttribute("aria-labelledby", "site-window-title");
@@ -47,7 +48,7 @@
       try { doc = activeFrame.contentDocument; url = pageURL(activeFrame.contentWindow.location.href); } catch (error) { fail("Không thể mở nội dung này trong cửa sổ."); return; }
       if (!doc || !url || !doc.querySelector("#main,main,#content")) { fail("Nội dung chưa sẵn sàng. Bạn có thể mở bằng giao diện 2D."); return; }
       var loaded = route(url);
-      if (loaded !== current) { current = loaded; history.pushState({drcgfPage:current,depth:((history.state && history.state.depth)||0)+1}, "", "/?page=" + encodeURIComponent(current)); updateHeader(url); announce(); }
+      if (loaded !== current) { current = loaded; history.pushState({drcgfPage:current,depth:((history.state && history.state.depth)||0)+1}, "", showroomURL(current)); updateHeader(url); announce(); }
       function notificationPreviews() {
         doc.querySelectorAll('a[href*="phieu-cong-bo/"][href*=".pdf"]').forEach(function(a){
           var name="";
@@ -113,7 +114,7 @@
     var next = route(url);
     if (next === current && !dialog.hidden) return true;
     current = next; var token = ++serial;
-    if (push) history.pushState({drcgfPage:current,depth:((history.state && history.state.depth)||0)+1}, "", "/?page=" + encodeURIComponent(current));
+    if (push) history.pushState({drcgfPage:current,depth:((history.state && history.state.depth)||0)+1}, "", showroomURL(current));
     updateHeader(url); loading(); title.textContent = "Đang mở nội dung…";
     if (dialog.hidden) {
       opener = document.activeElement;
@@ -150,7 +151,15 @@
     new FormData(form).forEach(function(value,key){if(typeof value==="string")url.searchParams.set(key,value);});
     if(open(url.href,true))event.preventDefault();
   });
-  function sync() { var page = new URLSearchParams(location.search).get("page"); if (page && pageURL(page)) open(page, false); else hide(); }
+  function sync() {
+    var clean=location.pathname.indexOf("/3d/")===0;
+    var page=clean ? location.pathname.slice(3)+location.search+location.hash : new URLSearchParams(location.search).get("page");
+    var url=page && pageURL(page);
+    if(url){
+      if(!clean || location.pathname!=="/3d"+url.pathname)history.replaceState(history.state,"",showroomURL(route(url)));
+      open(route(url),false);
+    }else hide();
+  }
   window.addEventListener("popstate", sync);
   window.DRCGFWindows = {open:function(value){return open(value,true);},close:close,currentPage:function(){return current;}};
   sync();
