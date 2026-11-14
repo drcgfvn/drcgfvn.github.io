@@ -892,12 +892,25 @@ function buildRoom() {
       // Camera and aim rise together during tier changes, without pitching.
       targetCamera.set(x+offset,top+height*.49,z+distance);
     } else {
-      const x = 0;
-      const distance = mobile.matches
-        ? Math.max(12.8,14.0/camera.aspect)
-        : Math.max(13.6,15.8/camera.aspect);
-      targetAim.set(x,mobile.matches ? 1.20 : 1.50,0);
-      targetCamera.set(x, mobile.matches ? 5.65 : 5.20,distance);
+      if (mobile.matches) {
+        // Fit the rotating display (including the floor ring) inside the usable
+        // view. A square fitting area makes its shorter side the limiting one.
+        const radius = 5.36;
+        const height = Math.max(...models.map(model => model.top + model.height));
+        const lensHeight = 5.65;
+        const halfView = Math.tan(T.MathUtils.degToRad(camera.fov / 2))
+          * Math.min(1, camera.aspect) * .92;
+        const distance = radius + radius / halfView;
+        const nearDepth = distance - radius;
+        const farDepth = distance + radius;
+        const lowerEdge = -lensHeight / nearDepth;
+        const upperEdge = (height - lensHeight) / farDepth;
+        targetAim.set(0, lensHeight + (lowerEdge + upperEdge) * distance / 2, 0);
+        targetCamera.set(0, lensHeight, distance);
+      } else {
+        targetAim.set(0,1.50,0);
+        targetCamera.set(0,5.20,Math.max(13.6,15.8/camera.aspect));
+      }
     }
   }
 
@@ -953,9 +966,14 @@ function buildRoom() {
     const height = render.clientHeight;
     if (!width || !height) return;
     const bounds = render.getBoundingClientRect();
-    const controlSpace = mobile.matches && experience.classList.contains('inspect')
-      ? parseFloat(getComputedStyle(render).getPropertyValue('--closeup-control-space')) || 0
+    const renderStyle = getComputedStyle(render);
+    const inspecting = experience.classList.contains('inspect');
+    const controlSpace = mobile.matches && inspecting
+      ? parseFloat(renderStyle.getPropertyValue('--closeup-control-space')) || 0
       : 0;
+    const overviewHeight = mobile.matches && !inspecting
+      ? parseFloat(getComputedStyle(render,'::before').height)
+      : NaN;
     // During the flight the canvas extends behind the future panel. Frame the
     // product against the final closeup height so revealing the panel cannot move it.
     const closeupHeight = controlSpace
@@ -963,7 +981,7 @@ function buildRoom() {
       : NaN;
     const framingHeight = Number.isFinite(closeupHeight)
       ? Math.max(1,closeupHeight)
-      : Math.max(1,height-controlSpace);
+      : Math.max(1,Number.isFinite(overviewHeight) ? overviewHeight : height-controlSpace);
     const framingTop = controlSpace
       ? parseFloat(getComputedStyle(render).getPropertyValue('--closeup-framing-top')) || 0
       : 0;

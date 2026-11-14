@@ -81,12 +81,12 @@ body[data-view="3d"] .top .brand::after{
  #sm3-nav{bottom:calc(var(--sm3-footer-space) + 8px);max-height:calc(100dvh - var(--sm3-footer-space) - 90px)}
  #catalog{max-height:calc(100dvh - 78px - var(--sm3-footer-space) - 8px)}
  #product-dock{bottom:calc(var(--sm3-footer-space) + 8px)}
- #render{bottom:calc(154px + var(--sm3-footer-space))}
+ #render{--overview-reserve:calc(154px + var(--sm3-footer-space));bottom:0}
  #details{bottom:calc(var(--sm3-footer-space) + 8px);height:calc(43dvh - 16px - var(--sm3-footer-space))}
  .inspect #render{--closeup-control-space:80px;bottom:0}
 }
 @media(max-width:900px) and (max-height:700px){
- #render{bottom:calc(140px + var(--sm3-footer-space))}
+ #render{--overview-reserve:calc(140px + var(--sm3-footer-space));bottom:0}
  #details{height:calc(45dvh - 16px - var(--sm3-footer-space))}
  .inspect #render{--closeup-control-space:67px;bottom:0}
 }
@@ -100,12 +100,12 @@ body[data-view="3d"] .top .brand::after{
  #catalog{max-height:calc(100dvh - 92px)}
  #catalog .catalog-scroll{padding-bottom:72px}
  #product-dock{bottom:calc(var(--sm3-footer-space) + 8px)}
- #render{bottom:calc(154px + var(--sm3-footer-space))}
+ #render{--overview-reserve:calc(154px + var(--sm3-footer-space));bottom:0}
  #details{bottom:max(8px,env(safe-area-inset-bottom));height:calc(43dvh - 16px)}
  #details .details-scroll{padding-bottom:72px}
  .inspect #render{--closeup-control-space:80px;bottom:0}
 }
-@media(max-width:900px) and (max-height:700px){#render{bottom:calc(140px + var(--sm3-footer-space))}#details{height:calc(45dvh - 16px)}.inspect #render{--closeup-control-space:67px;bottom:0}}
+@media(max-width:900px) and (max-height:700px){#render{--overview-reserve:calc(140px + var(--sm3-footer-space));bottom:0}#details{height:calc(45dvh - 16px)}.inspect #render{--closeup-control-space:67px;bottom:0}}
 
 /* Compact mobile header menu; the mode switch matches the 2D bottom-left position. */
 @media(max-width:900px){
@@ -120,3 +120,20 @@ body[data-view="3d"] .top .brand::after{
  .drcgf-view-switch.is-showroom{position:fixed;left:12px;right:auto;bottom:16px;transform:none}
 }
 @media(max-width:380px){.top-nav #auto-tour{padding-inline:6px;font-size:10px}.top-nav #list-toggle{padding-inline:6px;font-size:10px}.top-nav #sm3-toggle{flex-basis:30px;width:30px;min-width:30px;height:30px;min-height:30px}}
+
+/* Draw through the lower edge while fitting above the product dock. */
+@media(max-width:900px){
+ #experience:not(.inspect) #render::before{
+  content:"";
+  position:absolute;
+  width:0;
+  height:max(1px,calc(100% - var(--overview-reserve)));
+  pointer-events:none;
+ }
+}
+
+@media (max-width:900px) and (orientation:landscape) and (max-height:500px){
+ #experience:not(.inspect) #render{top:110px;--overview-reserve:calc(100px + var(--sm3-footer-space))}
+ #experience:not(.inspect) #table-controls{bottom:calc(var(--sm3-footer-space) + 12px);left:auto;right:12px;transform:none}
+ #experience:not(.inspect) #product-dock{left:12px;width:calc(100% - 170px);transform:none}
+}
