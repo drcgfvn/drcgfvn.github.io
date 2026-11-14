@@ -285,7 +285,6 @@ window.addEventListener('resize',()=>closeMobileCategories());
 const zoneButtons = groups.map((name,index) => {
   const button = document.createElement('button');
   button.innerHTML = '<span>'+serial(index)+'</span>'+name;
-  button.title = 'Lọc '+name+'. Bấm lại để xem tất cả.';
   button.onclick = () => {
     if (selected >= 0) closeProduct(false);
     setGroupFilter(groupFilter === index ? null : index);
