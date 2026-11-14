@@ -20,5 +20,5 @@
 .drcgf-view-switch.is-showroom{left:20px;right:auto;bottom:22px}
 @media(max-width:600px){.drcgf-view-switch.is-showroom{left:12px;right:auto;bottom:16px}}
 
-/* The content window supplies its own section-aware mode switch. */
-body.site-window-open #drcgf-view-switch{visibility:hidden}
+/* Keep the shared outside switch available while a catalogue content panel is open. */
+body.site-window-open #drcgf-view-switch{z-index:7}

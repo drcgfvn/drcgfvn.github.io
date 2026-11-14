@@ -16,9 +16,9 @@
   var catalogShell=document.getElementById("catalog");
   var dialog = document.createElement("div"); dialog.id = "site-window";dialog.hidden=true;dialog.setAttribute("role","region");
   dialog.setAttribute("aria-labelledby", "site-window-title");
-  dialog.innerHTML = '<header class="sw-header"><div class="sw-heading"><span class="sw-eyebrow">DR.CGF / KHÔNG GIAN 3D</span><h2 id="site-window-title">Đang mở nội dung…</h2></div><div class="sw-actions"><button id="sw-back" type="button" title="Quay lại mục trước" aria-label="Quay lại mục trước"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button><nav class="sw-mode" aria-label="Giao diện nội dung"><a id="sw-2d" title="Xem mục này ở giao diện 2D">2D</a><span aria-current="page">3D</span></nav><button id="sw-close" type="button" aria-label="Đóng cửa sổ nội dung" title="Đóng cửa sổ"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></header><div class="sw-body"><div class="sw-status" role="status" aria-live="polite"><span class="sw-spinner" aria-hidden="true"></span><span>Đang mở nội dung…</span></div><div class="sw-frame-host"></div></div>';
+  dialog.innerHTML = '<header class="sw-header"><div class="sw-heading"><span class="sw-eyebrow">DR.CGF / KHÔNG GIAN 3D</span><h2 id="site-window-title">Đang mở nội dung…</h2></div><div class="sw-actions"><button id="sw-back" type="button" title="Quay lại mục trước" aria-label="Quay lại mục trước"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button><button id="sw-close" type="button" aria-label="Đóng cửa sổ nội dung" title="Đóng cửa sổ"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></header><div class="sw-body"><div class="sw-status" role="status" aria-live="polite"><span class="sw-spinner" aria-hidden="true"></span><span>Đang mở nội dung…</span></div><div class="sw-frame-host"></div></div>';
   catalogShell.appendChild(dialog);
-  var title = dialog.querySelector("#site-window-title"), status = dialog.querySelector(".sw-status"), host = dialog.querySelector(".sw-frame-host"), back = dialog.querySelector("#sw-back"), twoD = dialog.querySelector("#sw-2d");
+  var title = dialog.querySelector("#site-window-title"), status = dialog.querySelector(".sw-status"), host = dialog.querySelector(".sw-frame-host"), back = dialog.querySelector("#sw-back");
   function announce() { window.dispatchEvent(new CustomEvent("drcgf:pagechange", {detail:{page:current}})); }
   function hide() {
     serial++; current = null;
@@ -31,13 +31,12 @@
   }
   function close() { if (dialog.hidden) return; history.pushState({drcgfPage:null,depth:0}, "", "/"); hide(); }
   function updateHeader(url) {
-    twoD.href = route(url);
     back.disabled = !history.state || !history.state.depth;
   }
   function loading() { status.hidden = false; status.innerHTML = '<span class="sw-spinner" aria-hidden="true"></span><span>Đang mở nội dung…</span>'; }
   function fail(message) {
     status.hidden = false; status.textContent = message;
-    var a = document.createElement("a"); a.href = twoD.href; a.textContent = "Mở bằng giao diện 2D"; a.className = "sw-fallback";
+    var a = document.createElement("a"); a.href = current || "/2d/"; a.textContent = "Mở bằng giao diện 2D"; a.className = "sw-fallback";
     a.addEventListener("click", function () { try { localStorage.setItem("drcgf.preferredView", "2d"); } catch (error) {} }); status.appendChild(a);
   }
   function bindFrame(activeFrame, token) {
@@ -129,7 +128,6 @@
   }
   dialog.querySelector("#sw-close").addEventListener("click", close);
   back.addEventListener("click", function () { if (!back.disabled) history.back(); });
-  twoD.addEventListener("click", function () { try { localStorage.setItem("drcgf.preferredView", "2d"); } catch(error) {} });
   function fitPanel(){if(!dialog.hidden)catalogShell.style.height=getComputedStyle(catalogShell).maxHeight;}
   window.addEventListener("resize",fitPanel);
   document.addEventListener("keydown",function(event){if(event.key==="Escape" && !dialog.hidden){event.preventDefault();event.stopImmediatePropagation();close();}},true);

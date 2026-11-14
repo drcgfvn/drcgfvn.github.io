@@ -14,6 +14,6 @@
 - Đường dẫn chia sẻ/khôi phục: `/?page=%2Fgioi-thieu%2Findex.html`. Đóng cửa sổ trở về `/`; nút quay lại và lịch sử trình duyệt giữ từng mục đã mở.
 - `assets/js/showroom-windows.js` quản lý cửa sổ và điều hướng cùng website. `assets/css/showroom-windows.css` định dạng khung; `showroom-window-content.css` định dạng nội dung.
 - Nội dung dùng chính các trang đang có trong khung cùng tên miền, giữ các chức năng tìm kiếm, biểu mẫu và liên kết. Thanh đầu/cuối của 2D được ẩn trong cửa sổ.
-- Nút 2D/3D có trên toàn bộ trang nội dung 2D và giữ đúng mục, từ khóa, neo liên kết khi đổi chế độ. Trong cửa sổ, nút chuyển nằm trên thanh tiêu đề.
+- Nút 2D/3D có trên toàn bộ trang nội dung 2D và giữ đúng mục, từ khóa, neo liên kết khi đổi chế độ. Khung nội dung dùng nút chuyển chung bên ngoài, không có nút 2D/3D riêng bên trong.
 - Trang nội dung truy cập trực tiếp sẽ theo lựa chọn đã lưu của khách. Các trang trong cửa sổ không tự chuyển hướng, tránh lặp trang.
 - Phiếu công bố trong cửa sổ dùng ảnh trang đầu khi có, không mở PDF đầy đủ. Bản 2D giữ nguyên dữ liệu cũ.
