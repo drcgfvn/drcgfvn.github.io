@@ -768,3 +768,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 /* Give the showroom title more breathing room between letters. */
 #intro h1{letter-spacing:.015em}
 @media(max-width:900px){#intro h1{letter-spacing:.01em}}
+
+/* Keep the room photo out of mobile control and thumbnail lanes. */
+@media(max-width:900px){
+ #stage{--mobile-control-lane:calc(120px + var(--sm3-footer-space,64px));background-image:linear-gradient(to top,#dce8f8 0,#dce8f8 var(--mobile-control-lane),transparent var(--mobile-control-lane)),url("assets/showroom-empty.png")}
+ .inspect #stage{--mobile-control-lane:80px}
+}
+@media(max-width:900px) and (max-height:700px){.inspect #stage{--mobile-control-lane:67px}}
