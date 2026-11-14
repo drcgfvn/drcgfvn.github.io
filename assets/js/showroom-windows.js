@@ -7,6 +7,8 @@
       var url = new URL(value, base || location.origin);
       if (url.origin !== location.origin || !allowed.test(url.pathname) || !/(?:\/|\.html)$/.test(url.pathname)) return null;
       url.searchParams.delete("embed3d");
+      // Cloudflare canonicalizes index.html to directory URLs; normalize before history updates.
+      url.pathname=url.pathname.replace(/\/index\.html$/, "/");
       return url;
     } catch (error) { return null; }
   }
@@ -83,6 +85,14 @@
         if (!next || (next.pathname === url.pathname && next.search === url.search && next.hash)) return;
         event.preventDefault(); open(next.href, true);
       }, true);
+      doc.addEventListener("submit",function(event){
+        var form=event.target;
+        if(event.defaultPrevented || form.method.toLowerCase()!=="get" || form.target==="_blank")return;
+        var dest=pageURL(form.action || url.href);if(!dest)return;
+        dest.search="";
+        new FormData(form).forEach(function(value,key){if(typeof value==="string")dest.searchParams.set(key,value);});
+        event.preventDefault();open(dest.href,true);
+      },true);
       doc.addEventListener("keydown", function (event) { if (event.key === "Escape") { event.preventDefault(); close(); } });
 
     });
