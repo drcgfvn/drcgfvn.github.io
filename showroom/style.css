@@ -797,7 +797,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   background:#d7e4f6 url("assets/showroom-empty.png") center/cover no-repeat;
  }
  body[data-view="3d"] #stage{background:transparent}
- .inspect:has(#details.await-camera) #stage{height:var(--stage)}
+ .inspect #stage{height:var(--stage)}
+ .inspect #controls{
+  bottom:calc(var(--stage) - var(--mobile-closeup-height) + 12px);
+ }
  .inspect #render{
   --closeup-framing-height:calc(var(--mobile-closeup-height) - 77px - var(--closeup-control-space,0px));
   padding:0;
