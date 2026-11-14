@@ -531,3 +531,7 @@ body #header #wide-nav .nav>li>a.nav-top-link,body #header #wide-nav .nav>li.has
   9%,23% {opacity:1}
   32%,100% {background-position:0 0;opacity:0}
 }
+
+/* Keep the 2D search heading separate from the breadcrumb band. */
+html:not([data-site-window]) body.drcgf-search-page #wrapper #main{padding-top:32px!important}
+@media(max-width:600px){html:not([data-site-window]) body.drcgf-search-page #wrapper #main{padding-top:24px!important}}
