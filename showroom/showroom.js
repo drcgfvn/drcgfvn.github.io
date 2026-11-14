@@ -787,14 +787,14 @@ function buildRoom() {
   });
 
   function updateProductEdges() {
-    // Small overview cutouts need blended alpha edges instead of MSAA coverage steps.
-    // Keep the accepted close-up treatment and mobile rendering unchanged.
-    const softOverview = !mobile.matches && selected < 0;
+    // Blend desktop product alpha edges smoothly in both overview and close-up.
+    // Preserve the existing mobile treatment.
+    const softDesktop = !mobile.matches;
     models.forEach(({mesh}) => {
       const material = mesh.material;
-      const transparent = mobile.matches || softOverview;
-      const coverage = !softOverview;
-      const cutoff = softOverview ? .01 : .08;
+      const transparent = mobile.matches || softDesktop;
+      const coverage = !softDesktop;
+      const cutoff = softDesktop ? .01 : .08;
       if (material.transparent !== transparent || material.alphaToCoverage !== coverage || material.alphaTest !== cutoff) {
         material.transparent = transparent;
         material.alphaToCoverage = coverage;
