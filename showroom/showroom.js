@@ -643,6 +643,10 @@ function buildRoom() {
     color:0x83c9df,metalness:.22,roughness:.17,clearcoat:1,clearcoatRoughness:.16,envMapIntensity:.45,emissive:0x8cc6df,emissiveIntensity:.04,
     transparent:false,opacity:1,depthWrite:true
   });
+  // Broaden the top tier's light reflection so it reads as a soft glass highlight.
+  const topGlassSurface = glassSurface.clone();
+  topGlassSurface.roughness = .27;
+  topGlassSurface.clearcoatRoughness = .26;
   const violetLight = new T.MeshBasicMaterial({color:0xd8e8ff,toneMapped:false});
   const edgeClock={value:0};
   const edgeTint=new T.ShaderMaterial({
@@ -715,10 +719,10 @@ function buildRoom() {
     hoop(radius-.305,base+.06,.014,lavenderTrim);
     disc(radius,.075,top-.10,silver);
     disc(radius-.018,.041,top-.047,[edgeTint,light,light]);
-    disc(radius-.035,.058,top-.003,glassSurface);
+    disc(radius-.035,.058,top-.003,top===3.09 ? topGlassSurface : glassSurface);
     const reflection=tabletopReflection.clone();
     reflection.uniforms.uTime=edgeClock;
-    reflection.uniforms.uStrength.value=top===3.09 ? 1.5 : 1;
+    reflection.uniforms.uStrength.value=1;
     plane(radius*2,radius*2,0,top+.036,0,reflection,true,table);
     hoop(radius-.026,top+.018,.014,violetLight);
     hoop(radius-.22,top+.027,.009,silver);
@@ -737,10 +741,10 @@ function buildRoom() {
   }
   // Lower tiers receive round specular highlights from the lights on the tier above.
   // Supply an equivalent overhead pair for the top tier, which has no tier above it.
-  const topCyanReflection = new T.PointLight(0xe8faff,1.1,2.8,2);
+  const topCyanReflection = new T.PointLight(0xe8faff,.42,2.8,2);
   topCyanReflection.position.set(-.7,3.28,-.2);
   table.add(topCyanReflection);
-  const topPinkReflection = new T.PointLight(0xffeaf7,.9,2.8,2);
+  const topPinkReflection = new T.PointLight(0xffeaf7,.34,2.8,2);
   topPinkReflection.position.set(.7,3.28,-.2);
   table.add(topPinkReflection);
   hoop(5.34,.007,.018,light,scene);
