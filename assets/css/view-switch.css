@@ -1,0 +1,21 @@
+.drcgf-view-switch{position:fixed;left:20px;bottom:22px;z-index:10000;display:flex;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.9);border-radius:30px;background:rgba(235,245,255,.92);box-shadow:0 4px 22px #123f7040,inset 0 0 0 1px #b8d9ef80;backdrop-filter:blur(18px);font:600 13px/1.2 "Segoe UI",Arial,sans-serif;isolation:isolate}.drcgf-view-switch a{display:flex;align-items:center;justify-content:center;min-width:44px;height:32px;padding:0 12px;border-radius:22px;color:#234a71;text-decoration:none!important;transition:background .2s,box-shadow .2s,transform .2s}.drcgf-view-switch a:hover{background:#fff;box-shadow:0 2px 10px #5187b92b}.drcgf-view-switch a[aria-current=page]{background:linear-gradient(120deg,#177eae,#536bca);color:#fff;box-shadow:0 2px 9px #3276b34d}.drcgf-view-switch a:focus-visible{outline:2px solid #177eae;outline-offset:2px}.drcgf-view-switch.is-showroom{left:auto;right:24px;bottom:145px;z-index:4;background:rgba(235,245,255,.82)}@media(max-width:600px){.drcgf-view-switch{left:12px;bottom:16px;padding:4px}.drcgf-view-switch a{height:29px;min-width:38px;padding:0 9px}.drcgf-view-switch.is-showroom{left:auto;right:12px;bottom:132px}}
+@media(min-width:701px){.drcgf-view-switch.is-showroom{position:fixed;left:20px;right:auto;bottom:22px}}
+
+/* Shared tooltip treatment for the 2D website and 3D showroom. */
+#drcgf-site-tooltip,#strip-tooltip,#table-tooltip{
+  position:fixed;z-index:10020;pointer-events:none;box-sizing:border-box;
+  width:max-content;max-width:min(310px,calc(100vw - 20px));
+  padding:10px 14px;border:1px solid #ffffffeb;border-radius:13px;
+  background:linear-gradient(140deg,#f4fbfff5,#e2ebfff5);
+  color:#23416c;font:600 12px/1.45 "Segoe UI",Arial,sans-serif;
+  text-align:center;overflow-wrap:anywhere;white-space:normal;
+  box-shadow:0 5px 20px #34578233,inset 0 1px #fff;backdrop-filter:blur(14px);
+}
+#drcgf-site-tooltip[hidden]{display:none!important}
+#drcgf-site-tooltip:not([hidden]){animation:drcgf-tooltip-in .16s ease-out}
+@keyframes drcgf-tooltip-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){#drcgf-site-tooltip:not([hidden]){animation:none}}
+
+/* Same switch location in both website views, including phones. */
+.drcgf-view-switch.is-showroom{left:20px;right:auto;bottom:22px}
+@media(max-width:600px){.drcgf-view-switch.is-showroom{left:12px;right:auto;bottom:16px}}

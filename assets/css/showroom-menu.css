@@ -1,0 +1,73 @@
+#sm3-nav,#sm3-toggle{font:600 12px/1.4 "Segoe UI",Arial,sans-serif;color:#294b74;box-sizing:border-box}#sm3-toggle{position:fixed;z-index:30;left:134px;bottom:22px;display:flex;align-items:center;justify-content:center;gap:7px;height:44px;padding:0 14px;border:1px solid #ffffffed;border-radius:28px;background:linear-gradient(140deg,#f1f9fff2,#e0eaffed);box-shadow:0 4px 22px #123f7030;cursor:pointer}#sm3-toggle svg,#sm3-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}#sm3-toggle[aria-expanded=true]{background:#d3eaff;color:#174c80}#sm3-nav{display:none;position:fixed;left:20px;bottom:78px;width:min(360px,calc(100vw - 40px));max-height:70dvh;overflow:auto;overscroll-behavior:contain;z-index:29;padding:14px;border:1px solid #fff;border-radius:22px;background:linear-gradient(145deg,#f5fbfff5,#dfeafff5);box-shadow:0 12px 45px #254f7f3d;backdrop-filter:blur(22px);scrollbar-width:thin;scrollbar-color:#a1bdd9 transparent}#sm3-nav.is-open{display:block}#sm3-nav a{color:inherit;text-decoration:none}#sm3-nav .sm3-link,#sm3-nav summary{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:12px;border-radius:12px;cursor:pointer;list-style:none}#sm3-nav summary::-webkit-details-marker{display:none}#sm3-nav summary:hover,#sm3-nav a:hover{background:#ffffffb8;color:#126ca3}#sm3-nav details[open]>summary{background:#fff9;color:#17659b}#sm3-nav .sm3-sub{padding:4px 0 7px 10px;border-left:1px solid #b8cee5;margin:3px 0 8px 14px}#sm3-nav .sm3-sub a{display:block;padding:9px 11px;border-radius:9px;font-size:12px;font-weight:500}#sm3-nav :is(a,summary,button,input):focus-visible,#sm3-toggle:focus-visible{outline:2px solid #3081b9;outline-offset:3px}#sm3-nav .sm3-search{margin:12px 0 0;padding:12px 0 0;border-top:1px solid #afcae76e}#sm3-nav .sm3-search label{display:block;margin-bottom:6px;font-size:11px}#sm3-nav .sm3-search>div{display:flex;background:#fff9;border:1px solid #bad1e6;border-radius:12px;overflow:hidden}#sm3-nav input{min-width:0;width:100%;padding:10px;border:0;background:none;color:#294b74;font:inherit}#sm3-nav .sm3-search button{display:grid;place-items:center;width:40px;border:0;background:#d6eafb;color:#295a83;cursor:pointer}@media(min-width:1150px){#sm3-toggle{display:none}#sm3-nav{display:flex;position:static;align-items:center;justify-content:center;gap:2px;margin:0 auto;padding:0;width:auto;max-height:none;overflow:visible;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none}#sm3-nav summary,#sm3-nav .sm3-link{padding:9px 10px;white-space:nowrap}#sm3-nav .sm3-group{position:relative}#sm3-nav .sm3-sub{position:absolute;top:calc(100% + 12px);left:0;width:255px;max-height:65dvh;overflow:auto;margin:0;padding:9px;border:1px solid #fff;border-radius:16px;background:linear-gradient(140deg,#f4fbfffa,#e3edfffa);box-shadow:0 10px 30px #34578233;backdrop-filter:blur(22px)}#sm3-nav .sm3-search{display:none}.top{overflow:visible}}@media(max-width:600px){#sm3-toggle{left:120px;bottom:16px;height:39px;padding:0 12px}#sm3-nav{left:12px;bottom:68px;width:min(360px,calc(100vw - 24px))}}
+#sm3-nav .sm3-search-link{display:none}@media(min-width:1150px){#sm3-nav .sm3-search-link{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%}}
+
+/* Refined glass navigation, shared line icons and clear dropdown hierarchy. */
+#sm3-nav .sm3-icon{width:17px;height:17px;flex:none;color:#5387b3;stroke-width:1.65;stroke-linejoin:round}
+#sm3-nav .sm3-label{flex:1;text-align:left}
+#sm3-nav .sm3-chevron{width:14px;height:14px;flex:none;color:#7c95b7;transition:transform .2s}
+#sm3-nav details[open] .sm3-chevron{transform:rotate(180deg)}
+#sm3-nav summary,#sm3-nav .sm3-link{border:1px solid transparent;transition:background .2s,box-shadow .2s,border-color .2s,color .2s}
+#sm3-nav summary:hover,#sm3-nav .sm3-link:hover,#sm3-nav details[open]>summary{border-color:#ffffffed;background:linear-gradient(135deg,#fffdf5,#e4f3ffdd);box-shadow:0 3px 12px #648bbb20,inset 0 1px #fff}
+#sm3-nav .sm3-sub a{position:relative;transition:background .18s,color .18s}
+#sm3-nav .sm3-sub a:hover{background:linear-gradient(100deg,#d9edffad,#ffffffd9);color:#176b9f}
+#sm3-toggle{background:linear-gradient(135deg,#ffffffeb,#dfedfff0);border-color:#fff;box-shadow:0 4px 16px #527eae30,inset 0 1px #fff;transition:background .2s,box-shadow .2s}
+#sm3-toggle:hover,#sm3-toggle[aria-expanded=true]{background:linear-gradient(135deg,#effcff,#dce2ff);box-shadow:0 0 0 1px #b7d3ee80,0 4px 18px #4b9ad532}
+#sm3-toggle svg{stroke-width:1.65;stroke-linejoin:round;color:#3b78a3}
+@media(min-width:1150px){
+ #sm3-nav{gap:3px;padding:4px;border:1px solid #ffffff8c;border-radius:24px;background:linear-gradient(120deg,#f8fcff75,#e3eaff40);box-shadow:inset 0 1px #fff9}
+ #sm3-nav summary,#sm3-nav .sm3-link{padding:8px 9px;border-radius:20px;gap:6px;font-size:11px}
+ #sm3-nav .sm3-sub{top:calc(100% + 14px);padding:10px;border-radius:19px;border-color:#fff;background:linear-gradient(140deg,#f8fcfffa,#e6edfffa);box-shadow:0 12px 35px #3d689631,inset 0 1px #fff}
+ #sm3-nav .sm3-search-link{margin-right:2px;border:1px solid #fff9;background:#f3f9ff9c;box-shadow:inset 0 1px #fff}
+}
+#sm3-mobile-tools{display:contents}
+@media(max-width:900px){
+ #sm3-mobile-tools{position:fixed;left:50%;bottom:var(--sm3-tools-bottom,132px);transform:translateX(-50%);z-index:30;display:flex;align-items:center;justify-content:center;gap:8px;width:max-content;height:38px}
+ #sm3-mobile-tools .drcgf-view-switch.is-showroom{position:static;left:auto;right:auto;bottom:auto;padding:4px;box-shadow:0 4px 16px #527eae30;}
+ #sm3-mobile-tools .drcgf-view-switch a{height:28px;min-width:38px;padding:0 9px}
+ #sm3-mobile-tools #sm3-toggle{position:static;left:auto;bottom:auto;height:38px;padding:0 13px;font-size:12px}
+ #sm3-nav{left:12px;bottom:calc(var(--sm3-tools-bottom,132px) + 46px);width:min(360px,calc(100vw - 24px));max-height:calc(100dvh - var(--sm3-tools-bottom,132px) - 70px);padding:12px;border-radius:21px}
+ #sm3-nav summary,#sm3-nav .sm3-link{justify-content:flex-start;gap:12px;padding:12px}
+ #sm3-nav .sm3-icon{width:19px;height:19px}
+ #table-controls{bottom:calc(var(--sm3-tools-bottom,132px) + 48px)}
+}
+@media(prefers-reduced-motion:reduce){#sm3-nav *,#sm3-toggle{transition:none!important}}
+
+/* Desktop hover bridge keeps the dropdown reachable across its visual gap. */
+@media(min-width:1150px){
+ #sm3-nav summary,#sm3-nav .sm3-link{font-size:12px;padding-inline:8px}
+ #sm3-nav .sm3-sub a{font-size:13px;line-height:1.5}
+ #sm3-nav .sm3-group[open]::after{content:"";position:absolute;left:0;top:100%;width:255px;height:16px}
+}
+/* A brief light sweep across the logo, with a long quiet interval. */
+body[data-view="3d"] .top .brand{position:relative;isolation:isolate}
+body[data-view="3d"] .top .brand::after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(112deg,rgba(255,255,255,0) 22%,rgba(255,255,255,.04) 29%,rgba(255,255,255,.18) 36%,rgba(255,255,255,.47) 43%,rgba(255,255,255,.85) 50%,rgba(255,255,255,.47) 57%,rgba(255,255,255,.18) 64%,rgba(255,255,255,.04) 71%,rgba(255,255,255,0) 78%);
+ background-size:235% 100%;background-position:100% 0;
+ -webkit-mask:url('/showroom/assets/dr-cgf-logo.png') center/contain no-repeat;
+ mask:url('/showroom/assets/dr-cgf-logo.png') center/contain no-repeat;
+ mask-mode:alpha;opacity:0;animation:sm3-logo-shine 7s ease-in-out .45s infinite;
+}
+@keyframes sm3-logo-shine{
+ 0%{background-position:100% 0;opacity:0}
+ 4%,28%{opacity:.45}
+ 9%,23%{opacity:1}
+ 32%,100%{background-position:0 0;opacity:0}
+}
+@media(prefers-reduced-motion:reduce){body[data-view="3d"] .top .brand::after{animation:none}}
+
+/* Center the desktop navigation on the viewport, independently of side controls. */
+@media(min-width:1150px){
+ #sm3-nav{position:absolute;left:50%;top:50%;bottom:auto;height:auto;transform:translate(-50%,-50%);margin:0;width:max-content}
+ .top>.top-nav{margin-left:auto}
+}
+
+@media(min-width:1150px) and (max-width:1399px){
+ .top{left:20px;right:20px;padding-inline:16px}
+ .top>.top-nav{gap:6px}
+ .top-nav :is(#auto-tour,#list-toggle){padding:8px 9px;font-size:11px;gap:5px}
+ .top-nav :is(#auto-tour,#list-toggle) .icon{width:16px;height:16px}
+}
+
+/* Lower the desktop rotation controls slightly. */
+@media(min-width:901px){#table-controls{bottom:180px}}
