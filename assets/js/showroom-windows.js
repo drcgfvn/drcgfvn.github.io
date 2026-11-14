@@ -61,6 +61,8 @@
       }
       notificationPreviews();
       var content=doc.querySelector("#main,main,#content");
+      // Page-wide 2D shell styling is redundant inside the catalogue drawer.
+      content.classList.remove("drcgf-page-shell");
       new MutationObserver(notificationPreviews).observe(content,{childList:true,subtree:true});
       doc.documentElement.dataset.siteWindow = "true";
       var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=2";
