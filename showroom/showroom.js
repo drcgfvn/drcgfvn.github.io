@@ -479,6 +479,9 @@ function select(index, focusTarget = markerButtons[index], automatic = false) {
   toggleCatalog(false);
   experience.classList.add('inspect');
   $('#table-controls').hidden = true;
+  const waitForCamera = mobile.matches && !!renderer && !reducedMotion.matches
+    && (entering || details.classList.contains('await-camera'));
+  details.classList.toggle('await-camera',waitForCamera);
   details.hidden = exit.hidden = readDetails.hidden = $('#controls').hidden = false;
   markers.hidden = true;
   $('#position').textContent = groups[p.group].toUpperCase()+' / '+serial(index);
@@ -492,7 +495,7 @@ function select(index, focusTarget = markerButtons[index], automatic = false) {
     button.disabled = adjacent[button.dataset.move] < 0;
   }
   showTab(entering ? 'info' : tab);
-  if (entering || document.activeElement.disabled || document.activeElement.closest('#catalog')) {
+  if (!waitForCamera && (entering || document.activeElement.disabled || document.activeElement.closest('#catalog'))) {
     $('#product-name').focus({preventScroll:true});
   }
   $('.details-scroll').scrollTop = 0;
@@ -505,6 +508,7 @@ function closeProduct(restoreFocus = true) {
   if (selected < 0) return;
   selected = hovered = -1;
   experience.classList.remove('inspect');
+  details.classList.remove('await-camera');
   $('#table-controls').hidden = false;
   details.hidden = exit.hidden = readDetails.hidden = $('#controls').hidden = true;
   markers.hidden = !renderer;
@@ -1105,6 +1109,10 @@ function buildRoom() {
       }
     });
     renderer.render(scene,camera);
+    if(t===1 && selected>=0 && details.classList.contains('await-camera')){
+      details.classList.remove('await-camera');
+      $('#product-name').focus({preventScroll:true});
+    }
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
