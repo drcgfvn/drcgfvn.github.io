@@ -3,7 +3,8 @@
   if (window.self !== window.top) {
     document.documentElement.dataset.siteWindow = "true";
     var style = document.createElement("link"); style.id = "drcgf-window-content-style";
-    style.rel = "stylesheet"; style.href = "/assets/css/showroom-window-content.css?v=1";
+    style.rel = "stylesheet"; style.href = "/assets/css/showroom-window-content.css?v=3";
+    var critical=document.createElement("style");critical.textContent="html,body{height:100%!important;overflow:hidden!important}body{visibility:hidden}html[data-site-window] body #main{visibility:visible}";document.head.appendChild(critical);
     document.head.appendChild(style);
     return;
   }

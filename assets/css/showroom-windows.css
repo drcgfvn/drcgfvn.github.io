@@ -37,3 +37,6 @@
 #site-window .sw-actions button:hover:not(:disabled){background:#eff9ffe6;border-color:#fff;box-shadow:0 0 12px #ccf3ff,inset 0 1px #fff}
 #site-window .sw-body{border-radius:12px;background:transparent}
 @media(max-width:900px){#site-window h2{font-size:26px;line-height:1.2}#site-window .sw-header{gap:8px}}
+
+#catalog.has-content{overflow:hidden!important}
+#site-window .sw-frame-host{min-height:0;overflow:hidden}

@@ -65,11 +65,12 @@
       content.classList.remove("drcgf-page-shell");
       new MutationObserver(notificationPreviews).observe(content,{childList:true,subtree:true});
       doc.documentElement.dataset.siteWindow = "true";
-      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=2";
+      var css = doc.createElement("link"); css.rel = "stylesheet"; css.href = "/assets/css/showroom-window-content.css?v=3";
       function ready() {
         if (token !== serial) return;
         clearTimeout(loadTimer);
-        var h = doc.querySelector("#main h1,main h1,#content h1"), text = (h && h.textContent.trim()) || doc.title.replace(/\s*[|–-]\s*DR\.CGF.*$/i, "");
+        var h = content.querySelector("h1,.section-title-main,.entry-title,.catalogue-title h2"), text = (h && h.textContent.trim()) || doc.title.replace(/\s*[|–-]\s*DR\.CGF.*$/i, "");
+        if(h){var headingBlock=h.closest(".section-title-container,.catalogue-title") || h;headingBlock.setAttribute("data-sw-duplicate-heading", "true");}
         title.textContent = text || "DR.CGF"; activeFrame.title = "Nội dung: " + title.textContent; document.title = title.textContent + " | DR.CGF 3D";
         status.hidden = true; activeFrame.classList.add("is-ready");
       }
@@ -116,7 +117,7 @@
       var menu=document.querySelector("#sm3-nav"), menuToggle=document.querySelector("#sm3-toggle");
       if(menu){menu.classList.remove("is-open");menu.querySelectorAll("details[open]").forEach(function(d){d.open=false;});}
       if(menuToggle){menuToggle.setAttribute("aria-expanded","false");menuToggle.setAttribute("aria-label","Mở menu website");}
-      dialog.hidden=false;catalogShell.hidden=false;catalogShell.classList.add("has-content");
+      catalogShell.classList.add("has-content");dialog.hidden=false;catalogShell.hidden=false;
       catalogShell.setAttribute("aria-label","Nội dung DR.CGF");
       document.getElementById("list-toggle").setAttribute("aria-expanded","true");
       document.body.classList.add("site-window-open");
@@ -124,7 +125,7 @@
     fitPanel();
     if (frame) frame.remove();
     frame = document.createElement("iframe"); frame.title = "Nội dung DR.CGF"; frame.name = "drcgf-content-window";
-    frame.setAttribute("referrerpolicy", "same-origin"); bindFrame(frame, token);
+    frame.setAttribute("referrerpolicy", "same-origin"); frame.setAttribute("scrolling","no"); bindFrame(frame, token);
     url.searchParams.set("embed3d", "1"); frame.src = url.href; host.appendChild(frame);
     announce(); return true;
   }
