@@ -801,18 +801,20 @@ function buildRoom() {
       shader.fragmentShader='uniform float uProductTime; uniform float uProductPhase; uniform float uGroupFocus;\n'+shader.fragmentShader;
       shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
         #ifdef USE_MAP
-          // Lift the whole package smoothly while preserving its original hue.
+          // Sweep a soft highlight across the original package colours.
           float phase = fract(uProductTime / 7.0 + uProductPhase);
-          float pulse = smoothstep(.08,.23,phase) * (1.0 - smoothstep(.30,.48,phase));
+          float sweep = mix(-.32,1.32,smoothstep(.04,.40,phase));
+          float distanceToHighlight = abs(vMapUv.x + (vMapUv.y - .5) * .12 - sweep);
+          float highlight = 1.0 - smoothstep(.025,.25,distanceToHighlight);
           float brightest = max(diffuseColor.r,max(diffuseColor.g,diffuseColor.b));
-          diffuseColor.rgb *= 1.0 + step(0.0,uProductTime) * pulse * .85 * (1.0 - brightest);
+          diffuseColor.rgb *= 1.0 + step(0.0,uProductTime) * highlight * .85 * (1.0 - brightest);
           float neutral=dot(diffuseColor.rgb,vec3(.2126,.7152,.0722));
           diffuseColor.rgb=mix(vec3(neutral*.9),diffuseColor.rgb,uGroupFocus);
           diffuseColor.a*=mix(.55,1.0,uGroupFocus);
         #endif
       `);
     };
-    material.customProgramCacheKey=()=> 'drcgf-product-brightness-pulse';
+    material.customProgramCacheKey=()=> 'drcgf-product-brightness-sweep';
     const height = Math.min(1.07,1.21/p.aspect)*(p.group === 3 ? 1.27 : 1);
     const geometry = new T.PlaneGeometry(1,1);
     geometry.translate(0,.5,0);
