@@ -596,9 +596,7 @@ function buildRoom() {
   renderer = new T.WebGLRenderer({antialias:true,alpha:true});
   const renderDensity = () => mobile.matches
     ? Math.min(devicePixelRatio || 1,2.5)
-    : selected >= 0
-      ? Math.max(1.5,Math.min(devicePixelRatio || 1,1.75))
-      : Math.max(1.25,Math.min(devicePixelRatio || 1,1.5));
+    : Math.max(1.25,Math.min(devicePixelRatio || 1,1.5));
   renderer.setPixelRatio(renderDensity());
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -898,6 +896,7 @@ function buildRoom() {
   let flightDuration = 0;
   let previousSelection = -1;
   let viewportBounds = render.getBoundingClientRect();
+  const canvasSize = new T.Vector2();
   let canvasProjectionScale = 1;
   let canvasProjectionShift = 0;
   const mobileOverviewZoom = 1.05;
@@ -959,16 +958,15 @@ function buildRoom() {
     if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
     const now = performance.now();
     const enteringCloseup = selected >= 0 && previousSelection < 0;
-    const enteringOnMobile = mobile.matches && enteringCloseup;
     entryProjectionScale = 1;
     entryProjectionShift = 0;
-    if(enteringOnMobile && !reducedMotion.matches){
-      // The inspect layout shrinks and moves the canvas before the camera flies.
-      // Preserve its former pixel scale and screen centre, then ease to the new lens.
+    const exitingCloseup = selected < 0 && previousSelection >= 0;
+    if (enteringCloseup || (!mobile.matches && exitingCloseup)) {
+      // Measure the new framing before rendering the first transition frame.
       const before = viewportBounds;
       resize();
       const after = viewportBounds;
-      if(before.height && after.height){
+      if (!reducedMotion.matches && before.height && after.height) {
         entryProjectionScale = before.height/after.height;
         entryProjectionShift = 2*((before.top+before.height/2)-(after.top+after.height/2))/after.height;
       }
@@ -1025,12 +1023,17 @@ function buildRoom() {
     const closeupHeight = controlSpace
       ? parseFloat(getComputedStyle(render,'::before').height)
       : NaN;
-    const framingHeight = Number.isFinite(closeupHeight)
+    let framingHeight = Number.isFinite(closeupHeight)
       ? Math.max(1,closeupHeight)
       : Math.max(1,Number.isFinite(overviewHeight) ? overviewHeight : height-controlSpace);
-    const framingTop = controlSpace
+    let framingTop = controlSpace
       ? parseFloat(getComputedStyle(render).getPropertyValue('--closeup-framing-top')) || 0
       : 0;
+    if (!mobile.matches) {
+      framingTop = parseFloat(renderStyle.getPropertyValue('--desktop-frame-top')) || 0;
+      const framingBottom = parseFloat(renderStyle.getPropertyValue('--desktop-frame-bottom')) || 0;
+      framingHeight = Math.max(1,height-framingTop-framingBottom);
+    }
     viewportBounds = {top:bounds.top+framingTop,height:framingHeight};
     canvasProjectionScale = framingHeight/height;
     canvasProjectionShift = (2*framingTop+framingHeight)/height-1;
@@ -1039,7 +1042,10 @@ function buildRoom() {
     updateProductEdges();
     const density = renderDensity();
     if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
-    renderer.setSize(width,height,false);
+    renderer.getSize(canvasSize);
+    if (canvasSize.x !== width || canvasSize.y !== height) {
+      renderer.setSize(width,height,false);
+    }
     setTargets();
   }
 

@@ -845,3 +845,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   border:1px solid #ffffff80;border-radius:50%;
   background:#263e68;color:white;font-size:24px;
 }
+
+/* Keep the desktop canvas intact while the camera changes its framing. */
+@media (min-width:901px) {
+  #render, .inspect #render { inset:0; }
+  #render { --desktop-frame-top:130px; --desktop-frame-bottom:100px; }
+  .inspect #render { --desktop-frame-top:70px; --desktop-frame-bottom:0px; }
+}
