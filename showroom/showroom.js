@@ -958,7 +958,8 @@ function buildRoom() {
     const density = renderDensity();
     if (renderer.getPixelRatio() !== density) renderer.setPixelRatio(density);
     const now = performance.now();
-    const enteringOnMobile = mobile.matches && selected >= 0 && previousSelection < 0;
+    const enteringCloseup = selected >= 0 && previousSelection < 0;
+    const enteringOnMobile = mobile.matches && enteringCloseup;
     entryProjectionScale = 1;
     entryProjectionShift = 0;
     if(enteringOnMobile && !reducedMotion.matches){
@@ -986,7 +987,8 @@ function buildRoom() {
     } else {
       setTargets();
     }
-    const rotationMs = reducedMotion.matches ? 0 : enteringOnMobile ? 950 : 580;
+    const closeupEntryMs = mobile.matches ? 950 : 780;
+    const rotationMs = reducedMotion.matches ? 0 : enteringCloseup ? closeupEntryMs : 580;
     if (selected >= 0) {
       orientTo(selected,rotationMs);
       rotationStarted = now;
