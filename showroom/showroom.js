@@ -801,17 +801,18 @@ function buildRoom() {
       shader.fragmentShader='uniform float uProductTime; uniform float uProductPhase; uniform float uGroupFocus;\n'+shader.fragmentShader;
       shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
         #ifdef USE_MAP
-          float sweep=fract(uProductTime*.065+uProductPhase)*2.0-.5;
-          float distanceToLight=(vMapUv.x*.88+vMapUv.y*.12)-sweep;
-          float reflection=exp(-pow(distanceToLight/.095,2.0));
-          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.93,.98,1.0),reflection*.065);
+          // Lift the whole package smoothly while preserving its original hue.
+          float phase = fract(uProductTime * .1 + uProductPhase);
+          float pulse = smoothstep(.10,.24,phase) * (1.0 - smoothstep(.24,.40,phase));
+          float brightest = max(diffuseColor.r,max(diffuseColor.g,diffuseColor.b));
+          diffuseColor.rgb *= 1.0 + step(0.0,uProductTime) * pulse * .22 * (1.0 - brightest);
           float neutral=dot(diffuseColor.rgb,vec3(.2126,.7152,.0722));
           diffuseColor.rgb=mix(vec3(neutral*.9),diffuseColor.rgb,uGroupFocus);
           diffuseColor.a*=mix(.55,1.0,uGroupFocus);
         #endif
       `);
     };
-    material.customProgramCacheKey=()=> 'drcgf-product-soft-reflection-v2-muted';
+    material.customProgramCacheKey=()=> 'drcgf-product-brightness-pulse';
     const height = Math.min(1.07,1.21/p.aspect)*(p.group === 3 ? 1.27 : 1);
     const geometry = new T.PlaneGeometry(1,1);
     geometry.translate(0,.5,0);
