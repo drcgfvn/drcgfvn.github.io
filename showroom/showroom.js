@@ -784,7 +784,12 @@ function buildRoom() {
   for (const [radius,top] of [[5.05,.65],[3.59,1.88],[2.12,3.09]]) {
     hoop(radius-.018,top-.044,.085,edgeGlow);
   }
-  const productLightClock={value:0};
+  const productLightClock={value:-1};
+  const shineDuration = 3200;
+  let shiningProduct = -1;
+  let lastShiningProduct = -1;
+  let shineStarted = 0;
+  let nextShineAt = 0;
   const loader = new T.TextureLoader();
   const models = products.map((p,index) => {
     const placement = placements[index];
@@ -794,27 +799,27 @@ function buildRoom() {
     texture.anisotropy = Math.min(8,renderer.capabilities.getMaxAnisotropy());
     const material = new T.MeshBasicMaterial({map:texture,transparent:mobile.matches,depthWrite:true,alphaTest:.08,alphaToCoverage:true,side:T.DoubleSide,toneMapped:false,fog:false});
     const focus={value:matchesGroup(p) ? 1 : 0,target:matchesGroup(p) ? 1 : 0};
+    const shineVisibility = {value:0};
     material.onBeforeCompile = shader => {
       shader.uniforms.uGroupFocus=focus;
       shader.uniforms.uProductTime=productLightClock;
-      shader.uniforms.uProductPhase={value:index*.137};
-      shader.fragmentShader='uniform float uProductTime; uniform float uProductPhase; uniform float uGroupFocus;\n'+shader.fragmentShader;
+      shader.uniforms.uShineVisibility=shineVisibility;
+      shader.fragmentShader='uniform float uProductTime; uniform float uShineVisibility; uniform float uGroupFocus;\n'+shader.fragmentShader;
       shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
         #ifdef USE_MAP
           // Sweep a soft highlight across the original package colours.
-          float phase = fract(uProductTime / 7.0 + uProductPhase);
-          float sweep = mix(-.32,1.32,smoothstep(.04,.40,phase));
+          float sweep = mix(-.36,1.36,smoothstep(0.0,1.0,uProductTime));
           float distanceToHighlight = abs(vMapUv.x + (vMapUv.y - .5) * .12 - sweep);
-          float highlight = 1.0 - smoothstep(.025,.25,distanceToHighlight);
+          float highlight = 1.0 - smoothstep(0.0,.29,distanceToHighlight);
           float brightest = max(diffuseColor.r,max(diffuseColor.g,diffuseColor.b));
-          diffuseColor.rgb *= 1.0 + step(0.0,uProductTime) * highlight * .85 * (1.0 - brightest);
+          diffuseColor.rgb *= 1.0 + uShineVisibility * highlight * .32 * (1.0 - brightest);
           float neutral=dot(diffuseColor.rgb,vec3(.2126,.7152,.0722));
           diffuseColor.rgb=mix(vec3(neutral*.9),diffuseColor.rgb,uGroupFocus);
           diffuseColor.a*=mix(.55,1.0,uGroupFocus);
         #endif
       `);
     };
-    material.customProgramCacheKey=()=> 'drcgf-product-brightness-sweep';
+    material.customProgramCacheKey=()=> 'drcgf-product-front-sweep';
     const height = Math.min(1.07,1.21/p.aspect)*(p.group === 3 ? 1.27 : 1);
     const geometry = new T.PlaneGeometry(1,1);
     geometry.translate(0,.5,0);
@@ -826,7 +831,7 @@ function buildRoom() {
     mesh.userData.index = index;
     mesh.renderOrder = 0;
     table.add(mesh);
-    return {mesh,x,z,top,height,angle,radius,ring:placement.ring,focus};
+    return {mesh,x,z,top,height,angle,radius,ring:placement.ring,focus,shineVisibility};
   });
 
   function updateProductEdges() {
@@ -1145,7 +1150,6 @@ function buildRoom() {
     const elapsed = Math.min(50,now-lastFrame);
     const blend = reducedMotion.matches ? 1 : 1-Math.exp(-elapsed/115);
     lastFrame = now;
-    productLightClock.value=reducedMotion.matches ? -20 : now*.001;
     edgeClock.value=reducedMotion.matches ? 0 : now*.001;
     if (rotationTarget !== null) {
       const progress = rotationDuration ? T.MathUtils.clamp((now-rotationStarted)/rotationDuration,0,1) : 1;
@@ -1180,8 +1184,30 @@ function buildRoom() {
     // Product cutouts stand vertically on the table: only yaw toward the lens.
     // Full camera-facing sprites tilt with camera pitch and appear to fall forward.
     const productYaw = Math.atan2(camera.position.x-aim.x,camera.position.z-aim.z);
+    const canShine = selected < 0 && !reducedMotion.matches && !drag;
+    if (!canShine || now >= shineStarted + shineDuration) shiningProduct = -1;
+    if (canShine && shiningProduct < 0 && now >= nextShineAt) {
+      let closestFacing = Math.cos(.22);
+      models.forEach(({angle},index) => {
+        if (index === lastShiningProduct || !matchesGroup(products[index])) return;
+        const facing = Math.cos(angle+tableAngle-productYaw);
+        if (facing > closestFacing) {
+          closestFacing = facing;
+          shiningProduct = index;
+        }
+      });
+      if (shiningProduct >= 0) {
+        lastShiningProduct = shiningProduct;
+        shineStarted = now;
+        nextShineAt = now + shineDuration + 1500;
+      }
+    }
+    productLightClock.value = (now-shineStarted)/shineDuration;
     if (hovered < 0 || drag || !catalog.hidden) tableTooltip.hidden = true;
-    models.forEach(({mesh,height,focus},index) => {
+    models.forEach(({mesh,height,focus,angle,shineVisibility},index) => {
+      const facing = Math.cos(angle+tableAngle-productYaw);
+      const frontLight = index === shiningProduct ? T.MathUtils.smoothstep(facing,.85,.98) : 0;
+      shineVisibility.value = T.MathUtils.lerp(shineVisibility.value,frontLight,blend);
       focus.value=T.MathUtils.lerp(focus.value,focus.target,blend);
       mesh.rotation.set(0,productYaw-tableAngle,0);
       const width = height*products[index].aspect;
