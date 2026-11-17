@@ -891,6 +891,26 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   stroke-linecap:round;
 }
 
+/* Photo preview opens by the right edge, with an optional full viewport mode. */
+#notification-viewer:not(.is-fullscreen) {
+  inset: 12px 12px 12px auto;
+  width:min(640px,calc(100% - 24px));
+  height:calc(100dvh - 24px);
+  border-radius:18px;
+}
+#notification-viewer:not(.is-fullscreen) img {
+  max-width:calc(100% - 20px);
+  max-height:calc(100% - 100px);
+}
+#notification-viewer form {display:flex;gap:8px}
+#notification-viewer .viewer-fullscreen {width:auto;padding:0 12px;font-size:13px}
+@media(max-width:600px) {
+  #notification-viewer:not(.is-fullscreen) {
+    top:auto;
+    height:min(76dvh,640px);
+  }
+}
+
 /* Keep the desktop canvas intact while the camera changes its framing. */
 @media (min-width:901px) {
   #render, .inspect #render { inset:0; }

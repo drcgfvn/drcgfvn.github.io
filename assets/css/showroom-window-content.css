@@ -151,3 +151,13 @@ html:root[data-site-window] body[class] #wrapper #main#main .drcgf-related-news 
  html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid .catalogue-card__body h3{font-size:13px!important}
  html:root[data-site-window] body[class] #wrapper #main#main .catalogue-grid .catalogue-card__image{height:140px!important}
 }
+
+html[data-site-window] body #drcgf-image-lightbox.is-open:not(.is-fullscreen){
+  inset:8px 8px 8px auto!important;
+  width:calc(100% - 16px);
+}
+html[data-site-window] body #drcgf-image-lightbox.is-open.is-fullscreen{inset:0!important}
+
+@media(max-width:600px){
+  html[data-site-window] body #drcgf-image-lightbox.is-open:not(.is-fullscreen){top:auto!important}
+}

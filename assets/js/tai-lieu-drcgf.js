@@ -161,8 +161,11 @@
     lb.id='drcgf-image-lightbox';
     lb.className='drcgf-image-lightbox';
     lb.setAttribute('aria-hidden','true');
-    lb.innerHTML='<span class="drcgf-lightbox-close drcgf-round-close" role="button" tabindex="0" aria-label="Đóng">×</span><button class="drcgf-lightbox-prev" type="button" aria-label="Ảnh trước">‹</button><div class="drcgf-lightbox-stage"><img alt=""><div class="drcgf-lightbox-caption"></div></div><button class="drcgf-lightbox-next" type="button" aria-label="Ảnh tiếp theo">›</button><div class="drcgf-lightbox-counter"></div>';
+    lb.innerHTML='<button class="drcgf-lightbox-fullscreen" type="button" aria-pressed="false">Toàn màn hình</button><span class="drcgf-lightbox-close drcgf-round-close" role="button" tabindex="0" aria-label="Đóng">×</span><button class="drcgf-lightbox-prev" type="button" aria-label="Ảnh trước">‹</button><div class="drcgf-lightbox-stage"><img alt=""><div class="drcgf-lightbox-caption"></div></div><button class="drcgf-lightbox-next" type="button" aria-label="Ảnh tiếp theo">›</button><div class="drcgf-lightbox-counter"></div>';
     document.body.appendChild(lb);
+    lb.querySelector('.drcgf-lightbox-fullscreen').onclick = function () {
+      setImageFullscreen(lb,!lb.classList.contains('is-fullscreen'));
+    };
     var imageClose=lb.querySelector('.drcgf-lightbox-close');imageClose.onclick=closeLightbox;imageClose.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();closeLightbox();}});
     lb.querySelector('.drcgf-lightbox-prev').onclick=function(e){e.stopPropagation();moveLightbox(-1);};
     lb.querySelector('.drcgf-lightbox-next').onclick=function(e){e.stopPropagation();moveLightbox(1);};
@@ -173,6 +176,16 @@
     lb.addEventListener('wheel',function(e){e.preventDefault();},{passive:false});
     return lb;
   }
+  function setImageFullscreen(lb,full) {
+    lb.classList.toggle('is-fullscreen',full);
+    var toggle = lb.querySelector('.drcgf-lightbox-fullscreen');
+    toggle.textContent = full ? 'Thu nhỏ' : 'Toàn màn hình';
+    toggle.setAttribute('aria-pressed',String(full));
+    // Expand the embedded content frame as well as the viewer within it.
+    if (document.documentElement.hasAttribute('data-site-window')) {
+      window.frameElement?.classList.toggle('photo-fullscreen',full);
+    }
+  }
   function showLightbox(){
     var lb=ensureLightbox(),x=lightboxState.items[lightboxState.index];if(!x)return;
     var img=lb.querySelector('.drcgf-lightbox-stage img');img.src=x.url;img.alt=x.name||'';
@@ -182,15 +195,15 @@
     lb.querySelector('.drcgf-lightbox-prev').style.display=many?'flex':'none';
     lb.querySelector('.drcgf-lightbox-next').style.display=many?'flex':'none';
   }
-  function openLightbox(items,index){lightboxState.items=items||[];lightboxState.index=index||0;var lb=ensureLightbox();showLightbox();lockPageScroll();lb.classList.add('is-open');lb.setAttribute('aria-hidden','false');document.body.classList.add('drcgf-lightbox-open');}
-  function closeLightbox(){var lb=document.getElementById('drcgf-image-lightbox');if(!lb||!lb.classList.contains('is-open'))return;lb.classList.remove('is-open');lb.setAttribute('aria-hidden','true');document.body.classList.remove('drcgf-lightbox-open');unlockPageScroll();}
+  function openLightbox(items,index){lightboxState.items=items||[];lightboxState.index=index||0;var lb=ensureLightbox();showLightbox();if(!lb.classList.contains('is-open'))lockPageScroll();lb.classList.add('is-open');lb.setAttribute('aria-hidden','false');document.body.classList.add('drcgf-lightbox-open');}
+  function closeLightbox(){var lb=document.getElementById('drcgf-image-lightbox');if(!lb||!lb.classList.contains('is-open'))return;setImageFullscreen(lb,false);lb.classList.remove('is-open');lb.setAttribute('aria-hidden','true');document.body.classList.remove('drcgf-lightbox-open');unlockPageScroll();}
   function moveLightbox(step){var n=lightboxState.items.length;if(!n)return;lightboxState.index=(lightboxState.index+step+n)%n;showLightbox();}
 
   document.addEventListener('keydown',function(e){
     var pv=document.getElementById('drcgf-pdf-viewer');
     if(pv&&pv.classList.contains('is-open')){if(e.key==='Escape')closePdfViewer();return;}
     var lb=document.getElementById('drcgf-image-lightbox');if(!lb||!lb.classList.contains('is-open'))return;
-    if(e.key==='Escape')closeLightbox();else if(e.key==='ArrowLeft')moveLightbox(-1);else if(e.key==='ArrowRight')moveLightbox(1);
+    if(e.key==='Escape'){if(lb.classList.contains('is-fullscreen'))setImageFullscreen(lb,false);else closeLightbox();}else if(e.key==='ArrowLeft')moveLightbox(-1);else if(e.key==='ArrowRight')moveLightbox(1);
   });
 
   function images(item){

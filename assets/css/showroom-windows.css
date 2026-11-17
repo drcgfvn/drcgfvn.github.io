@@ -44,3 +44,20 @@
 /* Allow Vietnamese descenders and long headings to occupy their full line boxes. */
 #site-window .sw-heading{overflow:visible}
 #site-window h2{display:block;-webkit-line-clamp:unset;overflow:visible;line-height:1.35;padding-bottom:5px;margin-bottom:10px;max-height:none}
+
+#catalog.has-content:has(iframe.photo-fullscreen){
+  position:fixed!important;
+  inset:0!important;
+  width:100%!important;
+  height:100dvh!important;
+  max-width:none!important;
+  max-height:none!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+}
+#catalog:has(iframe.photo-fullscreen) .sw-header{display:none}
+#catalog:has(iframe.photo-fullscreen) .sw-body{border-radius:0}
+body:has(iframe.photo-fullscreen) .top,
+body:has(iframe.photo-fullscreen) #drcgf-view-switch,
+body:has(iframe.photo-fullscreen) #sm3-nav{visibility:hidden}
