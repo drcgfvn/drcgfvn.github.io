@@ -462,14 +462,16 @@ function showTab(name) {
   });
   const p = products[selected];
   if (tab === 'photo') {
-    panel.innerHTML = '<img src="'+photo(p)+'" alt="Ảnh trưng bày '+p.name+'">';
+    const packagePhoto = photo(p);
+    panel.innerHTML = '<a class="notification-preview product-gallery-preview" href="'+packagePhoto+'" aria-label="Xem lớn ảnh bao bì '+p.name+'">'
+      +'<img src="'+packagePhoto+'" alt="Ảnh bao bì '+p.name+'"></a>';
     if (addedProductPhotos.has(p.id)) {
       const url = '/showroom/assets/product-gallery/'+p.id+'.jpg';
       panel.insertAdjacentHTML('beforeend',
         '<a class="notification-preview product-gallery-preview" href="'+url+'" aria-label="Xem lớn ảnh giới thiệu '+p.name+'">'
-        +'<img src="'+url+'" alt="Ảnh giới thiệu '+p.name+'" loading="lazy"></a>'
-        +'<p class="notification-hint">Chạm ảnh để xem rõ hơn</p>');
+        +'<img src="'+url+'" alt="Ảnh giới thiệu '+p.name+'" loading="lazy"></a>');
     }
+    panel.insertAdjacentHTML('beforeend','<p class="notification-hint">Chạm ảnh để xem rõ hơn</p>');
   } else if (tab === 'docs') {
     const receipt = p.receipt ? '<p>Số tiếp nhận: '+p.receipt+'</p>' : '<p>Chưa có số tiếp nhận để hiển thị.</p>';
     const reports = p.reports.length ? '<p>Mã hồ sơ theo tài liệu cung cấp:</p><ul>'+p.reports.map(code => '<li>'+code+'</li>').join('')+'</ul>' : '<p>Chưa có mã hồ sơ để hiển thị.</p>';
