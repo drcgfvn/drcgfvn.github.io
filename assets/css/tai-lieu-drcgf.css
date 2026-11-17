@@ -308,7 +308,7 @@ body #drcgf-image-lightbox.is-open.is-fullscreen {
   padding:0!important;
 }
 #drcgf-image-lightbox.is-fullscreen .drcgf-lightbox-stage img {max-height:100dvh;max-width:100%}
-#drcgf-image-lightbox.is-fullscreen .drcgf-lightbox-caption {bottom:8px}
+#drcgf-image-lightbox.is-fullscreen .drcgf-lightbox-caption {display:none!important}
 body #drcgf-image-lightbox .drcgf-lightbox-fullscreen {
   position:absolute;
   z-index:2;

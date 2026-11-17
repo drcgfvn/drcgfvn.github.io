@@ -922,7 +922,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 #notification-viewer .shrink-icon,
 #notification-viewer.is-fullscreen .expand-icon {display:none}
 #notification-viewer.is-fullscreen .shrink-icon {display:block}
-#notification-viewer:has(.viewer-thumbnails:not([hidden])) .viewer-image {
+#notification-viewer:not(.is-fullscreen):has(.viewer-thumbnails:not([hidden])) .viewer-image {
   max-width:calc(100% - 16px);
   max-height:calc(100% - 120px);
   transform:translateY(-10px);
@@ -937,6 +937,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 }
 #notification-viewer .viewer-prev {left:8px}
 #notification-viewer .viewer-next {right:8px}
+#notification-viewer.is-fullscreen .viewer-thumbnails {display:none}
 #notification-viewer .viewer-thumbnails {
   position:absolute;
   bottom:max(8px,env(safe-area-inset-bottom));
