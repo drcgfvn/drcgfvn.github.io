@@ -485,7 +485,7 @@ function showTab(name) {
 const notificationViewer = document.createElement('dialog');
 notificationViewer.id = 'notification-viewer';
 notificationViewer.setAttribute('aria-label','Ảnh phiếu công bố');
-notificationViewer.innerHTML = '<form method="dialog"><button aria-label="Đóng ảnh" autofocus>×</button></form><img alt="">';
+notificationViewer.innerHTML = '<form method="dialog"><button aria-label="Đóng ảnh" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></form><img alt="">';
 document.body.append(notificationViewer);
 
 function openNotificationViewer(url, description) {

@@ -849,9 +849,23 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 }
 #notification-viewer form {height:52px;padding:8px 0;display:flex;justify-content:flex-end;margin:0}
 #notification-viewer button {
-  width:36px;height:36px;
-  border:1px solid #ffffff80;border-radius:50%;
-  background:#263e68;color:white;font-size:24px;
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  padding:0;
+  border:1px solid #ffffff80;
+  border-radius:50%;
+  background:#263e68;
+  color:white;
+}
+#notification-viewer button svg {
+  display:block;
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
 }
 
 /* Keep the desktop canvas intact while the camera changes its framing. */
