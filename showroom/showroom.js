@@ -16,6 +16,12 @@ const currency = new Intl.NumberFormat('vi-VN');
 const serial = number => String(number+1).padStart(2,'0');
 const cleanedPhotos = new Set(['b5-60','mist','oil','peel','pink']);
 const photo = product => cleanedPhotos.has(product.id) ? '/showroom/assets/clean/'+product.id+'.png?v=29' : '/showroom/assets/'+product.id+'.webp?v=3';
+const addedProductPhotos = new Set([
+  'stem', 'aloe', 'balance', 'wash', 'healing', 'oil',
+  'polish', 'peel', 'sun', 'nmn', 'massage', 'pink',
+  'detox', 'calm', 'night', 'mask', 'micellar', 'mist',
+  'retinal', 'b5', 'spicule', 'tran'
+]);
 const descriptions = [
   'Khám phá các dòng serum, tinh chất và xịt khoáng của DR.CGF.',
   'Các dòng kem dưỡng ngày, đêm và kem chống nắng trong cùng một khu.',
@@ -457,6 +463,13 @@ function showTab(name) {
   const p = products[selected];
   if (tab === 'photo') {
     panel.innerHTML = '<img src="'+photo(p)+'" alt="Ảnh trưng bày '+p.name+'">';
+    if (addedProductPhotos.has(p.id)) {
+      const url = '/showroom/assets/product-gallery/'+p.id+'.jpg';
+      panel.insertAdjacentHTML('beforeend',
+        '<a class="notification-preview product-gallery-preview" href="'+url+'" aria-label="Xem lớn ảnh giới thiệu '+p.name+'">'
+        +'<img src="'+url+'" alt="Ảnh giới thiệu '+p.name+'" loading="lazy"></a>'
+        +'<p class="notification-hint">Chạm ảnh để xem rõ hơn</p>');
+    }
   } else if (tab === 'docs') {
     const receipt = p.receipt ? '<p>Số tiếp nhận: '+p.receipt+'</p>' : '<p>Chưa có số tiếp nhận để hiển thị.</p>';
     const reports = p.reports.length ? '<p>Mã hồ sơ theo tài liệu cung cấp:</p><ul>'+p.reports.map(code => '<li>'+code+'</li>').join('')+'</ul>' : '<p>Chưa có mã hồ sơ để hiển thị.</p>';
@@ -475,6 +488,7 @@ document.body.append(notificationViewer);
 
 function openNotificationViewer(url, description) {
   const image = notificationViewer.querySelector('img');
+  notificationViewer.setAttribute('aria-label',description);
   image.alt = description;
   image.src = url;
   if (!notificationViewer.open) notificationViewer.showModal();
