@@ -835,11 +835,19 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   border-radius:20px;
   background:#192d53;
   color:white;
-  overflow:auto;
+  overflow:hidden;
 }
 #notification-viewer::backdrop {background:#101d37c9;backdrop-filter:blur(8px)}
-#notification-viewer img {display:block;max-width:100%;height:auto;margin:auto}
-#notification-viewer form {position:sticky;top:0;padding:8px 0;display:flex;justify-content:flex-end}
+#notification-viewer img {
+  display:block;
+  max-width:calc(100vw - 50px);
+  max-height:calc(100dvh - 90px);
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  margin:auto;
+}
+#notification-viewer form {height:52px;padding:8px 0;display:flex;justify-content:flex-end;margin:0}
 #notification-viewer button {
   width:36px;height:36px;
   border:1px solid #ffffff80;border-radius:50%;
