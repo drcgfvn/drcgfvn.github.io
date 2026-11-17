@@ -161,7 +161,7 @@
     lb.id='drcgf-image-lightbox';
     lb.className='drcgf-image-lightbox';
     lb.setAttribute('aria-hidden','true');
-    lb.innerHTML='<button class="drcgf-lightbox-fullscreen" type="button" aria-pressed="false">Toàn màn hình</button><span class="drcgf-lightbox-close drcgf-round-close" role="button" tabindex="0" aria-label="Đóng">×</span><button class="drcgf-lightbox-prev" type="button" aria-label="Ảnh trước">‹</button><div class="drcgf-lightbox-stage"><img alt=""><div class="drcgf-lightbox-caption"></div></div><button class="drcgf-lightbox-next" type="button" aria-label="Ảnh tiếp theo">›</button><div class="drcgf-lightbox-counter"></div>';
+    lb.innerHTML='<button class="drcgf-lightbox-fullscreen" type="button" aria-pressed="false" aria-label="Toàn màn hình" title="Toàn màn hình"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="expand-icon" d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/><path class="shrink-icon" d="M4 9h5V4m11 5h-5V4M9 20v-5H4m11 5v-5h5"/></svg></button><span class="drcgf-lightbox-close drcgf-round-close" role="button" tabindex="0" aria-label="Đóng">×</span><button class="drcgf-lightbox-prev" type="button" aria-label="Ảnh trước">‹</button><div class="drcgf-lightbox-stage"><img alt=""><div class="drcgf-lightbox-caption"></div></div><button class="drcgf-lightbox-next" type="button" aria-label="Ảnh tiếp theo">›</button><div class="drcgf-lightbox-counter"></div>';
     document.body.appendChild(lb);
     lb.querySelector('.drcgf-lightbox-fullscreen').onclick = function () {
       setImageFullscreen(lb,!lb.classList.contains('is-fullscreen'));
@@ -179,7 +179,8 @@
   function setImageFullscreen(lb,full) {
     lb.classList.toggle('is-fullscreen',full);
     var toggle = lb.querySelector('.drcgf-lightbox-fullscreen');
-    toggle.textContent = full ? 'Thu nhỏ' : 'Toàn màn hình';
+    toggle.setAttribute('aria-label',full ? 'Thu nhỏ' : 'Toàn màn hình');
+  toggle.title = full ? 'Thu nhỏ' : 'Toàn màn hình';
     toggle.setAttribute('aria-pressed',String(full));
     // Expand the embedded content frame as well as the viewer within it.
     if (document.documentElement.hasAttribute('data-site-window')) {

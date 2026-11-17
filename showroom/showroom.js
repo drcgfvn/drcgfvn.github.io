@@ -485,22 +485,60 @@ function showTab(name) {
 const notificationViewer = document.createElement('dialog');
 notificationViewer.id = 'notification-viewer';
 notificationViewer.setAttribute('aria-label','Ảnh phiếu công bố');
-notificationViewer.innerHTML = '<form method="dialog"><button type="button" class="viewer-fullscreen" aria-pressed="false">Toàn màn hình</button><button aria-label="Đóng ảnh" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></form><img alt="">';
+notificationViewer.innerHTML = '<form method="dialog"><button type="button" class="viewer-fullscreen" aria-pressed="false" aria-label="Toàn màn hình" title="Toàn màn hình"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="expand-icon" d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/><path class="shrink-icon" d="M4 9h5V4m11 5h-5V4M9 20v-5H4m11 5v-5h5"/></svg></button><button aria-label="Đóng ảnh" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></form><img class="viewer-image" alt=""><button type="button" class="viewer-prev" aria-label="Ảnh trước">‹</button><button type="button" class="viewer-next" aria-label="Ảnh sau">›</button><div class="viewer-thumbnails" aria-label="Chọn ảnh"></div>';
 document.body.append(notificationViewer);
 
-function openNotificationViewer(url, description) {
-  const image = notificationViewer.querySelector('img');
+let viewerPhotos = [];
+let viewerPhotoIndex = 0;
+const viewerThumbnails = notificationViewer.querySelector('.viewer-thumbnails');
+const viewerPrev = notificationViewer.querySelector('.viewer-prev');
+const viewerNext = notificationViewer.querySelector('.viewer-next');
+
+function showViewerPhoto(index) {
+  viewerPhotoIndex = (index + viewerPhotos.length) % viewerPhotos.length;
+  const photo = viewerPhotos[viewerPhotoIndex];
+  const image = notificationViewer.querySelector('.viewer-image');
+  image.src = photo.url;
+  image.alt = photo.description;
+  [...viewerThumbnails.children].forEach((button,i) => {
+    button.setAttribute('aria-pressed',String(i === viewerPhotoIndex));
+  });
+}
+
+function openNotificationViewer(url, description, photos = [{url,description}]) {
+  viewerPhotos = photos;
   notificationViewer.setAttribute('aria-label',description);
-  image.alt = description;
-  image.src = url;
+  const multiple = photos.length > 1;
+  viewerPrev.hidden = viewerNext.hidden = viewerThumbnails.hidden = !multiple;
+  viewerThumbnails.replaceChildren(...(multiple ? photos.map((photo,index) => {
+    const button = document.createElement('button');
+    const thumbnail = document.createElement('img');
+    button.type = 'button';
+    button.setAttribute('aria-label',photo.description);
+    thumbnail.src = photo.url;
+    thumbnail.alt = '';
+    button.append(thumbnail);
+    button.onclick = () => showViewerPhoto(index);
+    return button;
+  }) : []));
+  showViewerPhoto(Math.max(0,photos.findIndex(photo => photo.url === url)));
   if (!notificationViewer.open) notificationViewer.showModal();
 }
+
+viewerPrev.onclick = () => showViewerPhoto(viewerPhotoIndex - 1);
+viewerNext.onclick = () => showViewerPhoto(viewerPhotoIndex + 1);
+notificationViewer.addEventListener('keydown',event => {
+  if (viewerPhotos.length < 2 || !['ArrowLeft','ArrowRight'].includes(event.key)) return;
+  event.preventDefault();
+  showViewerPhoto(viewerPhotoIndex + (event.key === 'ArrowLeft' ? -1 : 1));
+});
 
 const notificationFullscreen = notificationViewer.querySelector('.viewer-fullscreen');
 function setNotificationFullscreen(full) {
   notificationViewer.classList.toggle('is-fullscreen',full);
   notificationFullscreen.setAttribute('aria-pressed',String(full));
-  notificationFullscreen.textContent = full ? 'Thu nhỏ' : 'Toàn màn hình';
+  notificationFullscreen.setAttribute('aria-label',full ? 'Thu nhỏ' : 'Toàn màn hình');
+  notificationFullscreen.title = full ? 'Thu nhỏ' : 'Toàn màn hình';
 }
 notificationFullscreen.onclick = () => setNotificationFullscreen(!notificationViewer.classList.contains('is-fullscreen'));
 notificationViewer.addEventListener('close',() => setNotificationFullscreen(false));
@@ -517,7 +555,13 @@ panel.addEventListener('click',event => {
   const link = event.target.closest('.notification-preview');
   if (!link) return;
   event.preventDefault();
-  openNotificationViewer(link.href,link.querySelector('img').alt);
+  const photos = link.matches('.product-gallery-preview')
+    ? [...panel.querySelectorAll('.product-gallery-preview')].map(item => ({
+      url:item.href,
+      description:item.querySelector('img').alt
+    }))
+    : undefined;
+  openNotificationViewer(link.href,link.querySelector('img').alt,photos);
 });
 
 function select(index, focusTarget = markerButtons[index], automatic = false) {
