@@ -161,12 +161,12 @@
     lb.id='drcgf-image-lightbox';
     lb.className='drcgf-image-lightbox';
     lb.setAttribute('aria-hidden','true');
-    lb.innerHTML='<button class="drcgf-lightbox-fullscreen" type="button" aria-pressed="false" aria-label="Toàn màn hình" title="Toàn màn hình"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="expand-icon" d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/><path class="shrink-icon" d="M4 9h5V4m11 5h-5V4M9 20v-5H4m11 5v-5h5"/></svg></button><span class="drcgf-lightbox-close drcgf-round-close" role="button" tabindex="0" aria-label="Đóng">×</span><button class="drcgf-lightbox-prev" type="button" aria-label="Ảnh trước">‹</button><div class="drcgf-lightbox-stage"><img alt=""><div class="drcgf-lightbox-caption"></div></div><button class="drcgf-lightbox-next" type="button" aria-label="Ảnh tiếp theo">›</button><div class="drcgf-lightbox-counter"></div>';
+    lb.innerHTML='<button class="drcgf-lightbox-fullscreen" type="button" aria-pressed="false" aria-label="Toàn màn hình" title="Toàn màn hình"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="expand-icon" d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/><path class="shrink-icon" d="M4 9h5V4m11 5h-5V4M9 20v-5H4m11 5v-5h5"/></svg></button><button type="button" class="drcgf-lightbox-close" aria-label="Đóng ảnh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><button class="drcgf-lightbox-prev" type="button" aria-label="Ảnh trước"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><div class="drcgf-lightbox-stage"><img alt=""><div class="drcgf-lightbox-caption"></div></div><button class="drcgf-lightbox-next" type="button" aria-label="Ảnh tiếp theo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button><div class="drcgf-lightbox-counter"></div>';
     document.body.appendChild(lb);
     lb.querySelector('.drcgf-lightbox-fullscreen').onclick = function () {
       setImageFullscreen(lb,!lb.classList.contains('is-fullscreen'));
     };
-    var imageClose=lb.querySelector('.drcgf-lightbox-close');imageClose.onclick=closeLightbox;imageClose.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();closeLightbox();}});
+    lb.querySelector('.drcgf-lightbox-close').onclick = closeLightbox;
     lb.querySelector('.drcgf-lightbox-prev').onclick=function(e){e.stopPropagation();moveLightbox(-1);};
     lb.querySelector('.drcgf-lightbox-next').onclick=function(e){e.stopPropagation();moveLightbox(1);};
     lb.addEventListener('click',function(e){if(e.target===lb)closeLightbox();});
@@ -193,8 +193,8 @@
     lb.querySelector('.drcgf-lightbox-caption').textContent=x.name||'';
     lb.querySelector('.drcgf-lightbox-counter').textContent=(lightboxState.index+1)+' / '+lightboxState.items.length;
     var many=lightboxState.items.length>1;
-    lb.querySelector('.drcgf-lightbox-prev').style.display=many?'flex':'none';
-    lb.querySelector('.drcgf-lightbox-next').style.display=many?'flex':'none';
+    lb.querySelector('.drcgf-lightbox-prev').hidden = !many;
+    lb.querySelector('.drcgf-lightbox-next').hidden = !many;
   }
   function openLightbox(items,index){lightboxState.items=items||[];lightboxState.index=index||0;var lb=ensureLightbox();showLightbox();if(!lb.classList.contains('is-open'))lockPageScroll();lb.classList.add('is-open');lb.setAttribute('aria-hidden','false');document.body.classList.add('drcgf-lightbox-open');}
   function closeLightbox(){var lb=document.getElementById('drcgf-image-lightbox');if(!lb||!lb.classList.contains('is-open'))return;setImageFullscreen(lb,false);lb.classList.remove('is-open');lb.setAttribute('aria-hidden','true');document.body.classList.remove('drcgf-lightbox-open');unlockPageScroll();}

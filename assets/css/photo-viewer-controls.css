@@ -1,0 +1,48 @@
+/* Shared controls for resource and showroom photo viewers. */
+body :is(#notification-viewer,#drcgf-image-lightbox) :is(
+  .viewer-fullscreen,.viewer-prev,.viewer-next,form button,
+  .drcgf-lightbox-fullscreen,.drcgf-lightbox-close,.drcgf-lightbox-prev,.drcgf-lightbox-next
+) {
+  display:grid!important;
+  place-items:center;
+  box-sizing:border-box;
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  min-height:38px!important;
+  padding:0!important;
+  margin:0!important;
+  border:1px solid #ffffffb8!important;
+  border-radius:50%!important;
+  background:#263e68f0!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  line-height:1;
+}
+body :is(#notification-viewer,#drcgf-image-lightbox) button[hidden] {
+  display:none!important;
+}
+body :is(#notification-viewer,#drcgf-image-lightbox) button > svg {
+  display:block;
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+body #drcgf-image-lightbox .drcgf-lightbox-close {
+  position:absolute;
+  z-index:2;
+}
+body #drcgf-image-lightbox .drcgf-lightbox-close,
+body #drcgf-image-lightbox .drcgf-lightbox-fullscreen {
+  top:max(12px,env(safe-area-inset-top))!important;
+}
+body #drcgf-image-lightbox .drcgf-lightbox-close {
+  right:max(12px,env(safe-area-inset-right))!important;
+}
+body #drcgf-image-lightbox .drcgf-lightbox-fullscreen {
+  right:calc(max(12px,env(safe-area-inset-right)) + 46px)!important;
+}
