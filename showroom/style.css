@@ -838,26 +838,38 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 }
 
 #notification-viewer {
-  max-width:calc(100vw - 24px);
-  max-height:calc(100dvh - 24px);
-  padding:0 12px 12px;
-  border:1px solid #ffffffa8;
-  border-radius:20px;
-  background:#192d53;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100dvh;
+  max-width:none;
+  max-height:none;
+  margin:0;
+  padding:0;
+  border:0;
+  background:#101d37f5;
   color:white;
   overflow:hidden;
 }
-#notification-viewer::backdrop {background:#101d37c9;backdrop-filter:blur(8px)}
+#notification-viewer[open] {
+  display:grid;
+  place-items:center;
+}
 #notification-viewer img {
   display:block;
-  max-width:calc(100vw - 50px);
-  max-height:calc(100dvh - 90px);
+  max-width:100%;
+  max-height:100%;
   width:auto;
   height:auto;
   object-fit:contain;
-  margin:auto;
 }
-#notification-viewer form {height:52px;padding:8px 0;display:flex;justify-content:flex-end;margin:0}
+#notification-viewer form {
+  position:absolute;
+  z-index:1;
+  top:max(12px,env(safe-area-inset-top));
+  right:max(12px,env(safe-area-inset-right));
+  margin:0;
+}
 #notification-viewer button {
   display:grid;
   place-items:center;
