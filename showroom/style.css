@@ -528,6 +528,16 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
 
 #panel .notification-preview { display:block; margin:12px 0 5px; border:1px solid #b9cfe5; border-radius:12px; overflow:hidden; background:white; box-shadow:0 4px 14px #54769919; }
 #panel .notification-preview img { display:block; width:100%; max-height:none; height:auto; padding:0; }
+/* Keep the package thumbnail compact while leaving the poster full width. */
+#panel .product-gallery-preview:first-child {
+  max-width:280px;
+  margin-inline:auto;
+}
+#panel .product-gallery-preview:first-child img {
+  max-height:240px;
+  object-fit:contain;
+  padding:9px;
+}
 #panel .notification-hint { font-size:11px; color:#54749a; text-align:center; margin:5px 0 17px; }
 
 @media(max-width:380px) {
