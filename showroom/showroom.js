@@ -15,7 +15,9 @@ const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)');
 const currency = new Intl.NumberFormat('vi-VN');
 const serial = number => String(number+1).padStart(2,'0');
 const cleanedPhotos = new Set(['b5-60','mist','oil','peel','pink']);
-const photo = product => cleanedPhotos.has(product.id) ? '/showroom/assets/clean/'+product.id+'.png?v=29' : '/showroom/assets/'+product.id+'.webp?v=3';
+const replacementPhotos = {oil:'/assets/images/dr-cgf-ance-oil-control-cleansing-gel-20261119.png',calm:'/assets/images/dr-cgf-mela-calm-cleansing-gel-20261119.png'};
+const replacementPhotoCrops = {"oil": [0.20539254559873116, 0.04089815557337606, 0.5995241871530531, 0.9109863672814755], "calm": [0.24673202614379086, 0.12062256809338523, 0.5718954248366013, 0.8700389105058366]};
+const photo = product => replacementPhotos[product.id] || (cleanedPhotos.has(product.id) ? '/showroom/assets/clean/'+product.id+'.png?v=29' : '/showroom/assets/'+product.id+'.webp?v=3');
 const addedProductPhotos = new Set([
   'stem', 'aloe', 'balance', 'wash', 'healing', 'oil',
   'polish', 'peel', 'sun', 'nmn', 'massage', 'pink',
@@ -871,6 +873,8 @@ function buildRoom() {
     const placement = placements[index];
     const {radius,angle,top} = placement;
     const texture = loader.load(photo(p));
+    const crop = replacementPhotoCrops[p.id];
+    if(crop){texture.offset.set(crop[0],crop[1]);texture.repeat.set(crop[2],crop[3]);}
     texture.colorSpace = T.SRGBColorSpace;
     texture.anisotropy = Math.min(8,renderer.capabilities.getMaxAnisotropy());
     const material = new T.MeshBasicMaterial({map:texture,transparent:mobile.matches,depthWrite:true,alphaTest:.08,alphaToCoverage:true,side:T.DoubleSide,toneMapped:false,fog:false});
