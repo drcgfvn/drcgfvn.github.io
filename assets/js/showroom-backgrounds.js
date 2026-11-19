@@ -3,10 +3,10 @@
   if (document.body.dataset.view !== '3d') return;
   var themes = [
     {id:'original', name:'Ánh ngọc', palette:{surface:'#83c9df',emissive:'#8cc6df',titleFrom:'#ba83e0aa',titleTo:'#6ac6e9b0',titleGlow:'#bdeeff'}, image:'/showroom/assets/showroom-empty.png'},
-    {id:'botanical', name:'Vườn kính', palette:{surface:'#8fdbbd',emissive:'#8fdac3',titleFrom:'#399b88bf',titleTo:'#68bfc7c4',titleGlow:'#b7f3d8'}, horizon:490/941, image:'/showroom/assets/backgrounds/botanical.png'},
-    {id:'aurora', name:'Cực quang', palette:{surface:'#b7a7e8',emissive:'#bba9e9',titleFrom:'#a678d4c4',titleTo:'#67b9e1c4',titleGlow:'#d5c7ff'}, horizon:510/941, image:'/showroom/assets/backgrounds/aurora.png'},
-    {id:'pearl', name:'Ngọc trai', palette:{surface:'#e6daca',emissive:'#e0d3c0',titleFrom:'#af987bc9',titleTo:'#8faebfc9',titleGlow:'#f9edd5'}, horizon:530/941, image:'/showroom/assets/backgrounds/pearl.png'},
-    {id:'dawn', name:'Bình minh', palette:{surface:'#efbed2',emissive:'#eab8c8',titleFrom:'#d98ca9c9',titleTo:'#dbac85c9',titleGlow:'#ffe0d7'}, horizon:511/941, image:'/showroom/assets/backgrounds/dawn.png'}
+    {id:'botanical', name:'Vườn kính', palette:{surface:'#8fdbbd',emissive:'#8fdac3',titleFrom:'#27cba8c4',titleTo:'#48cde5c4',titleGlow:'#b8ffed'}, horizon:490/941, image:'/showroom/assets/backgrounds/botanical.png'},
+    {id:'aurora', name:'Cực quang', palette:{surface:'#b7a7e8',emissive:'#bba9e9',titleFrom:'#b780efc9',titleTo:'#50d0edc9',titleGlow:'#e6d2ff'}, horizon:510/941, image:'/showroom/assets/backgrounds/aurora.png'},
+    {id:'pearl', name:'Ngọc trai', palette:{surface:'#e6daca',emissive:'#e0d3c0',titleFrom:'#d5a1e7c4',titleTo:'#84cfeac4',titleGlow:'#f6e6ff'}, horizon:530/941, image:'/showroom/assets/backgrounds/pearl.png'},
+    {id:'dawn', name:'Bình minh', palette:{surface:'#efbed2',emissive:'#eab8c8',titleFrom:'#f38dbcc9',titleTo:'#ffb68bc9',titleGlow:'#ffe2ed'}, horizon:511/941, image:'/showroom/assets/backgrounds/dawn.png'}
   ];
   var storageKey = 'drcgf.showroomBackground';
   var chosen = themes[0], request = 0;
