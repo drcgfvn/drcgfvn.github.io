@@ -15,8 +15,8 @@ const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)');
 const currency = new Intl.NumberFormat('vi-VN');
 const serial = number => String(number+1).padStart(2,'0');
 const cleanedPhotos = new Set(['b5-60','mist','oil','peel','pink']);
-const replacementPhotos = {oil:'/assets/images/dr-cgf-ance-oil-control-cleansing-gel-20261119-user.png',calm:'/assets/images/dr-cgf-mela-calm-cleansing-gel-20261119-user.png'};
-const replacementPhotoCrops = {"oil": [0.24520433694745622, 0.14786585365853655, 0.5621351125938282, 0.805640243902439], "calm": [0.25, 0.12140077821011674, 0.5645424836601307, 0.8684824902723736]};
+const replacementPhotos = {oil:'/assets/images/dr-cgf-ance-oil-control-cleansing-gel-cbe3a28d83.png',calm:'/assets/images/dr-cgf-mela-calm-cleansing-gel-e80a5e6747.png'};
+const replacementPhotoCrops = {"oil": [0.20697858842188738, 0.04009623095429027, 0.5971451229183188, 0.9109863672814755], "calm": [0.24754901960784315, 0.12140077821011674, 0.571078431372549, 0.8684824902723736]};
 const photo = product => replacementPhotos[product.id] || (cleanedPhotos.has(product.id) ? '/showroom/assets/clean/'+product.id+'.png?v=29' : '/showroom/assets/'+product.id+'.webp?v=3');
 const addedProductPhotos = new Set([
   'stem', 'aloe', 'balance', 'wash', 'healing', 'oil',
