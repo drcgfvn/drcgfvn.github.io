@@ -44,3 +44,11 @@ body[data-view="3d"] #stage{
   background-position:var(--showroom-background-position,center);
  }
 }
+
+/* The title frame takes its tint from the selected room palette. */
+#intro h1{
+ background:linear-gradient(100deg,var(--showroom-title-from,#ba83e0aa),var(--showroom-title-to,#6ac6e9b0));
+ box-shadow:0 0 15px var(--showroom-title-glow,#bdeeff),inset 0 0 10px #fff8;
+ transition:box-shadow .45s ease;
+}
+@media(prefers-reduced-motion:reduce){#intro h1{transition:none}}

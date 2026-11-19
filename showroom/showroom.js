@@ -756,6 +756,15 @@ function buildRoom() {
   topGlassSurface.clearcoat = .45;
   topGlassSurface.clearcoatRoughness = .38;
   topGlassSurface.roughness = .23;
+  const themedSurface = new T.Color(0x83c9df);
+  const themedEmission = new T.Color(0x8cc6df);
+  function updateTablePalette(palette) {
+    if(!palette)return;
+    themedSurface.set(palette.surface);
+    themedEmission.set(palette.emissive);
+  }
+  updateTablePalette(window.DRCGFShowroomPalette);
+  window.addEventListener('drcgf:backgroundchange',event=>updateTablePalette(event.detail.palette));
   const violetLight = new T.MeshBasicMaterial({color:0xd8e8ff,toneMapped:false});
   const edgeClock={value:0};
   const edgeTint=new T.ShaderMaterial({
@@ -1231,6 +1240,11 @@ function buildRoom() {
     const blend = reducedMotion.matches ? 1 : 1-Math.exp(-elapsed/115);
     lastFrame = now;
     edgeClock.value=reducedMotion.matches ? 0 : now*.001;
+    const paletteBlend=reducedMotion.matches ? 1 : 1-Math.exp(-elapsed/260);
+    glassSurface.color.lerp(themedSurface,paletteBlend);
+    glassSurface.emissive.lerp(themedEmission,paletteBlend);
+    topGlassSurface.color.copy(glassSurface.color);
+    topGlassSurface.emissive.copy(glassSurface.emissive);
     if (rotationTarget !== null) {
       const progress = rotationDuration ? T.MathUtils.clamp((now-rotationStarted)/rotationDuration,0,1) : 1;
       tableAngle = T.MathUtils.lerp(rotationStart,rotationTarget,T.MathUtils.smootherstep(progress,0,1));
