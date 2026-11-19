@@ -522,7 +522,7 @@ const products = [
   {
     "id": "oil",
     "name": "Sữa rửa mặt da dầu, mụn",
-    "line": "ACNE & OIL CONTROL CLEANSING GEL",
+    "line": "ANCE & OIL CONTROL CLEANSING GEL",
     "price": 398000,
     "size": "150 ml",
     "receipt": "349931/26/CBMP-QLD",
@@ -532,31 +532,32 @@ const products = [
     "reports": [],
     "catalogue": {
       "highlights": [
-        "Làm sạch sâu – hỗ trợ giảm bít tắc và ngăn ngừa mụn với sự kết hợp của Salicylic Acid (BHA), Glycolic Acid (AHA) và Gluconolactone (PHA), giúp loại bỏ tế bào chết, làm sạch lỗ chân lông và hỗ trợ cải thiện da dầu mụn.",
-        "Cấp ẩm và cân bằng da, giúp da sạch nhưng không khô căng, duy trì độ ẩm tự nhiên cho làn da.",
-        "Làm dịu và phục hồi hàng rào bảo vệ da, giúp hỗ trợ giảm kích ứng, mang lại làn da khỏe mạnh và mịn màng."
+        "Gel rửa mặt.",
+        "Sản xuất tại Hàn Quốc."
       ],
       "benefits": [
-        "..."
+        "Gel rửa mặt dành cho da mụn và da dầu, giúp làm sạch da, cho da sạch và mịn màng."
       ],
       "ingredients": [
-        "Glycolic Acid (AHA)",
-        "Salicylic Acid (BHA)",
-        "Gluconolactone (PHA)",
-        "Centella Asiatica Callus Extracellular Vesicles",
-        "Aquaxyl Complex",
-        "Chamomile Extract"
+        "Salicylic Acid (0,5%)",
+        "Gluconolactone",
+        "Glycolic Acid",
+        "Xylitylglucoside",
+        "Anhydroxylitol",
+        "Xylitol",
+        "Centella Asiatica Callus Extracellular Vesicles"
       ],
       "skin": [
-        "Da dầu",
-        "Hỗn hợp thiên dầu",
-        "Da mụn."
+        "Da dầu, da mụn."
       ],
       "storage": [
         "Tránh xa tầm tay trẻ em. Bảo quản ở nơi thoáng mát, tránh xa ánh nắng mặt trời."
       ]
     },
-    "catalogueEdition": 3
+    "catalogueEdition": 3,
+    "notificationImage": "/showroom/assets/notifications/oil.png?v=20261119",
+    "notificationDate": "07/10/2026",
+    "manufacturer": "Wellmade Household and Health Care Co., Ltd."
   },
   {
     "id": "calm",
@@ -571,30 +572,30 @@ const products = [
     "reports": [],
     "catalogue": {
       "highlights": [
-        "Làm sạch dịu nhẹ, không gây khô căng với hệ chất hoạt động bề mặt thế hệ mới, giúp làm sạch hiệu quả mà vẫn bảo vệ hàng rào da.",
-        "Làm sáng và đều màu, hỗ trợ cải thiện xỉn màu, mang lại làn da rạng rỡ.",
-        "Cấp ẩm đa tầng chuyên sâu, giúp duy trì độ ẩm, cho da căng mọng và mềm mịn.",
-        "Hỗ trợ phục hồi và làm dịu da, giúp củng cố hàng rào bảo vệ và tăng sức sống cho làn da.",
-        "Chống lão hóa toàn diện, giúp hỗ trợ cải thiện độ đàn hồi, giảm nếp nhăn và mang lại làn da săn chắc, trẻ trung."
+        "Gel rửa mặt.",
+        "Sản xuất tại Hàn Quốc."
       ],
       "benefits": [
-        "..."
+        "Gel rửa mặt giúp làm sạch da, hỗ trợ dưỡng ẩm da, cho da sạch và mịn màng."
       ],
       "ingredients": [
+        "Glycerin",
         "Niacinamide",
         "Glutathione",
-        "Centella EVs (Centella Asiatica Extracellular Vesicles)",
-        "Multi-Hyaluronic Acid Complex",
-        "Peptide Complex"
+        "Sodium Hyaluronate",
+        "Centella Asiatica Callus Extracellular Vesicles",
+        "Acetyl Hexapeptide-8",
+        "Copper Tripeptide-1"
       ],
-      "skin": [
-        "Da khô nám, nhạy cảm, mỏng yếu"
-      ],
+      "skin": [],
       "storage": [
         "Tránh xa tầm tay trẻ em. Bảo quản ở nơi thoáng mát, tránh xa ánh nắng mặt trời."
       ]
     },
-    "catalogueEdition": 3
+    "catalogueEdition": 3,
+    "notificationImage": "/showroom/assets/notifications/calm.png?v=20261119",
+    "notificationDate": "07/10/2026",
+    "manufacturer": "Wellmade Household and Health Care Co., Ltd."
   },
   {
     "id": "peel",

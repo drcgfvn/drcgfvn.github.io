@@ -382,5 +382,53 @@
     "usage": "Thoa lượng vừa đủ và vỗ nhẹ cho thẩm thấu. Dùng ban ngày; sử dụng kem chống nắng ở bước sau.",
     "notification": "302840/25/CBMP-QLD",
     "tested": "Phiếu thử nghiệm IRDOP ngày 30/12/2025."
+  },
+  {
+    "slug": "dr-cgf-ance-oil-control-cleansing-gel",
+    "name": "DR.CGF ANCE & OIL CONTROL CLEANSING GEL",
+    "vn": "Gel rửa mặt da dầu, mụn DR.CGF",
+    "price": "398.000 VNĐ",
+    "size": "150 ml",
+    "image": "dr-cgf-ance-oil-control-cleansing-gel.png",
+    "group": "Làm sạch da",
+    "skin": "Da dầu, da mụn.",
+    "benefits": [
+      "Gel rửa mặt dành cho da mụn và da dầu, giúp làm sạch da, cho da sạch và mịn màng."
+    ],
+    "ingredients": [
+      "Salicylic Acid (0,5%)",
+      "Gluconolactone",
+      "Glycolic Acid",
+      "Xylitylglucoside",
+      "Anhydroxylitol",
+      "Xylitol",
+      "Centella Asiatica Callus Extracellular Vesicles"
+    ],
+    "usage": "Sử dụng theo hướng dẫn trên nhãn sản phẩm.",
+    "notification": "349931/26/CBMP-QLD"
+  },
+  {
+    "slug": "dr-cgf-mela-calm-cleansing-gel",
+    "name": "DR.CGF MELA CALM CLEANSING GEL",
+    "vn": "Gel rửa mặt Mela Calm DR.CGF",
+    "price": "398.000 VNĐ",
+    "size": "150 ml",
+    "image": "dr-cgf-mela-calm-cleansing-gel.webp",
+    "group": "Làm sạch da",
+    "skin": "Tham khảo nhãn sản phẩm để lựa chọn phù hợp với loại da.",
+    "benefits": [
+      "Gel rửa mặt giúp làm sạch da, hỗ trợ dưỡng ẩm da, cho da sạch và mịn màng."
+    ],
+    "ingredients": [
+      "Glycerin",
+      "Niacinamide",
+      "Glutathione",
+      "Sodium Hyaluronate",
+      "Centella Asiatica Callus Extracellular Vesicles",
+      "Acetyl Hexapeptide-8",
+      "Copper Tripeptide-1"
+    ],
+    "usage": "Sử dụng theo hướng dẫn trên nhãn sản phẩm.",
+    "notification": "349932/26/CBMP-QLD"
   }
 ]

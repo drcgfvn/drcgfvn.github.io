@@ -476,7 +476,9 @@ function showTab(name) {
     const receipt = p.receipt ? '<p>Số tiếp nhận: '+p.receipt+'</p>' : '<p>Chưa có số tiếp nhận để hiển thị.</p>';
     const reports = p.reports.length ? '<p>Mã hồ sơ theo tài liệu cung cấp:</p><ul>'+p.reports.map(code => '<li>'+code+'</li>').join('')+'</ul>' : '<p>Chưa có mã hồ sơ để hiển thị.</p>';
     const notification = p.notificationImage ? '<a class="notification-preview" href="'+p.notificationImage+'" aria-label="Xem rõ trang đầu phiếu công bố '+p.name+'"><img src="'+p.notificationImage+'" alt="Trang đầu phiếu công bố '+p.name+'" loading="lazy"></a><p class="notification-hint">Chạm ảnh để xem rõ hơn</p>' : '';
-    panel.innerHTML = '<h3>Phiếu công bố sản phẩm</h3>'+receipt+notification+'<h3>Kiểm nghiệm</h3>'+reports;
+    const notificationDetails = (p.notificationDate ? '<p>Ngày cấp số tiếp nhận: '+p.notificationDate+'</p>' : '')
+      + (p.manufacturer ? '<p>Nhà sản xuất: '+p.manufacturer+'</p><p>Xuất xứ: Hàn Quốc.</p>' : '');
+    panel.innerHTML = '<h3>Phiếu công bố sản phẩm</h3>'+receipt+notificationDetails+notification+'<h3>Kiểm nghiệm</h3>'+reports;
   } else {
     showCatalogue(p);
   }
