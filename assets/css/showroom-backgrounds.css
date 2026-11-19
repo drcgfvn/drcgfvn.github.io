@@ -1,0 +1,34 @@
+/* A single background source keeps the room unchanged during mobile camera moves. */
+body[data-view="3d"] #stage{background-image:var(--showroom-background,url('/showroom/assets/showroom-empty.png'))}
+#showroom-background-toggle{display:flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:44px;padding:0 11px;margin:0 0 0 3px;border:0;border-left:1px solid #b6cee580;border-radius:0 22px 22px 0;background:transparent;color:#234a71;font:600 12px/1.2 "Segoe UI",Arial,sans-serif;cursor:pointer;transition:background .2s,box-shadow .2s}
+#showroom-background-toggle svg{width:19px;height:19px;flex:none}
+#showroom-background-toggle:hover,#showroom-background-toggle[aria-expanded="true"]{background:#ffffffb8;box-shadow:0 2px 10px #5187b92b}
+#showroom-background-toggle:focus-visible{outline:2px solid #177eae;outline-offset:2px}
+#showroom-background-picker{position:fixed;z-index:10010;width:min(350px,calc(100vw - 20px));max-height:calc(100dvh - 95px);overflow:auto;box-sizing:border-box;padding:16px;border:1px solid #ffffffed;border-radius:23px;background:linear-gradient(135deg,#e9f5fff0,#e1dff7eb 65%,#e0f4f3ed);box-shadow:0 12px 45px #31578138,inset 0 1px 12px #fff9;backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);color:#23416c;font-family:"Segoe UI",Arial,sans-serif}
+#showroom-background-picker[hidden]{display:none!important}
+#showroom-background-picker:not([hidden]){animation:background-picker-in .22s ease-out}
+.background-picker-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.background-picker-heading small{font-size:9px;font-weight:650;letter-spacing:.14em;color:#467c9b}
+.background-picker-heading h2{font-size:20px;line-height:1.4;margin:3px 0 0;font-weight:600}
+.background-picker-close{display:grid;place-items:center;flex:none;width:30px;height:30px;border:1px solid #fff;border-radius:50%;padding:0;background:#f7fbff88;color:#39708f;cursor:pointer}
+.background-picker-close svg{width:17px;height:17px}
+.background-picker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.background-picker-grid button{position:relative;min-width:0;overflow:hidden;display:flex;flex-direction:column;padding:4px;border:1px solid #ffffffc9;border-radius:13px;background:#eff7ff69;box-shadow:inset 0 1px #fff8;cursor:pointer;color:#2c527d;text-align:left;transition:border-color .2s,box-shadow .2s,background .2s}
+.background-picker-grid button img{display:block;width:100%;height:76px;object-fit:cover;border-radius:9px}
+.background-picker-grid button span{padding:7px 5px 4px;font:600 12px/1.3 "Segoe UI",Arial,sans-serif}
+.background-picker-grid button:hover{background:#f5fcffb3;border-color:#90d6f4}
+.background-picker-grid button:focus-visible{outline:2px solid #188bbf;outline-offset:2px}
+.background-picker-grid button[aria-pressed="true"]{border-color:#42aeda;background:#e4f7ffbb;box-shadow:0 0 0 1px #42aeda55,0 3px 12px #458db521}
+.background-check{display:none;position:absolute;top:9px;right:9px;width:16px;height:16px;padding:3px;box-sizing:content-box;border-radius:50%;background:#267fa9;color:#fff;box-shadow:0 1px 6px #23416c33}
+[aria-pressed="true"]>.background-check{display:block}
+.background-picker-status{margin:9px 0 0;font-size:11px;line-height:1.4;color:#49728f}
+.background-picker-status:empty{display:none}
+@keyframes background-picker-in{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
+@media(max-width:900px){
+ body[data-view="3d"] #stage{background-image:none}
+ body[data-view="3d"] #experience::before{background-image:var(--showroom-background,url('/showroom/assets/showroom-empty.png'))}
+ #showroom-background-toggle{height:29px;min-width:32px;padding:0 8px;gap:0}
+ #showroom-background-toggle span{display:none}
+ body[data-view="3d"] #mobile-categories{left:120px;right:12px;max-width:240px}
+}
+@media(prefers-reduced-motion:reduce){#showroom-background-picker:not([hidden]){animation:none}}

@@ -4,7 +4,7 @@
     if (window.self !== window.top || document.getElementById("drcgf-view-switch")) return;
     var is3D = document.body.dataset.view === "3d";
     if (!document.querySelector('link[href*="view-switch.css"]')) {
-      var link = document.createElement("link"); link.rel = "stylesheet"; link.href = "/assets/css/view-switch.css?v=4"; document.head.appendChild(link);
+      var link = document.createElement("link"); link.rel = "stylesheet"; link.href = "/assets/css/view-switch.css?v=6"; document.head.appendChild(link);
     }
     if (!document.getElementById("drcgf-site-tooltip")) {
       var tooltipScript = document.createElement("script"); tooltipScript.src = "/assets/js/site-tooltips.js?v=1"; document.head.appendChild(tooltipScript);

@@ -22,3 +22,8 @@
 
 /* Keep the shared outside switch available while a catalogue content panel is open. */
 body.site-window-open #drcgf-view-switch{z-index:7}
+
+/* Show only the destination view to keep the shared control compact. */
+.drcgf-view-switch a[aria-current="page"]{display:none}
+.drcgf-view-switch a:not([aria-current="page"]){background:linear-gradient(120deg,#177eae,#536bca);color:#fff;box-shadow:0 2px 9px #3276b34d}
+.drcgf-view-switch a:not([aria-current="page"]):hover{background:linear-gradient(120deg,#146f9e,#465cb6)}
