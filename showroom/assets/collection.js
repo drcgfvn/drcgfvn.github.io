@@ -528,7 +528,7 @@ const products = [
     "receipt": "349931/26/CBMP-QLD",
     "group": 2,
     "slot": 0,
-    "aspect": 0.665493,
+    "aspect": 0.637654,
     "reports": [],
     "catalogue": {
       "highlights": [
@@ -568,7 +568,7 @@ const products = [
     "receipt": "349932/26/CBMP-QLD",
     "group": 2,
     "slot": 1,
-    "aspect": 0.626118,
+    "aspect": 0.619176,
     "reports": [],
     "catalogue": {
       "highlights": [
