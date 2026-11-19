@@ -3,15 +3,33 @@
   if (document.body.dataset.view !== '3d') return;
   var themes = [
     {id:'original', name:'Ánh ngọc', image:'/showroom/assets/showroom-empty.png'},
-    {id:'botanical', name:'Vườn kính', image:'/showroom/assets/backgrounds/botanical.png'},
-    {id:'aurora', name:'Cực quang', image:'/showroom/assets/backgrounds/aurora.png'},
-    {id:'pearl', name:'Ngọc trai', image:'/showroom/assets/backgrounds/pearl.png'},
-    {id:'dawn', name:'Bình minh', image:'/showroom/assets/backgrounds/dawn.png'}
+    {id:'botanical', name:'Vườn kính', horizon:490/941, image:'/showroom/assets/backgrounds/botanical.png'},
+    {id:'aurora', name:'Cực quang', horizon:510/941, image:'/showroom/assets/backgrounds/aurora.png'},
+    {id:'pearl', name:'Ngọc trai', horizon:530/941, image:'/showroom/assets/backgrounds/pearl.png'},
+    {id:'dawn', name:'Bình minh', horizon:511/941, image:'/showroom/assets/backgrounds/dawn.png'}
   ];
   var storageKey = 'drcgf.showroomBackground';
   var chosen = themes[0], request = 0;
   try { var saved = localStorage.getItem(storageKey); chosen = themes.find(function(t){return t.id === saved;}) || chosen; } catch(e) {}
   document.documentElement.style.setProperty('--showroom-background', 'url("' + chosen.image + '")');
+  // Reframe the existing room image so its floor meets the original room's horizon.
+  // Extra image height covers the lower edge after moving the horizon upward.
+  function frameBackground() {
+    var root=document.documentElement;
+    if(!chosen.horizon){
+      root.style.removeProperty('--showroom-background-size');
+      root.style.removeProperty('--showroom-background-position');
+      return;
+    }
+    var width=window.innerWidth, height=window.innerHeight, aspect=1672/941;
+    var originalHeight=Math.max(height,width/aspect);
+    var horizon=(height-originalHeight)/2+(420/941)*originalHeight;
+    var imageHeight=Math.max(height,width/aspect,horizon/chosen.horizon,(height-horizon)/(1-chosen.horizon));
+    var top=horizon-chosen.horizon*imageHeight;
+    root.style.setProperty('--showroom-background-size',(imageHeight*aspect)+'px '+imageHeight+'px');
+    root.style.setProperty('--showroom-background-position','center '+top+'px');
+  }
+  frameBackground();
   function mount() {
     var nav = document.getElementById('drcgf-view-switch');
     if (!nav || document.getElementById('showroom-background-toggle')) return;
@@ -39,6 +57,7 @@
         image.onload=function(){
           if(ticket!==request)return;
           chosen=theme;
+          frameBackground();
           document.documentElement.style.setProperty('--showroom-background','url("'+theme.image+'")');
           grid.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.background===theme.id));});
           try{localStorage.setItem(storageKey,theme.id);}catch(e){}
@@ -55,7 +74,7 @@
     picker.querySelector('.background-picker-close').addEventListener('click',function(){close(true);});
     document.addEventListener('pointerdown',function(e){if(!picker.hidden&&!picker.contains(e.target)&&!toggle.contains(e.target))close(false);});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!picker.hidden){e.preventDefault();close(true);}});
-    window.addEventListener('resize',function(){if(!picker.hidden)position();});
+    window.addEventListener('resize',function(){frameBackground();if(!picker.hidden)position();});
     window.addEventListener('drcgf:pagechange',function(){close(false);});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();

@@ -32,3 +32,15 @@ body[data-view="3d"] #stage{background-image:var(--showroom-background,url('/sho
  body[data-view="3d"] #mobile-categories{left:120px;right:12px;max-width:240px}
 }
 @media(prefers-reduced-motion:reduce){#showroom-background-picker:not([hidden]){animation:none}}
+
+/* Reframe only the four alternate images; the original room keeps its framing. */
+body[data-view="3d"] #stage{
+ background-size:var(--showroom-background-size,cover);
+ background-position:var(--showroom-background-position,center);
+}
+@media(max-width:900px){
+ body[data-view="3d"] #experience::before{
+  background-size:var(--showroom-background-size,cover);
+  background-position:var(--showroom-background-position,center);
+ }
+}
