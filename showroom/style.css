@@ -975,3 +975,6 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:no
   object-fit:contain;
 }
 #panel:has(.product-gallery-preview) .notification-hint {grid-column:1 / -1}
+
+/* A slightly lighter showroom heading on desktop. */
+@media(min-width:901px){#intro h1{font-weight:600}}
