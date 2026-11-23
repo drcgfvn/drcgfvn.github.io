@@ -18,7 +18,7 @@
   function position() {
     if (!active || tip.hidden) return;
     var r = active.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
-    var anchored = !!active.closest("#drcgf-view-switch");
+    var anchored = !!active.closest("#drcgf-view-switch, #table-controls");
     var fixed = anchored || keyboard || !point;
     var x = fixed ? r.left + r.width / 2 : point.x;
     var y = anchored ? r.top - h - 10 : fixed ? r.bottom + 10 : point.y + 19;
@@ -54,7 +54,7 @@
     show(target(event.target), event, false);
   });
   document.addEventListener('pointermove', function (event) {
-    if (!active || keyboard || active.closest("#drcgf-view-switch")) return;
+    if (!active || keyboard || active.closest("#drcgf-view-switch, #table-controls")) return;
     point = {x:event.clientX,y:event.clientY}; position();
   });
   document.addEventListener('pointerout', function (event) {
