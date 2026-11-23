@@ -7,7 +7,7 @@
       var link = document.createElement("link"); link.rel = "stylesheet"; link.href = "/assets/css/view-switch.css?v=6"; document.head.appendChild(link);
     }
     if (!document.getElementById("drcgf-site-tooltip")) {
-      var tooltipScript = document.createElement("script"); tooltipScript.src = "/assets/js/site-tooltips.js?v=1"; document.head.appendChild(tooltipScript);
+      var tooltipScript = document.createElement("script"); tooltipScript.src = "/assets/js/site-tooltips.js?v=2"; document.head.appendChild(tooltipScript);
     }
     var nav = document.createElement("nav");
     nav.id = "drcgf-view-switch"; nav.className = "drcgf-view-switch" + (is3D ? " is-showroom" : "");

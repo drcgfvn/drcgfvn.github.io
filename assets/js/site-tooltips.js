@@ -18,9 +18,12 @@
   function position() {
     if (!active || tip.hidden) return;
     var r = active.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
-    var x = keyboard || !point ? r.left + r.width / 2 : point.x;
-    var y = keyboard || !point ? r.bottom + 10 : point.y + 19;
-    if (y + h > window.innerHeight - 10) y = (keyboard || !point ? r.top : point.y) - h - 12;
+    var anchored = !!active.closest("#drcgf-view-switch");
+    var fixed = anchored || keyboard || !point;
+    var x = fixed ? r.left + r.width / 2 : point.x;
+    var y = anchored ? r.top - h - 10 : fixed ? r.bottom + 10 : point.y + 19;
+    if (anchored && y < 10) y = r.bottom + 10;
+    if (y + h > window.innerHeight - 10) y = (fixed ? r.top : point.y) - h - 12;
     tip.style.left = Math.max(10, Math.min(x - w / 2, window.innerWidth - w - 10)) + "px";
     tip.style.top = Math.max(10, y) + "px";
   }
@@ -51,7 +54,7 @@
     show(target(event.target), event, false);
   });
   document.addEventListener('pointermove', function (event) {
-    if (!active || keyboard) return;
+    if (!active || keyboard || active.closest("#drcgf-view-switch")) return;
     point = {x:event.clientX,y:event.clientY}; position();
   });
   document.addEventListener('pointerout', function (event) {
