@@ -318,8 +318,6 @@
       ['Link TikTok','https://www.tiktok.com/@dr.cgf_vn'],
       ['Kênh Youtube','https://www.youtube.com/@tapdoanthuanhoa'],
       ['Website drcgf.vn','https://www.drcgf.vn'],
-      ['Website miracollvietnam.info','https://www.miracollvietnam.info'],
-      ['Link eclafinvietnam.info','https://www.eclafinvietnam.info'],
       ['Website Hàn Quốc','https://www.cgfcosmetic.com'],
       ['Website drcgfvietnam.info','https://www.drcgfvietnam.info'],
       ['Slide Thuần Hoa Group','https://canva.link/8tnhtufh09fvama']
